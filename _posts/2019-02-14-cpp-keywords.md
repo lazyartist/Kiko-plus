@@ -1,6 +1,6 @@
 ### noexcept
 
-​noexcept(true) or noexcept : 예외를 던질 가능성이 있는 함수
+​noexcept(true) or noexcept : 예외를 던질 가능성이 없는 함수
 
 noexcept(false) : 예외를 던질 가능성이 있는 함수
 
@@ -15,13 +15,13 @@ int i = 0;
 while (i < 10)
     i++;
 
-// 컴파일러가 이렇게 만듦
+// 컴파일러가 이렇게 최적화함
 int i = 10;
 
 volatile int j = 0;
 while(j < 10)
     j++;
-// j변수는 volatile로 인해 컴파일러가 최적화하지 않음
+// j변수는 volatile로 인해 컴파일러가 최적화하지 않고 매번 메모리에 접근하게 됨
 ```
 
 
