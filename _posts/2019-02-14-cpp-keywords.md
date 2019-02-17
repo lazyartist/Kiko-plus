@@ -10,6 +10,8 @@ noexcept(false) : 예외를 던질 가능성이 있는 함수
 
 ### volatile
 
+`volatile : [ˈvɑːlətl] 1. [흔히 못마땅함]사람·기분이변덕스러운`
+
 변수에 volatile을 붙이면 해당 변수를 최적화에서 제외하여 항상 메모리에 접근하도록 만든다.
 
 https://dojang.io/mod/page/view.php?id=749
