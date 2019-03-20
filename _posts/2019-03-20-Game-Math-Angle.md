@@ -1,8 +1,11 @@
 ---
 layout: post
-title: "Game Math - Angle"
-tags: [math]
-date:   2019-03-20 19:00:00+09:00
+title: "Testing Readability with a Bunch of Text"
+description: "A ton of text to test readability."
+date: 2012-05-22
+tags: [sample post, readability, test, intro]
+comments: true
+share: true
 ---
 
 #### 원운동
