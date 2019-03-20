@@ -1,5 +1,5 @@
 ---
-title:Game Math - Angle
+title:"Game Math - Angle"
 ---
 
 #### 원운동
