@@ -1,9 +1,8 @@
 ---
 layout: post
-title: "Testing Readability with a Bunch of Text"
-description: "A ton of text to test readability."
-date: 2012-05-22
-tags: [sample post, readability, test, intro]
+title: "Game Math - Angle"
+date: 2019-03-20
+tags: [math]
 comments: true
 share: true
 ---
