@@ -1,7 +1,8 @@
 ---
 layout: post
 title: "Game Math - Angle"
-date: 2019-03-20
+description: "A ton of text to test readability."
+date: 2019-03-20 19:00:00+09:00
 tags: [math]
 comments: true
 share: true
