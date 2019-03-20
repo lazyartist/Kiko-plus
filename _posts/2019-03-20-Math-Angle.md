@@ -3,7 +3,7 @@ layout: post
 title: "Math - Angle"
 description: ""
 date: 2019-03-20 19:00:00+09:00
-tags: [game, math]
+tags: [game, math, ]
 comments: true
 share: true
 ---
