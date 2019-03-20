@@ -1,5 +1,7 @@
 ---
+layout: post
 title:"Game Math - Angle"
+tags: [math]
 ---
 
 #### 원운동
