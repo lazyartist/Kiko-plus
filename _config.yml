@@ -28,7 +28,7 @@ copyright:
 
 # Google-analytics
 google-analytics:
-  id:               ""
+  id:               "UA-7915764-5"
 
 # Disqus
 disqus:
@@ -45,7 +45,7 @@ timezone:           Asia/Seoul
 permalink:          /:year-:month-:day/:title/
 
 # Pagination
-paginate:           5
+paginate:           30
 paginate_path:      /page:num/
 
 # Markdown
