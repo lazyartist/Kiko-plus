@@ -32,7 +32,7 @@ google-analytics:
 
 # Disqus
 disqus:
-  id:               "lazyartist"
+  id:               ""
 
 # URL
 url:                "https://lazyartist.github.io" # the base hostname & protocol for your site
