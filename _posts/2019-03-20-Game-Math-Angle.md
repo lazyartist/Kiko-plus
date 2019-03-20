@@ -1,6 +1,6 @@
 ---
 layout: post
-title:"Game Math - Angle"
+title: "Game Math - Angle"
 tags: [math]
 date:   2019-03-20 19:00:00+09:00
 ---
