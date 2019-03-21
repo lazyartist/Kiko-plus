@@ -102,9 +102,11 @@ $$
 \sin{45˚} = \sin{\frac{\pi}{4}} = \frac{1}{\sqrt2} = \frac{\sqrt2}{2}
 $$
 
+
 $$
 \sin^{-1}\frac{\sqrt2}{2} = \arcsin{\frac{\sqrt2}{2}} = \frac{\sqrt2}{2} = \frac{1}{\sqrt2} = 45˚
 $$
+
 ---
 
 #### atan2
