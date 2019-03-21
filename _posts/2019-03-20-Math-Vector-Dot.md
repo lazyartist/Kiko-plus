@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Math - Vector"
+title: "Math - Vector(Dot Product)"
 description: ""
 date: 2019-03-20 19:00:00+09:00
 tags: [game, math, math]
@@ -167,14 +167,3 @@ cos값으로 각을 얻으려면 acos을 사용하면 된다.
 |       > 0        | 벡터가 앞쪽에 있다. |
 |        0         |   두 벡터가 수직    |
 |       < 0        | 벡터가 뒤쪽에 있다. |
-
-------
-
-
-#### 외적(Cross Product)
-
-
-$$
-
-$$
-
