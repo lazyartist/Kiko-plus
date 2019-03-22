@@ -57,6 +57,7 @@ $$
 
 
 $$
+\require{cancel}
 \text{x에 대입}\\\\
 y = a_1x-a_1p_{1x}+p_{1y}\\
 y = a_1(\frac{-a_2p_{2x}+p_{2y}+a_1p_{1x}-p_{1y}}{a_1-a_2})-a_1p_{1x}+p_{1y} \\

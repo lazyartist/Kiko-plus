@@ -20,6 +20,7 @@ share: true
 하나의 선 위에 있지 않은 평면 위의 세 점(평면 위의 벡터2개)으로 외적을 구할 수 있다.
 
 하나의 선 위에 있다면 영벡터가 나온다.
+
 $$
 \begin{matrix}
 A \times B &=& (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x)
@@ -31,6 +32,7 @@ $$
 #### 외적의 교환법칙
 
 외적의 결과는 벡터인데 외적 연산의 순서가 바뀌면 벡터의 방향이 반대가 된다.
+
 $$
 \begin{matrix}
 A \times B &=& (a_yb_z - a_zb_y, a_zb_x - a_xb_z, a_xb_y - a_yb_x) \\
