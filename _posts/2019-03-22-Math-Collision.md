@@ -174,9 +174,9 @@ k_x^2 + 2k_xV_xt + V_x^2t^2 + k_y^2 + 2k_yV_yt + V_y^2t^2 + k_z^2 + 2k_zV_zt + V
 (V_x^2 + V_y^2 + V_z^2)t^2 + 2(k_xV_x + k_yV_y + k_zV_z)t + k_x^2 + k_y^2 + k_z^2 - r^2 \\
 \text{다음과 같이 나타낼 수 있다} \\
 at^2 + bt + c = 0 \\
-\text{ 꼴이기 때문에 근의 공식으로 t값을 구할 수 있다.} \\
+\text{근의 공식으로 t값을 구할 수 있다} \\
 t = \frac{-b \pm \sqrt{b^2-4ac} }{2a} \\
-\therefore \text{t값을 구한 뒤 선분위의 점 방정식에 대입하여 x, y, z 값을 구하면 된다.}
+\therefore \text{t값을 구한 뒤 '선분 위의 점 방정식'에 대입하여 x, y, z 값을 구하면 된다.}
 $$
 
 
@@ -194,4 +194,54 @@ $$
 실제 프로그램에서는 판별식으로 직선이 충돌했는지를 먼저 계산하면 불필요한 계산을 줄일 수 있다.
 
 
+
+## 선분과 평면의 충돌
+
+
+
+> 유니티 구현 코드
+
+```C#
+
+private void OnDrawGizmos()
+{
+    /*
+    법선 벡터 : N(Nx, Ny, Nz)
+    평면상의 한 점 : P(Px, Py, Pz)
+    평면의 방정식 : Nx*x + Ny*y + Nz*z + d = 0
+                    d = -N·Q = -(Nx*Px + Ny*Py + Nz*Pz)
+        */
+    Vector3 n = Plane.up.normalized; // 평면의 법선 벡터
+    Vector3 p = Plane.position; // 평면상의 한 점
+    Vector3 s = SegmentStart.position; // 공간상의 한 점
+
+    // d값은 변하지 않기 때문에 미리 계산하는게 좋다.
+    float d = -(n.x * p.x + n.y * p.y + n.z * p.z);
+    // 공간 상의 점과 평면의 거리
+    float distance = n.x * s.x + n.y * s.y + n.z * s.z + d;
+    // 공간 상의 점과 평면을 연결하는 가장 짧은 벡터
+    Vector3 shortestVector = -n * distance;
+
+    // 선분 벡터
+    Vector3 segment = SegmentEnd.position - SegmentStart.position;
+    // 평면의 법선 벡터와 선분의 각도
+    float angle = Vector3.Dot(-n, segment.normalized);
+    // 선분의 시작에서 평면까지의 거리
+    float distanceFromStartToPlane = distance / angle;
+    // 선분의 시작에서 평면까지의 벡터
+    Vector3 toPlane = segment.normalized * distanceFromStartToPlane; 
+
+    Gizmos.color = Color.yellow;
+    Gizmos.DrawLine(SegmentStart.position, SegmentEnd.position);
+
+    if(distanceFromStartToPlane <= segment.magnitude)
+    {
+        Gizmos.color = Color.cyan; // 선분과 평면이 충돌함
+    } else
+    {
+        Gizmos.color = Color.red; // 선분과 평면이 충돌하지 않음
+    }
+    Gizmos.DrawLine(SegmentStart.position, SegmentStart.position + toPlane);
+}
+```
 
