@@ -20,12 +20,34 @@ share: true
 
 ## 선분과 선분 충돌
 
-#### 직선의 방정식
-
+#### 직선의 방정식 - 기울기와 y절편이 주어졌을 때
 
 $$
-P:시작점, V:벡터 \\
-y = \frac{V_y}{V_x}(x-p_x)+p_y
+a:기울기, b:y절편 \\
+y = ax + b
+$$
+
+#### 직선의 방정식 - 기울기와 한 점의 좌표가 주어졌을 때
+
+$$
+a:기울기, P:한 점 \\
+P_y = aP_x + b \\
+P_y - aP_x = b \\
+\therefore b = P_y - aP_x \\
+\text{b를 대입} \\
+y = ax + P_y - aP_x \\
+\therefore y - P_y = a(x - p_x)
+$$
+
+#### 직선의 방정식 - 두 점이 주어졌을 때
+
+$$
+P:한 점, Q:두 점 \\
+\text{'기울기와 한 점의 좌표' 공식에 대입} \\
+y - P_y = \frac{Q_y - P_y}{Q_x - P_x}(x - p_x) \\
+Q_y = P_y\text{라면 기울기가 0이되어 x축에 평행인 } y = P_y 직선이 되고 \\
+Q_x = P_x\text{라면 기울기를 구할 수 없기 때문에 } x = P_x 직선이 된다. \\ 
+\text{그 외는 위 식을 전개하면 된다.}
 $$
 
 #### 직선의 충돌(교점)
@@ -68,6 +90,52 @@ y = \frac{-a_1a_2p_{2x}+a_1p_{2y}+a_1^2p_{1x}-a_1p_{1y}}{a_1-a_2} -
 y = \frac{-a_1a_2p_{2x}+a_1p_{2y}+\cancel{a_1^2p_{1x}}-\cancel{a_1p_{1y}} - \cancel{a_1^2p_{1x}} + a_1a_2p_{1x} + \cancel{a_1p_{1y}}-a_2p_{1y}}{a_1-a_2} \\
 \therefore y = \frac{-a_1a_2p_{2x}+a_1p_{2y} + a_1a_2p_{1x} - a_2p_{1y}}{a_1-a_2}
 $$
+
+
+
+> 유니티 구현 코드
+
+```C#
+private void OnDrawGizmos()
+{
+    /*
+        이 방법으로는 수직인 직선과의 교점을 찾을 수 없다.
+    */
+
+    // 직선의 방정식 : y = ax + b, y = cx + d
+    // x` = (d - b) / (a - c)
+    // y` = ax` + b
+    float a = (LineEnd1.position.y - LineStart1.position.y) / (LineEnd1.position.x - LineStart1.position.x);
+    float c = (LineEnd2.position.y - LineStart2.position.y) / (LineEnd2.position.x - LineStart2.position.x);
+    float b = LineEnd1.position.y - a * LineEnd1.position.x;
+    float d = LineEnd2.position.y - c * LineEnd2.position.x;
+
+    if(a == c && b == d)
+    {
+        Debug.Log("Overlap");
+        return;
+    } else if (a == c)
+    {
+        Debug.Log("Parallel");
+        return;
+    } else
+    {
+        Debug.Log("Collision");
+    }
+
+    float x = (d - b) / (a - c);
+    float y = a * x + b;
+
+    Gizmos.color = Color.red;
+    Gizmos.DrawLine(LineStart1.position, LineEnd1.position);
+    Gizmos.color = Color.blue;
+    Gizmos.DrawLine(LineStart2.position, LineEnd2.position);
+    Gizmos.color = Color.yellow;
+    Gizmos.DrawWireSphere(new Vector3(x, y, 0), 1);
+
+    Debug.Log(x + ", " + y);
+}
+```
 
 
 
