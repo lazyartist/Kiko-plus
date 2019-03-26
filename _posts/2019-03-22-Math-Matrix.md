@@ -44,13 +44,34 @@ $$
 
 어떠한 행렬에 곱했을 때 단위 행렬로 만드는 수
 
-역행렬 구하는 법은 복잡하므로 생략
-
 $$
 E = M \times M^{-1} \\
 E = M^{-1} \times M \\
 \text{역행렬은 곱셈의 교환법칙이 성립한다.}
 $$
+
+
+$$
+\text{2x2 행렬의 역행렬 공식} \\
+A = \begin{bmatrix}
+a & b \\
+c & d
+\end{bmatrix} \\
+
+A^{-1} = \begin{vmatrix}
+a & b \\
+c & d
+\end{vmatrix}^{-1}
+= \frac{1}{\lvert A \rvert} \begin{bmatrix}
+d & -b \\
+-c & a
+\end{bmatrix}
+= \frac{1}{ad - bc} \begin{bmatrix}
+d & -b \\
+-c & a
+\end{bmatrix} \\
+$$
+
 
 #### 역행렬의 의의
 
@@ -88,5 +109,73 @@ $$
 
 크기, 회전, 이동 행렬의 4x4 행렬의 4행은 언제나 (0, 0, 0, 1)이기 때문에 메모리 절약과 처리속도 상승을 위해 4행을 제거하고 4행은 (0, 0, 0, 1)이라고 가정한다.
 
+
+
+#### 행렬식
+
+$$
+A = (a_{ij}) = \begin{pmatrix}
+0 & \cdots & 0 \\
+\vdots & \ddots & \vdots \\
+0 & \cdots & 0
+\end{pmatrix} \\
+
+\text{A 행렬에 대한 행렬식의 표현} \\
+\lvert A \rvert = 
+\lvert a_{ij} \rvert = 
+\det A = \det(a_{ij}) = 
+\det \begin{pmatrix}
+0 & \cdots & 0 \\
+\vdots & \ddots & \vdots \\
+0 & \cdots & 0
+\end{pmatrix} = 
+\begin{vmatrix}
+0 & \cdots & 0 \\
+\vdots & \ddots & \vdots \\
+0 & \cdots & 0
+\end{vmatrix} \\
+$$
+
+
+
+$$
+\text{1x1 행렬의 행렬식} \\
+\det(a) = a \\
+$$
+
+
+
+$$
+\text{2x2 행렬의 행렬식} \\
+\det \begin{pmatrix}
+a & b \\
+c & d
+\end{pmatrix} = ab - bc \\
+$$
+
+
+
+$$
+\text{3x3 행렬의 행렬식} \\
+\begin{matrix}
+\det \begin{pmatrix}
+a & b & c \\
+d & e & f \\
+g & h & i
+\end{pmatrix} &=& aei + bfg + cdh - ceg - bdi - afh \\
+&=& a \det \begin{pmatrix}
+e & f\\
+h & i
+\end{pmatrix}
+- b \det \begin{pmatrix}
+d & f\\
+g & i
+\end{pmatrix}
+- c \det \begin{pmatrix}
+d & e\\
+g & h
+\end{pmatrix}\\
+\end{matrix}
+$$
 
 

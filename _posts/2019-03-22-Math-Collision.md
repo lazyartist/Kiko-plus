@@ -18,7 +18,7 @@ share: true
 
 
 
-## 선분과 선분 충돌
+## 직선과 직선의 충돌
 
 #### 직선의 방정식 - 기울기와 y절편이 주어졌을 때
 
@@ -150,6 +150,133 @@ x축 방향 벡터가 0이면 기울기 계산 시 0으로 나누게 되므로 �
 - 기울기가 같고 y절편이 같다 : 겹침
 
 
+
+## 선분과 선분의 충돌
+
+#### 선분을 나타내는 방법
+
+직선의 방정식으로 수직인 직선을 표현할 수 없으므로 매개변수 t를 사용하여 x와 y에 대한 방정식 2개로 선분을 표현한다.
+
+$$
+\text{서로 다른 두 점 P1, P2로 이루어진 벡터 위의 한 점} \\
+x = P1_x + (P2_x - P1_x)t \\
+y = P1_y + (P2_y - P1_y)t
+$$
+
+
+
+#### 선분의 교점을 구하는 방정식 
+
+[참고]: http://www.cs.swan.ac.uk/~cssimon/line_intersection.html	" "
+$$
+벡터 : P1 \to P2, Q1 \to Q2 \\
+P(t) = P1 + (P2-P1)t \\
+Q(s) = Q1 + (Q2-Q1)s \\
+\text{교점이 있다는 것은 두 함수의 값이 같다는 것} \\
+P(t) = Q(s) \\
+\text{x 성분으로 전개} \\
+P1_x + (P2_x - P1_x)t = Q1_x + (Q2_x - Q1_x)s \\
+P1_x - Q1_x = (Q2_x - Q1_x)s - (P2_x - P1_x)t \\
+\text{y 성분으로 전개} \\
+P1_y + (P2_y - P1_y)t = Q1_y + (Q2_y - Q1_y)s \\
+P1_y - Q1_y = (Q2_y - Q1_y)s - (P2_y - P1_y)t \\
+$$
+
+
+
+$$
+\text{위 식에서 t, s를 구하기 위해 행렬을 이용} \\
+\begin{bmatrix}
+(Q2_x - Q1_x) & -(P2_x - P1_x) \\
+(Q2_y - Q1_y) & -(P2_y - P1_y)
+\end{bmatrix}
+\begin{bmatrix}
+s \\
+t
+\end{bmatrix}
+= 
+\begin{bmatrix}
+P1_x - Q1_x \\
+P1_y - Q1_y
+\end{bmatrix} \\\\
+
+\text{위 식을 } AX = B\text{ 형태로 봤을 때}\\
+\text{좌변에 X만 남기기 위해서는 좌, 우변에 } A^{-1}\text{(역행렬)을 곱해야함} \\
+X = BA^{-1} \\
+
+\begin{matrix}
+
+    \begin{bmatrix}
+    s \\
+    t
+    \end{bmatrix}
+    
+    &=& 
+    \frac{1}
+    {\begin{vmatrix}
+    (Q2_x - Q1_x) & -(P2_x - P1_x) \\
+    (Q2_y - Q1_y) & -(P2_y - P1_y)
+    \end{vmatrix}} 
+    \begin{bmatrix}
+    -(P2_y - P1_y) & -(P2_x - P1_x) * -1 \\
+    (Q2_y - Q1_y) * -1 & (Q2_x - Q1_x)
+    \end{bmatrix}
+    \begin{bmatrix}
+    P1_x - Q1_x \\
+    P1_y - Q1_y
+    \end{bmatrix} 
+    \\
+
+    &=& \frac{1}
+    {\begin{vmatrix}
+    (Q2_x - Q1_x) & (P1_x - P2_x) \\
+    (Q2_y - Q1_y) & (P1_y - P2_y)
+    \end{vmatrix}} 
+    \begin{bmatrix}
+    (P1_y - P2_y) & (P2_x - P1_x) \\
+    (Q1_y - Q2_y) & (Q2_x - Q1_x)
+    \end{bmatrix}
+    \begin{bmatrix}
+    P1_x - Q1_x \\
+    P1_y - Q1_y
+    \end{bmatrix} \\
+    
+    &=& 
+    \frac{1}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)}
+    \begin{bmatrix}
+    (P1_y - P2_y) & (P2_x - P1_x) \\
+    (Q1_y - Q2_y) & (Q2_x - Q1_x)
+    \end{bmatrix} 
+    \begin{bmatrix}
+    P1_x - Q1_x \\
+    P1_y - Q1_y
+    \end{bmatrix} \\
+    
+    &=& 
+    \begin{bmatrix}
+    \frac{(P1_y - P2_y)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} & \frac{(P2_x - P1_x)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} \\
+    \frac{(Q1_y - Q2_y)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} & \frac{(Q2_x - Q1_x)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)}
+    \end{bmatrix} 
+    \begin{bmatrix}
+    P1_x - Q1_x \\
+    P1_y - Q1_y
+    \end{bmatrix} \\
+\end{matrix}
+$$
+
+
+
+$$
+\begin{matrix}
+\therefore t &=& \frac{(Q1_y - Q2_y)(P1_x - Q1_x)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} + \frac{(Q2_x - Q1_x)(P1_y - Q1_y)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} \\
+&=& \frac{(Q1_y - Q2_y)(P1_x - Q1_x) + (Q2_x - Q1_x)(P1_y - Q1_y)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} \\
+
+\therefore s &=& \frac{(P1_y - P2_y)(P1_x - Q1_x)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} + \frac{(P2_x - P1_x)(P1_y - Q1_y)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} \\
+&=& \frac{(P1_y - P2_y)(P1_x - Q1_x) + (P2_x - P1_x)(P1_y - Q1_y)}{(Q2_x - Q1_x)(P1_y - P2_y) - (P1_x - P2_x)(Q2_y - Q1_y)} \\
+\end{matrix} \\
+$$
+
+ 
 
 ## 선분과 구의 충돌
 
