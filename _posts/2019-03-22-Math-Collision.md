@@ -168,6 +168,7 @@ $$
 #### 선분의 교점을 구하는 방정식 
 
 [참고]: http://www.cs.swan.ac.uk/~cssimon/line_intersection.html	" "
+
 $$
 벡터 : P1 \to P2, Q1 \to Q2 \\
 P(t) = P1 + (P2-P1)t \\
