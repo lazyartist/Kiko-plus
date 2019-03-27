@@ -93,7 +93,7 @@ $$
 
 
 
-> 유니티 구현 코드
+> 직선의 교점 - 유니티 구현
 
 ```C#
 private void OnDrawGizmos()
@@ -278,7 +278,7 @@ $$
 
  
 
-> 유니티 구현 코드
+> 선분의 교점 - 유니티 구현
 
 ```C#
 private void OnDrawGizmos()
@@ -404,26 +404,30 @@ $$
 
 #### 선분과 구의 충돌 검출
 
-> (a, b, c) : 구의 중심
+> S(x, y, z) : 구의 중심
 >
 > r : 구의 반지름
 
 $$
-(a - x)^2 + (b - y)^2 + (c - z)^2 = r^2 \\
-\text{구의 방정식에 직선의 (x, y, z)를 대입} \\
-(a - P_x + V_xt)^2 + (b - P_y + V_yt)^2 + (c - P_z + V_zt)^2 = r^2 \\
+\text{구의 방정식} : (x - S_x)^2 + (y - S_y)^2 + (z - S_z)^2 = r^2 \\
+선분 : x = V_xt + P_x, y = V_yt + P_y, z = V_zt + P_z \\
+\text{구의 방정식에 선분의 요소를 대입} \\
+(P_x + V_xt - S_x)^2 + (P_y + V_yt - S_y)^2 + (P_z + V_zt - S_z)^2 = r^2 \\
 \text{다음과 같이 치환} \\
-k_x = a - P_x \\
-k_y = b - P_y \\
-k_z = c - P_z \\
+k_x = P_x - S_x \\
+k_y = P_y - S_y \\
+k_z = P_z - S_z \\
 (k_x + V_xt)^2 + (k_y + V_yt)^2 + (k_z + V_zt)^2 = r^2 \\
 \text{전개} \\
 k_x^2 + 2k_xV_xt + V_x^2t^2 + k_y^2 + 2k_yV_yt + V_y^2t^2 + k_z^2 + 2k_zV_zt + V_z^2t^2 = r^2 \\
 (V_x^2 + V_y^2 + V_z^2)t^2 + 2(k_xV_x + k_yV_y + k_zV_z)t + k_x^2 + k_y^2 + k_z^2 - r^2 \\
-\text{다음과 같이 나타낼 수 있다} \\
-at^2 + bt + c = 0 \\
-\text{근의 공식으로 t값을 구할 수 있다} \\
-t = \frac{-b \pm \sqrt{b^2-4ac} }{2a} \\
+\text{다음과 같이 치환} \\
+a = V_x^2 + V_y^2 + V_z^2 \\
+b = k_xV_x + k_yV_y + k_zV_z \\
+c = k_x^2 + k_y^2 + k_z^2 - r^2 \\
+at^2 + 2bt + c = 0 \\
+\text{근의 공식으로 t값을 구한다} \\
+t = \frac{-b \pm \sqrt{b^2-ac} }{a} \\
 \therefore \text{t값을 구한 뒤 '선분 위의 점 방정식'에 대입하여 x, y, z 값을 구하면 된다.}
 $$
 
@@ -443,11 +447,58 @@ $$
 
 
 
+> 선분과 구의 충돌 - 유니티 구현
+
+```C#
+private void OnDrawGizmos()
+{
+    Vector3 s = Sphere.position;
+    float r = Sphere.localScale.x * 0.5f;
+    Vector3 p = P1.position;
+    Vector3 v = P2.position - P1.position;
+
+    Vector3 k = new Vector3(p.x - s.x, p.y - s.y, p.z - s.z);
+
+    // ax^2 + 2bx + c = 0
+    float a = Mathf.Pow(v.x, 2) + Mathf.Pow(v.y, 2) + Mathf.Pow(v.z, 2);
+    float b = k.x * v.x + k.y * v.y + k.z * v.z;
+    float c = Mathf.Pow(k.x, 2) + Mathf.Pow(k.y, 2) + Mathf.Pow(k.z, 2) - Mathf.Pow(r, 2);
+
+    Gizmos.color = Color.blue;
+    Gizmos.DrawLine(p, p + v);
+
+    // 판별식
+    float d = Mathf.Pow(b, 2) - (a * c);
+    if(d < 0) // 근이 없다
+    {
+        return;
+    }
+
+    // 근의 공식
+    float t1 = (-b + Mathf.Sqrt(d)) / a;
+    float t2 = (-b - Mathf.Sqrt(d)) / a;
+
+    Debug.Log(t1 + ", " + t2);
+
+    if (t1 >= 0f && t1 <= 1f)
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(new Vector3(v.x * t1 + p.x, v.y * t1 + p.y, v.z * t1 + p.z), 1);
+    }
+
+    if (t2 >= 0f && t2 <= 1f)
+    {
+        Gizmos.color = Color.green;
+        Gizmos.DrawWireSphere(new Vector3(v.x * t2 + p.x, v.y * t2 + p.y, v.z * t2 + p.z), 1);
+    }
+}
+```
+
+
+
 ## 선분과 평면의 충돌
 
-
-
-> 유니티 구현 코드
+> 선분과 평면의 충돌 - 유니티 구현
 
 ```C#
 private void OnDrawGizmos()
