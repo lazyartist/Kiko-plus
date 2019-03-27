@@ -93,13 +93,23 @@ $$
 
 
 
-> 직선의 교점 - 유니티 구현
+> 직선의 교점(Unity3D)
 
 ```C#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Line_Line_Collision : MonoBehaviour {
+    public Transform LineStart1;
+    public Transform LineEnd1;
+    public Transform LineStart2;
+    public Transform LineEnd2;
+
 private void OnDrawGizmos()
 {
     /*
-        이 방법으로는 수직인 직선과의 교점을 찾을 수 없다.
+        이 방법으로는 수직인 직선의 기울기가 0 또는 무한대가 되므로 교점을 찾을 수 없다.
     */
 
     // 직선의 방정식 : y = ax + b, y = cx + d
@@ -135,6 +145,8 @@ private void OnDrawGizmos()
 
     Debug.Log(x + ", " + y);
 }
+}
+
 ```
 
 
@@ -278,55 +290,68 @@ $$
 
  
 
-> 선분의 교점 - 유니티 구현
+> 선분의 교점(Unity3D)
 
 ```C#
-private void OnDrawGizmos()
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Segment_Segment_Collision : MonoBehaviour
 {
-    Gizmos.color = Color.red;
-    Gizmos.DrawLine(P1.position, P2.position);
-    Gizmos.color = Color.blue;
-    Gizmos.DrawLine(Q1.position, Q2.position);
+    public Transform P1;
+    public Transform P2;
+    public Transform Q1;
+    public Transform Q2;
 
-    Vector3 p1 = P1.position;
-    Vector3 p2 = P2.position;
-    Vector3 q1 = Q1.position;
-    Vector3 q2 = Q2.position;
-
-    Vector3 v = P2.position - P1.position;
-    Vector3 w = Q2.position - Q1.position;
-
-    float denominator = (q2.x - q1.x) * (p1.y - p2.y) - (p1.x - p2.x) * (q2.y - q1.y);
-
-    if(denominator == 0)
+    private void OnDrawGizmos()
     {
-        Debug.Log("Overlap");
-        return;
-    }
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(P1.position, P2.position);
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(Q1.position, Q2.position);
 
-    // t : P1->P2에서 교점의 비율, s : Q1->Q2에서 교점의 비율
-    float t = ((q1.y - q2.y) * (p1.x - q1.x) + (q2.x - q1.x) * (p1.y - q1.y)) / denominator;
-    float s = ((p1.y - p2.y) * (p1.x - q1.x) + (p2.x - p1.x) * (p1.y - q1.y)) / denominator;
+        Vector3 p1 = P1.position;
+        Vector3 p2 = P2.position;
+        Vector3 q1 = Q1.position;
+        Vector3 q2 = Q2.position;
 
-    float x = v.x * t + p1.x;
-    float y = v.y * t + p1.y;
+        Vector3 v = P2.position - P1.position;
+        Vector3 w = Q2.position - Q1.position;
 
-    Debug.Log(t + ", " + s + ", " + denominator);
+        float denominator = (q2.x - q1.x) * (p1.y - p2.y) - (p1.x - p2.x) * (q2.y - q1.y);
 
-    if (t < 0.0f || t > 1.0f || s < 0.0f || s > 1.0f)
-    {
-        Debug.Log("No Collision");
-    }
-    else if (t == 0 && s == 0)
-    {
-        Debug.Log("Parallel");
-    }
-    else
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(new Vector3(x, y, 0), 1);
+        if(denominator == 0)
+        {
+            Debug.Log("Overlap");
+            return;
+        }
+
+        // t : P1->P2에서 교점의 비율, s : Q1->Q2에서 교점의 비율
+        float t = ((q1.y - q2.y) * (p1.x - q1.x) + (q2.x - q1.x) * (p1.y - q1.y)) / denominator;
+        float s = ((p1.y - p2.y) * (p1.x - q1.x) + (p2.x - p1.x) * (p1.y - q1.y)) / denominator;
+
+        float x = v.x * t + p1.x;
+        float y = v.y * t + p1.y;
+
+        Debug.Log(t + ", " + s + ", " + denominator);
+
+        if (t < 0.0f || t > 1.0f || s < 0.0f || s > 1.0f)
+        {
+            Debug.Log("No Collision");
+        }
+        else if (t == 0 && s == 0)
+        {
+            Debug.Log("Parallel");
+        }
+        else
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(new Vector3(x, y, 0), 1);
+        }
     }
 }
+
 ```
 
 
@@ -447,101 +472,145 @@ $$
 
 
 
-> 선분과 구의 충돌 - 유니티 구현
+> 선분과 구의 충돌(Unity3D)
 
 ```C#
-private void OnDrawGizmos()
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Segment_Sphere_Collision : MonoBehaviour
 {
-    Vector3 s = Sphere.position;
-    float r = Sphere.localScale.x * 0.5f;
-    Vector3 p = P1.position;
-    Vector3 v = P2.position - P1.position;
+    public Transform P1;
+    public Transform P2;
+    public Transform Sphere;
 
-    Vector3 k = new Vector3(p.x - s.x, p.y - s.y, p.z - s.z);
-
-    // ax^2 + 2bx + c = 0
-    float a = Mathf.Pow(v.x, 2) + Mathf.Pow(v.y, 2) + Mathf.Pow(v.z, 2);
-    float b = k.x * v.x + k.y * v.y + k.z * v.z;
-    float c = Mathf.Pow(k.x, 2) + Mathf.Pow(k.y, 2) + Mathf.Pow(k.z, 2) - Mathf.Pow(r, 2);
-
-    Gizmos.color = Color.blue;
-    Gizmos.DrawLine(p, p + v);
-
-    // 판별식
-    float d = Mathf.Pow(b, 2) - (a * c);
-    if(d < 0) // 근이 없다
+    private void OnDrawGizmos()
     {
-        return;
-    }
+        Vector3 s = Sphere.position;
+        float r = Sphere.localScale.x * 0.5f;
+        Vector3 p = P1.position;
+        Vector3 v = P2.position - P1.position;
 
-    // 근의 공식
-    float t1 = (-b + Mathf.Sqrt(d)) / a;
-    float t2 = (-b - Mathf.Sqrt(d)) / a;
+        Vector3 k = new Vector3(p.x - s.x, p.y - s.y, p.z - s.z);
 
-    Debug.Log(t1 + ", " + t2);
+        // ax^2 + 2bx + c = 0
+        float a = Mathf.Pow(v.x, 2) + Mathf.Pow(v.y, 2) + Mathf.Pow(v.z, 2);
+        float b = k.x * v.x + k.y * v.y + k.z * v.z;
+        float c = Mathf.Pow(k.x, 2) + Mathf.Pow(k.y, 2) + Mathf.Pow(k.z, 2) - Mathf.Pow(r, 2);
 
-    if (t1 >= 0f && t1 <= 1f)
-    {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(new Vector3(v.x * t1 + p.x, v.y * t1 + p.y, v.z * t1 + p.z), 1);
-    }
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(p, p + v);
 
-    if (t2 >= 0f && t2 <= 1f)
-    {
-        Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(new Vector3(v.x * t2 + p.x, v.y * t2 + p.y, v.z * t2 + p.z), 1);
+        // 판별식
+        float d = Mathf.Pow(b, 2) - (a * c);
+        if(d < 0) // 근이 없다
+        {
+            return;
+        }
+
+        // 근의 공식
+        float t1 = (-b + Mathf.Sqrt(d)) / a;
+        float t2 = (-b - Mathf.Sqrt(d)) / a;
+
+        Debug.Log(t1 + ", " + t2);
+
+        if (t1 >= 0f && t1 <= 1f)
+        {
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(new Vector3(v.x * t1 + p.x, v.y * t1 + p.y, v.z * t1 + p.z), 1);
+        }
+
+        if (t2 >= 0f && t2 <= 1f)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(new Vector3(v.x * t2 + p.x, v.y * t2 + p.y, v.z * t2 + p.z), 1);
+        }
     }
 }
+
 ```
 
 
 
 ## 선분과 평면의 충돌
 
-> 선분과 평면의 충돌 - 유니티 구현
+> 선분과 평면의 충돌(Unity3D)
 
 ```C#
-private void OnDrawGizmos()
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Segment_Plane_Collision : MonoBehaviour
 {
-    /*
-    법선 벡터 : N(Nx, Ny, Nz)
-    평면상의 한 점 : P(Px, Py, Pz)
-    평면의 방정식 : Nx*x + Ny*y + Nz*z + d = 0
-                    d = -N·Q = -(Nx*Px + Ny*Py + Nz*Pz)
-    */
-    Vector3 n = Plane.up.normalized; // 평면의 법선 벡터
-    Vector3 p = Plane.position; // 평면상의 한 점
-    Vector3 s = SegmentStart.position; // 공간상의 한 점
+    public Transform Plane;
+    public Transform SegmentStart;
+    public Transform SegmentEnd;
 
-    // d값은 변하지 않기 때문에 미리 계산하는게 좋다.
-    float d = -(n.x * p.x + n.y * p.y + n.z * p.z);
-    // 공간 상의 점과 평면의 거리
-    float distance = n.x * s.x + n.y * s.y + n.z * s.z + d;
-    // 공간 상의 점과 평면을 연결하는 가장 짧은 벡터
-    Vector3 shortestVector = -n * distance;
-
-    // 선분 벡터
-    Vector3 segment = SegmentEnd.position - SegmentStart.position;
-    // 평면의 법선 벡터와 선분의 각도
-    float angle = Vector3.Dot(-n, segment.normalized);
-    // 선분의 시작에서 평면까지의 거리
-    float distanceFromStartToPlane = distance / angle;
-    // 선분의 시작에서 평면까지의 벡터
-    Vector3 toPlane = segment.normalized * distanceFromStartToPlane; 
-
-    Gizmos.color = Color.yellow;
-    Gizmos.DrawLine(SegmentStart.position, SegmentEnd.position);
-
-    // 제곱근 연산은 부하가 크기 때문에 길이의 제곱으로 비교한다.
-    //if(distanceFromStartToPlane <= segment.magnitude)
-    if (Mathf.Pow(distanceFromStartToPlane, 2) <= segment.sqrMagnitude)
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.cyan; // 선분과 평면이 충돌함
-    } else
-    {
-        Gizmos.color = Color.red; // 선분과 평면이 충돌하지 않음
+        /*
+        법선 벡터 : N(Nx, Ny, Nz)
+        평면상의 한 점 : P(Px, Py, Pz)
+        평면의 방정식 : Nx*x + Ny*y + Nz*z + d = 0
+                      d = -N·Q = -(Nx*Px + Ny*Py + Nz*Pz)
+        */
+        Vector3 n = Plane.up.normalized; // 평면의 법선 벡터
+        Vector3 p = Plane.position; // 평면상의 한 점
+        Vector3 s = SegmentStart.position; // 선분의 시작점
+
+        // d값은 변하지 않기 때문에 미리 계산하는게 좋다.
+        float d = -(n.x * p.x + n.y * p.y + n.z * p.z);
+        // 선분의 시작점과 평면의 거리
+        float distance = n.x * s.x + n.y * s.y + n.z * s.z + d; // 평면의 방정식의 근
+
+        // 평면의 방정식의 근이 0보다 작을 경우 공간상의 점은 평면 법선 벡터가 있는 쪽의 반대쪽에 있다.
+        if(distance < 0)
+        {
+            n *= -1; // 선분의 시작점이 법선 벡터 반대쪽에 있으므로 법선 벡터를 뒤집어 준다.
+            distance *= -1; // 거리에서 방향 정보를 제거한다.
+        }
+
+        // 공간 상의 점과 평면을 연결하는 가장 짧은 벡터
+        Vector3 shortestVector = n * distance;
+        // 선분 벡터
+        Vector3 segment = SegmentEnd.position - SegmentStart.position;
+        // 평면의 법선 벡터와 선분의 각도
+        float cos = Vector3.Dot(-n, segment.normalized);
+
+        // 선분과 평면의 각도가 0~90 사이일 경우만 계산한다.
+        // 90~180 사이에서는 선분의 방향으로 절대 만나지 않는다.
+        if (cos > 0)
+        {
+            // 선분의 시작에서 평면까지의 거리
+            float distanceFromStartToPlane = distance / cos;
+            // 선분의 시작에서 평면까지의 벡터
+            Vector3 toPlane = segment.normalized * distanceFromStartToPlane;
+
+            Debug.Log(distanceFromStartToPlane + ", " + segment.magnitude);
+
+            // 제곱근 연산은 부하가 크기 때문에 길이의 제곱으로 비교한다.
+            //if (distanceFromStartToPlane <= segment.magnitude)
+            if (Mathf.Pow(distanceFromStartToPlane, 2) <= segment.sqrMagnitude)
+            {
+                Gizmos.color = Color.yellow;
+                Gizmos.DrawWireSphere(SegmentStart.position + toPlane, 1);
+
+                Gizmos.color = Color.cyan; // 선분과 평면이 충돌함
+            }
+            else
+            {
+                Gizmos.color = Color.red; // 선분과 평면이 충돌하지 않음
+            }
+        } else
+        {
+            Gizmos.color = Color.red; // 선분과 평면이 충돌하지 않음
+        }
+        
+        Gizmos.DrawLine(SegmentStart.position, SegmentEnd.position);
     }
-    Gizmos.DrawLine(SegmentStart.position, SegmentStart.position + toPlane);
 }
+
 ```
 
