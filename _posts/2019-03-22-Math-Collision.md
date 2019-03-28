@@ -838,6 +838,7 @@ $$
 \end{matrix} \\
 
 \begin{matrix}
+	idst = (r1 + r2) - \rVert v \lVert \\
 	\therefore nsp = -\hat{v} \times idst \\
 	\\
 \end{matrix}
