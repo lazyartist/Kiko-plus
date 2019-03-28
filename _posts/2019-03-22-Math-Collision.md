@@ -8,8 +8,6 @@ comments: true
 share: true
 ---
 
-[TOC]
-
 
 
 ## 충돌 판정에 사용하는 형태
@@ -552,22 +550,28 @@ $$
     s &:& \text{선분의 시작점} \\
     v &:& \text{선분의 벡터} \\
     cos\theta &:& \text{평면 법선 벡터와 선분 벡터의 내적값} \\
-    w &:& \text{선분의 시작점과 선분과 평면이 충돌하는 지점까지의 벡터} \\\\
+    w &:& \text{선분의 시작점과 선분과 평면이 충돌하는 지점까지의 벡터} \\
+    \\
 \end{matrix} \\
 
-l\text{을 구하기 위해 s를 평면 방정식에 대입한다.} \\
-l = n_x(s_x - p_x) + n_y(s_y - p_y) + n_z(s_z - p_z) \\
-\text{평면 법선 벡터와 선분 벡터의 방향을 맞추고 내적으로 cos값을 구한다.} \\
-\cos\theta = \hat{v} \cdot -\hat{n} \\
-w\text{를 구한다.} \\
-w = \frac{l}{\cos\theta} \times \hat{v} \\
-$$
+\begin{matrix}
+    l\text{을 구하기 위해 s를 평면 방정식에 대입한다.} \\
+    l = n_x(s_x - p_x) + n_y(s_y - p_y) + n_z(s_z - p_z) \\
+    \text{평면 법선 벡터와 선분 벡터의 방향을 맞추고 내적으로 cos값을 구한다.} \\
+    \cos\theta = \hat{v} \cdot -\hat{n} \\
+    w\text{를 구한다.} \\
+    w = \frac{l}{\cos\theta} \times \hat{v} \\
+    \\
+\end{matrix} \\
 
-|                       | 충돌 여부 |
-| --------------------- | --------- |
-| \|\|w\|\| < 0         | X         |
-| \|\|w\|\| < \|\|v\|\| | O         |
-| \|\|w\|\| > \|\|v\|\| | X         |
+\begin{matrix}
+	비교 & 충돌 여부 \\
+    \rVert w \lVert < 0 & X \\
+    \rVert w \lVert < \rVert v \lVert & O \\
+    \rVert w \lVert > \rVert v \lVert & X \\
+    \\
+\end{matrix} \\
+$$
 
 
 
