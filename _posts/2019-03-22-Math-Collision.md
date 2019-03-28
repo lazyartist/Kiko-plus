@@ -8,6 +8,8 @@ comments: true
 share: true
 ---
 
+[TOC]
+
 
 
 ## 충돌 판정에 사용하는 형태
@@ -52,7 +54,7 @@ Q_x = P_x\text{라면 기울기를 구할 수 없기 때문에 } x = P_x 직선�
 \text{그 외는 위 식을 전개하면 된다.}
 $$
 
-#### 직선의 충돌(교점)
+#### 직선의 충돌 이론
 
 직선이 충돌한다는 것은 교점이 있다는 것
 
@@ -95,7 +97,7 @@ $$
 
 
 
-> 직선의 교점(Unity3D)
+#### 직선의 충돌 구현(Unity3D)
 
 ```C#
 using System.Collections;
@@ -153,7 +155,7 @@ private void OnDrawGizmos()
 
 
 
-#### 선분의 충돌(교점)
+#### 선분의 충돌
 
 직선의 교점이 두 선분의 영역안에 있는지 확인한다.
 
@@ -179,7 +181,7 @@ $$
 
 
 
-#### 선분의 교점을 구하는 방정식
+#### 선분과 선분의 충돌 이론
 [참고](http://www.cs.swan.ac.uk/~cssimon/line_intersection.html){:target="_blank"}
 
 $$
@@ -292,7 +294,7 @@ $$
 
  
 
-> 선분의 교점(Unity3D)
+#### 선분과 선분의 충돌 구현(Unity3D)
 
 ```C#
 using System.Collections;
@@ -429,7 +431,7 @@ $$
 
 
 
-#### 선분과 구의 충돌 검출
+#### 선분과 구의 충돌 이론
 
 > S(x, y, z) : 구의 중심
 >
@@ -474,7 +476,7 @@ $$
 
 
 
-> 선분과 구의 충돌(Unity3D)
+#### 선분과 구의 충돌 구현(Unity3D)
 
 ```C#
 using System.Collections;
@@ -800,6 +802,89 @@ public class Segment_Triangle_Collision : MonoBehaviour
 }
 
 ```
+
+
+
+## 구와 구의 충돌
+
+#### 구와 구의 충돌 이론
+
+$$
+\begin{matrix}
+	sp1, sp2 &:& \text{구의 중심점(sphere point)} \\
+	v &:& \text{두 구의 중심점을 잇는 벡터(vector)} \\
+	r1, r2 &:& \text{구의 반지름(radius)} \\
+	\\
+\end{matrix} \\
+
+\begin{matrix}
+	v = sp2 - sp1 \\
+	\\
+\end{matrix} \\
+
+\begin{matrix}
+	\therefore \rVert v \lVert < r1 + r2 \Rightarrow 충돌 \\
+	\\
+	\text{컴퓨터에서 제곱근 연산을 피하려면 제곱하여 비교한다.} \\
+	v_x^2 + v_y^2 + v_z^2 < (r1 + r2)^2 \Rightarrow 충돌 \\
+	\\
+\end{matrix}\\
+
+\text{충돌한 만큼 밀어내기} \\
+\begin{matrix}
+	idst &:& \text{침범한 거리(invasion distance)} \\
+	nsp &:& \text{밀려난 새로운 위치(new sphere point)} \\
+	\\
+\end{matrix} \\
+
+\begin{matrix}
+	\therefore nsp = -\hat{v} \times idst \\
+	\\
+\end{matrix}
+$$
+
+#### 구와 구의 충돌 구현
+
+```C#
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Sphere_Sphere_Collision : MonoBehaviour {
+    public Transform S1;
+    public Transform S2;
+
+    private void OnDrawGizmos()
+    {
+        Vector3 sp1 = S1.position;
+        Vector3 sp2 = S2.position;
+
+        float r1 = S1.localScale.x * 0.5f;
+        float r2 = S2.localScale.x * 0.5f;
+
+        Vector3 v = sp2 - sp1;
+        if (v.sqrMagnitude < Mathf.Pow(r1 + r2, 2))
+        {
+            Gizmos.color = Color.blue;
+
+            // 침범한 만큼 밀어내기
+            // 침범한 거리(invasion distance)
+            float idst = (r1 + r2) - v.magnitude;
+            S1.position += -v.normalized * idst;
+        } else
+        {
+            Gizmos.color = Color.red;
+        }
+
+        Gizmos.DrawLine(sp1, sp2);
+    }
+}
+
+```
+
+
+
+
 
 
 
