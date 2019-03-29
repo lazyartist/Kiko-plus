@@ -1140,7 +1140,7 @@ $$
 
 #### 평면과 평면의 충돌 구현
 
-```C# #Unity3D
+```csharp
 
 using System.Collections;
 using System.Collections.Generic;
