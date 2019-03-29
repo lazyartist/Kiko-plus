@@ -1051,6 +1051,7 @@ public class Sphere_Triangle_Collision : MonoBehaviour
 ###### 두 평면의 교선
 
 두 평면은 충돌시 하나의 직선에서 만나며 이 직선은 두 평면의 법선 벡터의 외적으로 구할 수 있다.
+
 $$
 \begin{gather*}
 \begin{array}{ c c c }
@@ -1072,8 +1073,8 @@ $$
 시작점은 교선위의 점의 요소중 하나를 0으로 만들어 찾아낸다. 
 
 이 때 법선 벡터의 요소중 0으로 만든 요소와 같은 요소가 0이라면 x, y 값을 계산할 수 없기 때문에 다른 요소를 0으로 만들어 찾아봐야한다.
-$$
 
+$$
 \begin{gather*}
 \begin{array}{ c c l }
 a_{0} x\ +\ b_{0} y\ +\ c_{0} z\ +\ d_{0} \ =\ 0 & : & \text{평면 방정식 1}\\
@@ -1139,7 +1140,7 @@ $$
 
 #### 평면과 평면의 충돌 구현
 
-```C#, Unity3D
+```C# Unity3D
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
