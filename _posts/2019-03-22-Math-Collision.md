@@ -20,6 +20,10 @@ share: true
 |         구          | - 중심에서 같은 거리에 있는 면으로 만든 형태<br />- 중심과 반지름으로 표현 | 중심좌표, 반지름                                             |
 | 평면<br /> (삼각형) | - 3차원 공간에 무한히 퍼져 있는 평평한 면<br />- 평면 방정식으로 표현<br />- 삼각형일 때는 평면을 범위로 제한 | - 평면의 성분<br />- 꼭짓점 3개, 삼각형을 포함하는 평면(계산 편의) |
 
+## 직선과 한 점의 거리
+
+
+
 
 
 ## 직선과 직선의 충돌
@@ -895,7 +899,7 @@ public class Sphere_Sphere_Collision : MonoBehaviour {
 
 
 
-#### 구와 삼각형의 충돌 구현
+#### 구와 삼각형의 충돌 구현(Unity3D)
 
 ```C#
 using System.Collections;
@@ -1040,9 +1044,167 @@ public class Sphere_Triangle_Collision : MonoBehaviour
 
 
 
+## 평면과 평면의 충돌
+
+#### 평면과 평면의 충돌 이론
+
+###### 두 평면의 교선
+
+두 평면은 충돌시 하나의 직선에서 만나며 이 직선은 두 평면의 법선 벡터의 외적으로 구할 수 있다.
+$$
+\begin{gather*}
+\begin{array}{ c c c }
+n_{0}( a_{0} ,\ b_{0} ,\ c_{0}) & : & 평면의\ 법선\ 벡터\\
+n_{1}( a_{1} ,\ b_{1} ,\ c_{1}) & : & 평면의\ 법선\ 벡터\\
+V & : & 두\ 평면의\ 교선
+\end{array}\\
+\\
+\begin{array}{ c c l }
+V & = & n_{0} \ \times n_{1}\\
+ & = & ( b_{0} c_{1} -c_{0} b_{1} ,\ c_{0} a_{1} -a_{0} c_{1} ,\ a_{0} b_{1} -b_{0} a_{1})\\
+ & = & ( V_{x} ,\ V_{y} ,\ V_{z})
+\end{array}
+\end{gather*}
+$$
+
+###### 두 평면의 교선의 시작점 
+
+시작점은 교선위의 점의 요소중 하나를 0으로 만들어 찾아낸다. 
+
+이 때 법선 벡터의 요소중 0으로 만든 요소와 같은 요소가 0이라면 x, y 값을 계산할 수 없기 때문에 다른 요소를 0으로 만들어 찾아봐야한다.
+$$
+
+\begin{gather*}
+\begin{array}{ c c l }
+a_{0} x\ +\ b_{0} y\ +\ c_{0} z\ +\ d_{0} \ =\ 0 & : & \text{평면 방정식 1}\\
+a_{1} x\ +\ b_{1} y\ +\ c_{1} z\ +\ d_{1} \ =\ 0 & : & \text{평면 방정식 2}
+\end{array} \ \\
+\\
+z\ =\ 0\text{으로 고정한 후 평면 방정식}\\
+a_{0} x\ +\ b_{0} y\ +\ d_{0} \ =\ 0\ \cdots ( 1)\\
+a_{1} x\ +\ b_{1} y\ +\ d_{1} \ =\ 0\cdots ( 2)\\
+\\
+\text{(1)을 y에 대해 정리한다.}\\
+\ b_{0} y\ =\ -( a_{0} x\ +\ d_{0})\\
+y\ =\ \frac{-( a_{0} x\ +\ d_{0})}{b_{0}}\\
+\\
+(1)을\ (2)에\ 대입하고\ x에\ 대해\ 정리\\
+\begin{array}{ r c c }
+a_{1} x\ +\ b_{1}\left(\frac{-( a_{0} x\ +\ d_{0})}{b_{0}}\right) \ +\ d_{1} & = & 0\\
+a_{1} x-\frac{a_{0} b_{1} x}{b_{0}} -\frac{b_{1} d_{0}}{b_{0}} +d_{1} & = & 0\\
+\frac{a_{1} b_{0}}{b_{0}} x-\frac{a_{0} b_{1}}{b_{0}} x-\frac{b_{1} d_{0}}{b_{0}} +d_{1} & = & 0\\
+\frac{( a_{1} b_{0} -a_{0} b_{1})}{b_{0}} x-\frac{b_{1} d_{0}}{b_{0}} +d_{1} & = & 0\\
+\cancel{b_{0}}\frac{( a_{1} b_{0} -a_{0} b_{1})}{\cancel{b_{0}}} x-\cancel{b_{0}}\frac{b_{1} d_{0}}{\cancel{b_{0}}} +b_{0} d_{1} & = & 0\\
+( a_{1} b_{0} -a_{0} b_{1}) x\ -b_{1} d_{0} \ +b_{0} d_{1} & = & 0\\
+( a_{1} b_{0} -a_{0} b_{1}) x & = & -( b_{0} d_{1} -b_{1} d_{0})\\
+x & = & \frac{-( b_{0} d_{1} -b_{1} d_{0})}{( a_{1} b_{0} -a_{0} b_{1})}\\
+x & = & \frac{-( b_{0} d_{1} -b_{1} d_{0})}{-( a_{0} b_{1} -a_{1} b_{0})}\\
+x & = & \frac{( b_{0} d_{1} -b_{1} d_{0})}{( a_{0} b_{1} -a_{1} b_{0})}\\
+\therefore x & = & \frac{( b_{0} d_{1} -b_{1} d_{0})}{V_{z}}
+\end{array}\\
+\\
+같은\ 방식으로\ y도\ 구할\ 수\ 있다.\\
+\begin{array}{ c c c }
+\therefore x & = & \frac{( b_{0} d_{1} -b_{1} d_{0})}{V_{z}}\\
+\therefore y & = & \frac{( a_{1} d_{0} -a_{0} d_{1})}{V_{z}}\\
+\therefore z & = & 0
+\end{array}\\
+\\
+이\ 때\ V_{z} 가\ 0이라면\ x,\ y값을\ 구할\ 수\ 없기\ 때문에\ \ \\
+다른\ 요소를\ 0으로\ 두고\ 위의\ 방식으로\ 찾는다.\\
+\\
+아래는\ 시작점을\ 찾을\ 수\ 있는\ 조건표이다.\\
+\begin{array}{|c|c|c|c|}
+\hline
+x & y & z & 조건\\
+\hline
+\frac{( b_{0} d_{1} -b_{1} d_{0})}{V_{z}} & \frac{( a_{1} d_{0} -a_{0} d_{1})}{V_{z}} & 0 & V_{z} \ \neq 0\\
+\hline
+\frac{( c_{1} d_{0} -c_{0} d_{1})}{V_{y}} & 0 & \frac{( a_{0} d_{1} -a_{1} d_{0})}{V_{y}} & V_{y} \ \neq 0\\
+\hline
+0 & \frac{( c_{0} d_{1} -c_{1} d_{0})}{V_{x}} & \frac{( b_{1} d_{0} -b_{0} d_{1})}{V_{x}} & V_{x} \ \neq 0\\
+\hline
+\end{array}\\
+\\
+V_{z} 가\ 0인\ 경우\ :\ 법선\ 벡터가\ z축에\ 직교함으로\ 인해\ 평면이\ z축에\ 평행한\ 경우\\
+V_{y} 가\ 0인\ 경우\ :\ 법선\ 벡터가\ y축에\ 직교함으로\ 인해\ 평면이\ y축에\ 평행한\ 경우\\
+V_{x} 가\ 0인\ 경우\ :\ 법선\ 벡터가\ x축에\ 직교함으로\ 인해\ 평면이\ x축에\ 평행한\ 경우\\
+\\
+만약\ V_{x} ,\ V_{y} ,\ V_{x} 가\ 모두\ 0이라면\ 두\ 평면은\ 평행하기\ 때문에\ 교선이\ 없다.\\
+\\
+\end{gather*}
+$$
 
 
 
+#### 평면과 평면의 충돌 구현
+
+```C#, Unity3D
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Plane_Plane_Collision : MonoBehaviour {
+    public Transform P0;
+    public Transform P1;
+
+    private void OnDrawGizmos()
+    {
+        Vector3 p0 = P0.position;
+        Vector3 p1 = P1.position;
+
+        // 평면의 법선
+        Vector3 n0 = P0.up.normalized;
+        Vector3 n1 = P1.up.normalized;
+
+        // 평면의 방정식의 d값
+        float d0 = -1 * Vector3.Dot(n0, p0);
+        float d1 = -1 * Vector3.Dot(n1, p1);
+
+        // 교선 벡터
+        Vector3 v = Vector3.Cross(P0.up, P1.up);
+        Debug.Log(v);
+
+        // 시작점
+        float x = 0;
+        float y = 0;
+        float z = 0;
+        if (v.z != 0.0f)
+        {
+            x = (n0.y * d1 - n1.y * d0) / v.z;
+            y = (n1.x * d0 - n0.x * d1) / v.z;
+            z = 0f;
+        }
+        else if (v.y != 0.0f)
+        {
+            x = (n1.z * d0 - n0.z * d1) / v.y;
+            y = 0f;
+            z = (n1.y * d0 - n0.y * d1) / v.z;
+        }
+        else if (v.x != 0.0f)
+        {
+            x = 0f;
+            y = (n0.z * d1 - n1.z * d0) / v.x;
+            z = (n1.y * d0 - n0.y * d1) / v.x;
+        }
+        Vector3 sp = new Vector3(x, y, z);
+
+        Gizmos.color = Color.green;
+        Gizmos.DrawLine(p0, p0 + P0.up);
+        Gizmos.DrawLine(p1, p1 + P1.up);
+        Gizmos.color = Color.magenta;
+        Gizmos.DrawWireMesh(P0.gameObject.GetComponent<MeshFilter>().mesh, P0.position, P0.rotation, P0.localScale);
+
+        Gizmos.color = Color.white;
+        Gizmos.DrawLine(Vector3.zero, v*100000f);
+        Gizmos.DrawLine(Vector3.zero, -v*100000f);
+
+        Gizmos.color = Color.red;
+        Gizmos.DrawLine(sp, sp + v * 100000f);
+        Gizmos.DrawLine(sp, sp + -v * 100000f);
+    }
+}
+```
 
 
 
