@@ -24,6 +24,16 @@ share: true
 
 
 
+인라인  $ x^2 = abx $ sdfsdf a^2^ dlfjsf~1~ highlight ==alkdjf== dlkfjsdlkfj sldf 
+
+
+
+
+$$
+이런ㅇㄹ
+니알
+ㅇ니러ㅓㅇㄹ
+$$
 
 
 ## 직선과 직선의 충돌
