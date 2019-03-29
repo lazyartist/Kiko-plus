@@ -1208,10 +1208,6 @@ public class Plane_Plane_Collision : MonoBehaviour {
 
 
 
-
-
-
-
 ## 평면과 삼각형의 충돌
 
 #### 평면과 삼각형의 충돌 이론
@@ -1220,6 +1216,8 @@ public class Plane_Plane_Collision : MonoBehaviour {
 	- 평면의 방정식에 꼭지점을 대입하여 나온 거리값이 양수이면 평면의 법선쪽, 음수이면 법선 반대쪽이다.
 - 삼각형의 변과 평면의 교점은 '평면과 선분의 충돌'을 이용한다.
 	- 삼각현의 변의 벡터 방향이 평면을 향하지 않고 있다면 충돌하지 않으므로 무시한다.
+
+<svg class="role-diagram-draw-area" style="width:100%"><g class="shapes-region" style="stroke: black; fill: none;"><g class="composite-shape"><path class="real" d=" M378.03,34 L507.22,34 L410.01,137.2 L280.82,137.2 Z" style="stroke-width: 1; stroke: rgba(255, 255, 255, 0); fill: rgba(0, 0, 0, 0.54);"></path></g><g class="composite-shape"><path class="real" d=" M503.94,126.1 L374.35,48.7 L458.3,12.2 Z" style="stroke-width: 1; stroke: rgb(0, 0, 0); fill: rgb(255, 255, 255);"></path></g><g class="composite-shape"><path class="real" d=" M507.22,34 L636.41,34 L539.2,137.2 L410.01,137.2 Z" style="stroke-width: 1; stroke: rgba(255, 255, 255, 0); fill: rgba(0, 0, 0, 0.54);"></path></g><g class="intersections-group"><g style="stroke: rgb(0, 0, 0); stroke-width: 1; fill: none;"><g><g class="intersection-group"><g><circle cx="450.5196743177314" cy="94.19336636826856" r="5"></circle><circle cx="450.5196743177314" cy="94.19336636826856" r="5" style="stroke: transparent; stroke-width: 6; fill: none;"></circle></g><g><circle cx="479.0274063814475" cy="63.92879683207136" r="5"></circle><circle cx="479.0274063814475" cy="63.92879683207136" r="5" style="stroke: transparent; stroke-width: 6; fill: none;"></circle></g></g></g><g></g></g></g></g><g></g><g></g><!-- react-empty: 230 --></svg>
 
 
 
