@@ -919,8 +919,8 @@ public class Sphere_Sphere_Collision : MonoBehaviour {
 #### 구와 삼각형의 충돌 이론
 
 1. 구와 평면의 충돌 검사
-2. 삼각형 각 변과 구의 충돌 검사
-3. 구가 삼각형 안에 있는지 검사
+2. 삼각형 각 변과 구의 충돌 검사 - 구와 선분의 충돌 이용
+3. 구가 삼각형 안에 있는지 검사 - 선분과 삼각형 충돌 이용
 
 
 
@@ -1399,7 +1399,7 @@ public class Triangle
     }
 
     // 현재 삼각형을 평면으로 하여 매개변수로 전달된 선분과 충돌했는지 테스트한다.
-    // 선분에서 충돌한 지점을 선분 길이 대비 비율로 반환한다.
+    // 선분에서 충돌한 지점을 선분 길이 대비 비율로 반환한다.(직선의 매개변수 방정식에서 t)
     // 0~1 사이 : 충돌 지점이 선분 안이다. 충돌했다.
     // 0~1 바깥 : 충돌 지점이 선분 밖이다. 충돌 안했다.
     public float HitTestWithSegment(Vector3 position, Vector3 vector)
@@ -1408,7 +1408,7 @@ public class Triangle
         float distance = N.x * position.x + N.y * position.y + N.z * position.z + _d;
         // 선분의 방향을 나타내는 단위벡터
         Vector3 vn = vector.normalized;
-        // 반환할 충돌지점 비율값
+        // 반환할 충돌지점 비율값(직선의 매개변수 방정식에서 t)
         float t = -1f;
         // 평면의 법선과 선분의 내적값, 두 벡터 사이각의 cos값과 같다.
         float cos = Vector3.Dot(N, vn);
