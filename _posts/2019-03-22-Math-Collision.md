@@ -1526,7 +1526,7 @@ public class Triangle_Triangle_Collision : MonoBehaviour {
 
 ```
 
-![Triangle vs Triangle Collision](D:\Examples\blog\images\Triangle_Triangle_Collision.png)
+![Triangle vs Triangle Collision](/lazyartist/blog/master/images/Triangle_Triangle_Collision.png)
 
 
 
