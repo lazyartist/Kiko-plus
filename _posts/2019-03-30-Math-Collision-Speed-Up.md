@@ -52,7 +52,7 @@ share: true
 
 구보다 빈틈없이 객체를 감쌀 수 있다.
 
-###### AABB
+###### AABB(Axis-Aligned Bounding Box)
 
 x, y, z축에 평행한 변을 갖는 상자로 객체가 회전해도 상자는 회전하지 않는다.
 
@@ -262,9 +262,15 @@ public class Segment_AABB_Collision : MonoBehaviour
 
 
 
+###### AABB 작동화면 캡쳐
+
+![](https://raw.githubusercontent.com/lazyartist/blog/master/images/AABB.gif)
 
 
-###### OBB
+
+###### OBB(Oriented Bounding Box)
+
+
 
 
 
