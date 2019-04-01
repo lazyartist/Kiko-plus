@@ -111,7 +111,7 @@ $$
 
 
 
-#### 행렬식
+#### 행렬식(Determinant)
 
 $$
 A = (a_{ij}) = \begin{pmatrix}
