@@ -315,6 +315,8 @@ public class Segment_AABB_Collision : MonoBehaviour
 
 ###### OBB의 충돌 검출 구현
 
+> Matrix4 클래스는 Math - Linear Transformation 포스트 참고
+
 ```csharp
 using System;
 using System.Collections;
