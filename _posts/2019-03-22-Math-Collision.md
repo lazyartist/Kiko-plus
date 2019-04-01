@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Math - Basic Shapes Collision"
+title: "Math - Collision"
 description: ""
 date: 2019-03-22 19:00:00+09:00
 tags: [game, math, math]
