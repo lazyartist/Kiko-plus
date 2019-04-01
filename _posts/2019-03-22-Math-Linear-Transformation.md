@@ -175,6 +175,8 @@ $$
 
 #### 크기, 회전, 이동 행렬 구현
 
+참고 : <https://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm>
+
 ```csharp
 // Matrix4 구조체 정의
 using System.Collections;
