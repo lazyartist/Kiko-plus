@@ -220,6 +220,8 @@ $$
 
 
 
+
+
 <svg xmlns="http://www.w3.org/2000/svg" width="662" height="650" style="
         width:662px;
         height:650px;
@@ -238,7 +240,6 @@ $$
 | --------- | ----------- | ----------------- |
 | 0         | +-0         | 비정상 값         |
 | 최댓값    | +- 무한대   | NaN(Not a Number) |
-|           |             |                   |
 
 
 
