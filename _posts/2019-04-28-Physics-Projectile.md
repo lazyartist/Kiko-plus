@@ -233,10 +233,59 @@ $$
 
 
 
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class ProjectileMotionTest : MonoBehaviour
+{
+    [Range(0, 360)]
+    public float Angle;
+    public float Velocity;
+    public float Gravity = 9.8f;
+
+    public float XRange = 10f;
+    public float DrawLineResolution = 50;
+    
+    private void OnDrawGizmos()
+    {
+        // 각도와 속도 그리기
+        float radian = Angle * Mathf.Deg2Rad;
+        Gizmos.color = Color.blue;
+        Gizmos.DrawLine(transform.position, transform.position + new Vector3(Velocity * Mathf.Cos(radian), Velocity * Mathf.Sin(radian), 0));
+
+        // 포물선 그리기
+        Gizmos.color = Color.red;
+        float xUnit = XRange / DrawLineResolution;
+        Vector3 prevPosition = transform.position;
+        for (int i = 0; i < DrawLineResolution; i++)
+        {
+            float x = xUnit * i;
+            float y = GetProjectileMotionY(x);
+            Vector3 curPosition = transform.position + new Vector3(x, y, 0);
+
+            Gizmos.DrawLine(prevPosition, curPosition);
+
+            prevPosition = curPosition;
+        }
+    }
+
+    private float GetProjectileMotionY(float x)
+    {
+        float radian = Angle * Mathf.Deg2Rad;
+        float y = Mathf.Tan(radian) * x;
+        y -= Gravity / (2 * Velocity * Velocity * Mathf.Cos(radian) * Mathf.Cos(radian)) * (x * x);
+        return y;
+    }
+}
+
+```
 
 
 
-## 포물선 - 경로 방정식
+
+## 포물선 - (역)경로 방정식
 
 최고점 높이(h), 최고점 도달 시간(ht), 마지막 위치(y) 및 경과 시간(t)을 아는 경우 y값을 계산할 수 있다.
 
@@ -320,13 +369,79 @@ $$
 t초 후 위치 계산 식에 t값을 변화시키며 좌표를 얻는다.
 
 $$
-   \begin{equation*}
+\begin{equation*}
    \begin{array}{ c c c }
    x & = & v_{x} t\\
    y & = & v_{y} t-\frac{1}{2} gt^{2}
    \end{array}
    \end{equation*}
 $$
+
+
+
+```csharp
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.EventSystems;
+
+public class ParabolaAlgorithm
+{
+    public float HeightLimit { get; private set; }
+    public float TimeToTopmostHeight { get; private set; }
+    public float TimeToEndPosition { get; private set; }
+
+    private Vector3 _startPosition;
+    private Vector3 _endPosition;
+
+    private float _vx;
+    private float _vy;
+    private float _gravity;
+
+    public Vector3 GetPosition(float elasedTime)
+    {
+        float x = _vx * elasedTime;
+        float y = (_vy * elasedTime) - (0.5f * _gravity * elasedTime * elasedTime);
+
+        return new Vector3(_startPosition.x + x, _startPosition.y + y, 0f);
+    }
+
+    public void Init(float heightLimit, float timeToTopmostHeight, Vector3 startPosition, Vector3 endPosition)
+    {
+        this.HeightLimit = heightLimit;
+        this.TimeToTopmostHeight = timeToTopmostHeight;
+
+        _startPosition = startPosition;
+        _endPosition = endPosition;
+
+        CalcParabolaTrack();
+    }
+
+    private void CalcParabolaTrack()
+    {
+        float endHeight = _endPosition.y - _startPosition.y;
+        float height = HeightLimit;
+        //float height = MaxHeight - transform.position.y;
+        _gravity = 2 * height / (TimeToTopmostHeight * TimeToTopmostHeight);
+
+        _vy = Mathf.Sqrt(2 * _gravity * height);
+
+        float a = _gravity;
+        float b = -2 * _vy;
+        float c = 2 * endHeight;
+
+        TimeToEndPosition = (-b + Mathf.Sqrt(b * b - 4 * a * c)) / (2 * a);
+
+        //Debug.Log(TimeToEndPosition.ToString("#.###"));
+
+        _vx = (_endPosition.x - _startPosition.x) / TimeToEndPosition;
+    }
+} 
+```
+
+
+
+
 
 
 
