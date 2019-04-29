@@ -331,3 +331,4 @@ $$
 
 [https://robatokim.tistory.com/entry/%EA%B2%8C%EC%9E%84%EC%88%98%ED%95%99-%EC%97%AD%ED%83%84%EB%8F%84%EA%B3%84%EC%82%B0%EC%9D%84-%EC%9D%B4%EC%9A%A9%ED%95%9C-%EB%91%90%EC%A0%90-%EC%82%AC%EC%9D%98-%ED%8F%AC%EB%AC%BC%EC%84%A0-%EA%B5%AC%ED%95%98%EA%B8%B0](https://robatokim.tistory.com/entry/게임수학-역탄도계산을-이용한-두점-사의-포물선-구하기)
 
+[https://0mind.tistory.com/entry/%ED%8F%AC%EB%AC%BC%EC%84%A0%EC%9A%B4%EB%8F%99-%EA%B3%B5%EC%8B%9D](https://0mind.tistory.com/entry/포물선운동-공식)
