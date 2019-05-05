@@ -1,4 +1,14 @@
-### noexcept
+---
+layout: post
+title: "Math - Trigonometric Function"
+description: ""
+date: 2019-02-14 19:00:00+09:00
+tags: [c++]
+comments: true
+share: true
+---
+
+## noexcept
 
 https://jacking75.github.io/C++11_noexcept/
 
@@ -8,7 +18,7 @@ noexcept(false) : 예외를 던질 가능성이 있는 함수
 
 
 
-### volatile
+## volatile
 
 `volatile : [ˈvɑːlətl] 1. [흔히 못마땅함]사람·기분이변덕스러운`
 
@@ -32,19 +42,19 @@ while(j < 10)
 
 
 
-### volatile function?
+## volatile function?
 
 
 
 
 
-### template <class t>?
+## template <class t>?
 
 typename 대신 class가 들어가는 이유?
 
 
 
-### Variadic template
+## Variadic template
 
 가변인자 템플릿
 
@@ -54,5 +64,10 @@ unique_ptr을 위해 C++11에서 만들어졌다.
 
 
 
+## string::assign vs string::copy
 
+- assign
+  - 현재 객체에 새로운 스트링을 할당한다.
+- copy
+  - 현재 객체의 값을 다른 문자열에 복사해준다.
 
