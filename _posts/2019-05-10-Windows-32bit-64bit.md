@@ -1,0 +1,172 @@
+---
+layout: post
+title: "Windows - 32Bit vs 64Bit"
+description: ""
+date: 2019-05-10 19:00:00+09:00
+tags: [windows, win32, win64]
+comments: true
+share: true
+---
+
+[TOC]
+
+
+
+## 32Bit vs 64Bit
+
+- CPU로 한 번에 전송할 수 있는 데이터 크기
+- CPU가 한 번에 처리할 수 있는 처리능력
+
+
+
+## 자료형 크기
+
+- short 
+  - 16bit 이상
+- int
+  - CPU가 다루는 가장 자연스러운 크기(CPU 레지스터, 데이터 버스)이고 16bit 이상
+  - C언어의 타입 정의에서 int 형은 "CPU의 레지스터와 동일한 크기를 가지는 타입"으로 정의(명확한 사이즈를 정의하지 않는다)
+- long
+  - int보다 크가나 같고 32bit 이상
+
+| OS    | short | int  | long |
+| ----- | ----- | ---- | ---- |
+| 16bit | 2     | 2    | 4    |
+| 32bit | 2     | 4    | 4    |
+| 64bit | 2     | 4    | 4/8  |
+
+따라서 long형을 쓸 경우 다른 시스템으로의 이식을 위해서 long을 그대로 사용하면 안되고 stdint.h에 정의된 int64_t, int32_t 자료형을 사용해야한다.
+
+
+
+## 64bit 데이터 모델
+
+|   OS    | Model | char | shor | int  | long | long long | Pointer |
+| :-----: | :---: | :--: | :--: | :--: | :--: | :-------: | :-----: |
+| Windows | LLP64 |  1   |  2   |  4   |  4   |     8     |    8    |
+|  Unix   | LP64  |  1   |  2   |  4   |  8   |     8     |    8    |
+
+
+
+## Windows 데이터 형식 범위
+
+__로 시작하는 자료형은 비표준이다.
+
+| 형식 이름              | 바이트          | 기타 이름                                      | 값의 범위                                                    |
+| :--------------------: | :-------------: | :--------------------------------------------: | :----------------------------------------------------------- |
+| **int**                | 4               | **signed**                                     | –2,147,483,648 ~ 2,147,483,647                               |
+| **unsigned int**       | 4               | **unsigned**                                   | 0 ~ 4,294,967,295                                            |
+| **__int8**             | 1               | **char**                                       | -128 ~ 127                                                   |
+| **unsigned __int8**    | 1               | **unsigned char**                              | 0 ~ 255                                                      |
+| **__int16**            | 2               | **short**, **short int**, **signed short int** | –32,768 ~ 32,767                                             |
+| **unsigned __int16**   | 2               | **unsigned short**, **unsigned short int**     | 0 ~ 65,535                                                   |
+| **__int32**            | 4               | **signed**, **signed int**, **int**            | –2,147,483,648 ~ 2,147,483,647                               |
+| **unsigned __int32**   | 4               | **unsigned**, **unsigned int**                 | 0 ~ 4,294,967,295                                            |
+| **__int64**            | 8               | **long long**, **signed long long**            | –9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807       |
+| **unsigned __int64**   | 8               | **unsigned long long**                         | 0 ~ 18,446,744,073,709,551,615                               |
+| **bool**               | 1               | 없음                                           | **false** 또는 **true**                                      |
+| **char**               | 1               | 없음                                           | -기본적으로 128 ~ 127  [/J](https://docs.microsoft.com/ko-kr/cpp/build/reference/j-default-char-type-is-unsigned?view=vs-2019)를 사용하여 컴파일된 경우 0~255 |
+| **signed) char**       | 1               | 없음                                           | -128 ~ 127                                                   |
+| **unsigned char**      | 1               | 없음                                           | 0 ~ 255                                                      |
+| **short**              | 2               | **short int**, **signed short int**            | –32,768 ~ 32,767                                             |
+| **unsigned short**     | 2               | **unsigned short int**                         | 0 ~ 65,535                                                   |
+| **long**               | 4               | **long int**, **signed long int**              | –2,147,483,648 ~ 2,147,483,647                               |
+| **unsigned long**      | 4               | **unsigned long int**                          | 0 ~ 4,294,967,295                                            |
+| **long long**          | 8               | 없음 (하지만 같음 **__int64**)                 | –9,223,372,036,854,775,808 ~ 9,223,372,036,854,775,807       |
+| **unsigned long long** | 8               | 없음 (하지만 같음 **unsigned __int64**)        | 0 ~ 18,446,744,073,709,551,615                               |
+| **enum**               | varies          | 없음                                           |                                                              |
+| **float**              | 4               | 없음                                           | 3.4E+/-38(7개의 자릿수)                                      |
+| **double**             | 8               | 없음                                           | 1.7E+/-308(15개의 자릿수)                                    |
+| **long double**        | 동일 **double** | 없음                                           | 동일 **double**                                              |
+| **wchar_t**            | 2               | **__wchar_t**                                  | 0 ~ 65,535                                                   |
+
+
+
+## Windows 스타일 자료형
+
+| Windows 자료형 | 의미                    | 정의 형태                        |
+| -------------- | ----------------------- | -------------------------------- |
+| BOOL           | Boolean variable        | typedef int BOOL                 |
+| DWORD          | 32-bit unsigned integer | typedef unsigned long DWORD      |
+| DWORD32        | 32-bit unsigned integer | typedef unsigned int DWORD32     |
+| DWORD64        | 64-bit unsigned integer | typedef unsigned __int64 DWORD64 |
+| INT            | 32-bit signed integer   | typedef int INT                  |
+| INT32          | 32-bit signed integer   | typedef signed int INT32         |
+| INT64          | 64-bit signed integer   | typedef signed __int64 INT64     |
+| LONG           | 32-bit signed integer   | typedef int LONG                 |
+| LONG32         | 32-bit signed integer   | typedef signed int LONG32        |
+| LONG64         | 64-bit signed integer   | typedef signed __int64 LONG64    |
+| UINT           | Unsigned INT            | typedef unsigned int UINT        |
+| UINT32         | Unsigned INT32          | typedef unsigned int UINT32      |
+| UINT64         | Unsigned INT64          | typedef unsigned __int64 UINT64  |
+| ULONG          | Unsigned LONG           | typedef unsigned int ULONG       |
+| ULONG32        | Unsigned LONG32         | typedef unsigned int ULONG32     |
+| ULONG64        | Unsigned LONG64         | typedef unsigned __int64 ULONG64 |
+
+WIN64로 넘어가며 WIN32, WIN64에 상관없이 동일한 의미를 지니는 자료형을 표현하기 위해 끝이 32, 64로 끝나는 자료형이 추가됐다.
+
+
+
+## Windows 스타일 포인터 자료형
+
+| Windows 자료형 | 의미                  | 정의 형태                         |
+| -------------- | --------------------- | --------------------------------- |
+| PINT           | INT32에 대한 포인터   | typedef int* PINT                 |
+| PINT32         | INT32에 대한 포인터   | typedef signed int* PINT32        |
+| PINT64         | INT64에 대한 포인터   | typedef signed __int64* PINT64    |
+| PLONG          | LONG에 대한 포인터    | typedef LONG* PLONG               |
+| PLONG32        | LONG32에 대한 포인터  | typedef signed int* PLONG32       |
+| PLONG64        | LONG64에 대한 포인터  | typedef signed __int* PLONG64     |
+| PUINT          | UNIT에 대한 포인터    | typedef unsigned int* PUINT       |
+| PUINT32        | UNIT32에 대한 포인터  | typedef unsigned int* PUINT32     |
+| PUINT64        | UNIT64에 대한 포인터  | typedef unsigned __int63* PUINT64 |
+| PULONG         | ULONG에 대한 포인터   | typedef ULONG* PULONG             |
+| PULONG32       | ULONG32에 대한 포인터 | typedef unsigned int* PULONG32    |
+| PULONG64       | ULONG64에 대한 포인터 | typedef unsigned __int* PULONG64  |
+
+
+
+## INT_PTR, LONG_PTR
+
+- 32/64bit 시스템에서 동일한 코드로 포인터 조작을 하기 위해 만들어진 자료형이다.
+  - Polymorphic 자료형이라 한다.
+- 이름에 _PTR이 붙었지만 포인터가 아니라 포인터값을 담을 수 있는 자료형이다.
+- 32bit에서는 4bite, 64bit에서는 8bite가 된다.
+
+```CPP
+// basetsd.h
+
+#if defined(_WIN64)
+    typedef __int64 INT_PTR, *PINT_PTR;
+    typedef unsigned __int64 UINT_PTR, *PUINT_PTR;
+
+    typedef __int64 LONG_PTR, *PLONG_PTR;
+    typedef unsigned __int64 ULONG_PTR, *PULONG_PTR;
+
+    #define __int3264   __int64
+
+#else
+    typedef _W64 int INT_PTR, *PINT_PTR;
+    typedef _W64 unsigned int UINT_PTR, *PUINT_PTR;
+
+    typedef _W64 long LONG_PTR, *PLONG_PTR;
+    typedef _W64 unsigned long ULONG_PTR, *PULONG_PTR;
+
+    #define __int3264   __int32
+
+#endif
+```
+
+
+
+## 참고
+
+- 뇌를 자극하는 윈도우즈 시스템 프로그래밍
+
+- [https://ko.wikipedia.org/wiki/64%EB%B9%84%ED%8A%B8](https://ko.wikipedia.org/wiki/64비트)
+
+- <https://docs.microsoft.com/ko-kr/cpp/cpp/data-type-ranges?view=vs-2019>
+
+- [https://dev.likejazz.com/post/69840022906/long%EA%B3%BC-int%EB%8A%94-%ED%81%AC%EA%B8%B0%EA%B0%80-%EA%B0%99%EC%9D%80%EB%8D%B0-%EC%99%9C-%EC%A1%B4%EC%9E%AC%ED%95%98%EB%82%98%EC%9A%94](https://dev.likejazz.com/post/69840022906/long과-int는-크기가-같은데-왜-존재하나요)
+
+  
