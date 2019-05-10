@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Math - Trigonometric Function"
+title: "C++"
 description: ""
 date: 2019-02-14 19:00:00+09:00
 tags: [c++]
