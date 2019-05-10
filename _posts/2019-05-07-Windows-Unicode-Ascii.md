@@ -149,19 +149,6 @@ Windows2000 이상에서는 내부적으로 모든 문자열을 유니코드 기
 
 
 
-## MBCS와 WBCS를 동시에 지원하기 위한 매크로
-
-TCHAR, LPTSTR, LPCTSTR
-
-```cpp
-#ifdef UNICODE
-	typedef 
-#else
-#endif
-```
-
-
-
 ## main 함수를 유니코드 기반으로 작성하기
 
 - main이라는 이름의 함수는 전달되는 문자열을 MBCS 기반으로 구성한다.
@@ -176,7 +163,7 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 
 
-## MBCS와 WBCS를 동시에 지원하는 T~
+## MBCS와 WBCS를 동시에 지원하는 매크로 T~
 
 - UNICODE 매크로 정의 여부에 따라 MBCS와 WBCS를 결정해준다.
   - T(Template) 문자가 들어간 매크로는 전처리 시 MBCS와 WBCS를 결정한다.
@@ -215,19 +202,19 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 ## UNICODE 매크로와 관련된 함수
 
-| T(template) | WBCS    | MBCS    |      |
-| ----------- | ------- | ------- | ---- |
-| _tmain      | wmain   | main    |      |
-| _tcslen     | wcslen  | strlen  |      |
-| _tcscat     | wcscat  | strcat  |      |
-| _tcscpy     | wcscpy  | strcpy  |      |
-| _tcsncpy    | wcsncpy | strncpy |      |
-| _tcscmp     | wcscmp  | strcmp  |      |
-| _tcsncmp    | wcsncmp | strncmp |      |
-| _tprintf    | wprintf | printf  |      |
-| _tscanf     | wscanf  | scanf   |      |
-| _fgetts     | fgetws  | fgets   |      |
-| _fputts     | fputws  | fputs   |      |
+| T(template) | WBCS    | MBCS    |
+| ----------- | ------- | ------- |
+| _tmain      | wmain   | main    |
+| _tcslen     | wcslen  | strlen  |
+| _tcscat     | wcscat  | strcat  |
+| _tcscpy     | wcscpy  | strcpy  |
+| _tcsncpy    | wcsncpy | strncpy |
+| _tcscmp     | wcscmp  | strcmp  |
+| _tcsncmp    | wcsncmp | strncmp |
+| _tprintf    | wprintf | printf  |
+| _tscanf     | wscanf  | scanf   |
+| _fgetts     | fgetws  | fgets   |
+| _fputts     | fputws  | fputs   |
 
 
 
