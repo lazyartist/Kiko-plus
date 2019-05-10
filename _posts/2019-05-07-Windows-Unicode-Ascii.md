@@ -21,6 +21,11 @@ share: true
 ## Unicode
 
 - 2Byte로 문자 표현
+
+
+
+## 인코딩 종류
+
 - 인코딩 종류
   - UTF-8
     - 영문 1바이트, 그 외는 2~4바이트
@@ -171,6 +176,66 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 
 
+## MBCS와 WBCS를 동시에 지원하는 T~
+
+- UNICODE 매크로 정의 여부에 따라 MBCS와 WBCS를 결정해준다.
+  - T(Template) 문자가 들어간 매크로는 전처리 시 MBCS와 WBCS를 결정한다.
+  - T(x), TEXT(x) 매크로는 전처리 시 리터럴 문자가 MBCS 타입인지 WBCS 타입인지를 결정한다.
+- TCHAR, LPTSTR, LPCTSTR 등을 사용하려면 tchar.h 헤더파일을 포함시켜야한다.
+- Visual Studio의 전처리기 정의 옵션을 사용하지 않고 소스코드에 UNICODE 정의를 한다면 tchar.h 헤더파일 include 이전에 정의해야한다. tchar.h 헤더파일에서 UNICODE 정의를 사용하기 때문이다.
+- 참고로 기존에 정의된 매크로를 지우려면 #undef를 사용하면된다.
+  - 프로젝트 전체에 영향을 준다. 파일 하나에 국한되지 않는다.
+  - 일정한 범위 내에서만 매크로의 의미를 잠시 바꾸고 싶을 때 사용.
+  - 이미 매크로가 정의되어 있다면 취소하고 원하는 값으로 다시 정의 할 때 사용.
+
+```cpp
+// tchar.h
+
+#ifdef UNICODE
+	typedef WCHAR		TCHAR;
+	typedef LPWCHAR		LPTSTR;
+	typedef LPCWCHAR	LPCTSTR;
+#else
+	typedef CHAR		TCHAR;
+	typedef LPCHAR		LPTSTR;
+	typedef LPCCHAR		LPCTSTR;
+#endif
+
+#ifdef _UNICODE
+	#define __T(x)	L ## x
+#else
+	#define __T(x)	x
+#endif
+
+#define _T(x)		__T(x)
+#define _TEXT(x)	__T(x)
+```
+
+
+
+## UNICODE 매크로와 관련된 함수
+
+| T(template) | WBCS    | MBCS    |      |
+| ----------- | ------- | ------- | ---- |
+| _tmain      | wmain   | main    |      |
+| _tcslen     | wcslen  | strlen  |      |
+| _tcscat     | wcscat  | strcat  |      |
+| _tcscpy     | wcscpy  | strcpy  |      |
+| _tcsncpy    | wcsncpy | strncpy |      |
+| _tcscmp     | wcscmp  | strcmp  |      |
+| _tcsncmp    | wcsncmp | strncmp |      |
+| _tprintf    | wprintf | printf  |      |
+| _tscanf     | wscanf  | scanf   |      |
+| _fgetts     | fgetws  | fgets   |      |
+| _fputts     | fputws  | fputs   |      |
+
+
+
+## Pre-compiled 헤더
+
+- Pre-compiled 헤더를 사용하도록 프로젝트 설정을 했다면 stdafx.h와 stdafx.cpp 파일이 만들어진다.
+- stdafx.h 파일은 stdio.h와 tchar.h를 포함하기 때문에 직접 포함시키지 않아도 된다.
+
 
 
 ## 참고
@@ -178,4 +243,6 @@ int _tmain(int argc, _TCHAR* argv[]);
 - 뇌를 자극하는 윈도우즈 시스템 프로그래밍
 - <https://s2junn.tistory.com/80>
 - <http://dev.epiloum.net/487>
+- <http://soen.kr/lecture/ccpp/cpp2/18-2-4.htm>
+- 
 
