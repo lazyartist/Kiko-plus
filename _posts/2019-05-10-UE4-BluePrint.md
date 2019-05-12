@@ -3,7 +3,7 @@ layout: post
 title: "UE4 - BluePrint"
 description: ""
 date: 2019-05-10 19:00:00+09:00
-tags: [windows, win32, win64]
+tags: [UE4, BluePrint]
 comments: true
 share: true
 ---
@@ -30,6 +30,7 @@ share: true
 ## 크기
 
 - 단위 cm
+- 1유닛 = 1cm
 
 
 
@@ -60,9 +61,12 @@ share: true
 ## 요, 피치, 롤
 
 - (모음의 방향으로 기억한다)
-- 요(Yaw) : 좌우
-- 피치(Pitch) : 상하
-- 롤(Roll) : 바라보는 축(z) 중심으로 회전
+- 요(Yaw)
+  - 좌우
+- 피치(Pitch)
+  - 상하
+- 롤(Roll)
+  - 바라보는 축(z) 중심으로 회전
 
 
 
@@ -206,11 +210,114 @@ BSP(Binary Space Patitioning - 이진 공간 분할법)
 
 
 
+## 이미지 파일 포맷
+
+- TGA/TAGA(True vision advanced raster graphics adapter)
+  - 무손실 압축 기반의 비트맵 이미지 파일 포맷
+  - 32비트 컬러까지 저장
+  - 알파채널 지원
+  - 이미지 합성과 영상 편집을 위해 고안
+  - 자막 파일이나 동영상 프레임을 '연속된 이미지 파일 시퀀스'로 만들 때 사용
+  - 압축률이 안좋아 용량이 큼
+  - 호환성이 좋아 윈도우, 리눅스, 매킨토시에서 사용
+  - 특허에서 자유로움
+- PNG(Portable Network Graphics)
+  - 비손실 그래픽 파일 포맷
+  - 8비트 알파 채널을 이용한 다양한 투명층 지원
+  - 32비트 컬러
+  - 알파값이 0인 필셀의 rgb값이 1(흰색) 이다.
+    - 이로 인해 유니티에서 png를 불러오면 경계부분에 흰색이 묻어 날 수 있다.
+    - 다른 rgb 채널에서 1이하의 값을 넣을 수 있지만 결국 그 컬러가 묻어난다.
+    - 해결
+      - rgb 채널에서 경계의 색으로 투명한 곳을 채우거나 TGA 파일 포맷을 사용한다.
+      - 유니티에서는 텍스처 설정에서 "Alpha Is Transparency"를 체크한다.
+      - 얼리얼에서는 자동으로 경계의 색을 확장하므로 이런 문제가 없다.
+-  참고
+  - <https://itrum.tistory.com/72>
+  - <https://ko.wikipedia.org/wiki/PNG>
+  - <https://chulin28ho.tistory.com/362>
+  - <https://chulin28ho.tistory.com/363>
+
+
+
+## FBX 임포트 옵션
+
+- Mesh > Import as Skeletal
+  - 뼈대가 없는 fbx를 스켈레탈 메시로 강제 임포트
+- Mesh > Auto Generate Collision
+  - 콜리전을 자동 생성
+- Mesh > Normal Import Method
+  - 노멀을 fbx에서 임포트할지 다시 재연산할지를 선택
+- Transform > Import Translation
+  - 설정한 오프셋만큼 모델의 원점을 이동
+- Transform > Import Rotation
+  - 좌표계가 다른 DCC에서 만든 모델의 경우 보정해서 임포트한다.
+- Transform > Import Uniform Scale
+  - 설정한 배율로 모델의 크기를 변경
+- Material > Import Materials
+  - fbx 데이터를 임포트할 때 머티리얼 정보가 있으면 UE4 머티리얼을 자동으로 생성하고 메시에 적용
+- Material > Import Textures
+  - fbx에 포함된 텍스처와 같은 경로에 이미지 파일일 있다면 동시에 임포트를 수행
+
+
+
+## 스태틱 메시 에디터
+
+- 라이트 이동
+  - L + ML + 마우스 이동
+
+
+
+## DCC 툴에서 콜리전 추가
+
+- 외부 DCC 툴에서 객체의 이름을 특정 규칙으로 시작하면 UE4에서 콜리전으로 인식한다.
+  - UCX_
+    - 볼록 형태
+  - UBX_
+    - 박스 형태
+  - USP
+    - 구 형태
+- 스켈레탈 메시는 외부에서 생성한 콜리전을 가지고 올 수 없고 언리얼 에디터에서 만들어야한다.
+
+
+
+## 리디렉터
+
+- 애셋을 이동시고 기존의 경로로 접근해도 새로운 경로로 접근할 수 있게 해주는 기능.
+- 처리에 부하가 걸리므로 최종적으로 수정해줘야한다.
 
 
 
 
 
+
+
+
+
+
+
+## Words
+
+- prop
+  - 소도구
+- convex
+  - 볼록면의, 볼록한, 볼록면
+- pillar
+  - 기둥
+- hull
+  - 겉껍질을 벗기다
+  - 겉껍질
+  - 덮개
+- hull shader
+  - 모델의 표면을 삼각형으로 변환
+- bonfire
+  - 모닥불, 화톳불, 횟불
+- IRC(Internet Relay Chat)
+  - 실시간 채팅 프로토콜로, 여러 사용자가 대화를 나눌 수 있다.
+  - 개인 간의 대화도 가능
+  - 'DCC'라는 파일 전송 기능도 제공
+- fix up
+  - 수리, 개량
 
 
 
