@@ -52,6 +52,7 @@ share: true
   - Shift : 카메라도 함께 움직임
   - Alt + Shift : 복제와 카메라 이동
 - 몰입 모드 : F11
+- 마키 사용 : ctrl + alt + drag
 - 추천 레이아웃
   - 배치 작업 중심이므로 2분할(상단, 원근) 레이아웃이 좋다.
 - <http://api.unrealengine.com/KOR/Engine/UI/LevelEditor/Viewports/ViewportControls/>
@@ -131,7 +132,7 @@ share: true
 
   
 
-BSP(Binary Space Patitioning - 이진 공간 분할법)
+## BSP(Binary Space Patitioning - 이진 공간 분할법)
 
 - 이진 공간 분할법은 하나의 공간을 특정한 최종 목적을 만족할 때까지 공간을 재귀적으로 2개씩 분할하는 과정이다.
 - 분할 과정에서 BSP 트리라 불리는 트리 구조가 만들어진다.
@@ -288,9 +289,22 @@ BSP(Binary Space Patitioning - 이진 공간 분할법)
 
 
 
+## 퍼시스턴스 레벨
+
+- 현재 레벨 에디터에서 읽어 들이고 있는 레벨
+- 서브 레벨의 읽기와 언로드를 관리
+- 여러 개의 서브 레벨에서 공통으로 사용하는 액터를 배치할 때 사용
+- 퍼시스턴스 레발은 언로드 불가, 서브레벨은 언로드 가능
 
 
 
+## 레이어
+
+- 폴더처럼 액터를 분류하는 기능
+- 하나의 액터를 여러 레이어에 추가할 수 있다.
+- 에디터만의 정보
+- 게임 중에 레이어로 제어하기는 안됨
+- 월드 아웃라이너 패널의 계층 구조에 영향을 주지 않음
 
 
 
@@ -318,6 +332,15 @@ BSP(Binary Space Patitioning - 이진 공간 분할법)
   - 'DCC'라는 파일 전송 기능도 제공
 - fix up
   - 수리, 개량
+- atmosphere
+  - 대기, 분위기, 기압
+- persistent
+  - 지속하는, 끊임없는
+- swarm
+  - 무리, 떼, 군중
+- PoC(Proof of Concept)
+  - 컨셉 증명
+  - 아이디어를 실체로 만들고, 아이디어가 괜찮은지 따져보는 것
 
 
 
