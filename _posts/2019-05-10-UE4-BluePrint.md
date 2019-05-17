@@ -410,7 +410,15 @@ share: true
         - 외부의 데이터를 참조하거나 변경하지 않는 함수
       - UE4에서 순수 함수는 실행 순서를 지정하지 않는 함수
       - 실행 순서 지정 시 실수를 줄이기 위해 순수 함수로 만들 수 있는 함수는 순수 함수로 만드는 것이 좋다.
-  - 
+  - Physics
+    - Simulate Physics
+      - 해당 액터에 물리를 적용한다.
+  - Collision
+    - Generate Overlap Event
+      - 오버랩으로 등록해서 충돌시 Overlap 이벤트가 발생하게 한다.
+  - 변수
+    - 편집가능
+      - 블루프린트를 맵에 배치엤을 때 레벨 에디터의 '디테일' 패널에서 값 변경 가능
 
 
 
@@ -542,45 +550,6 @@ share: true
 
 
 
-## 피직스 애셋(Physics Asset)
-
-- 스켈레톤의 관절과 관절 사이에 콜리전을 추가해 애니메이션과 함께 움직이게 하는 애니메이션 대응 콜리전.
-- 캐릭터 콜리전이 부분적으로 작동해야하는 경우 사용.
-- 지형 콜리전과 캐릭터 콜리전을 따로 만든다.
-- 컨스트레인트 모드
-  - Angular Limits
-    - Angular Swing 1Motion
-      - 빨간색 원주의 스윙(롤 회전)
-    - Angular YMotion
-      - 초록색 원주의 스윙(요 회전)
-    - Angular Swing 2Motion
-      - 파란색 원주의 스윙(피치 회전)
-
-
-
-## zero extend
-
-- 작은 크기의 데이터를 큰 크기의 데이터로 변경할 때 데이터가 모자라는 부분을 0으로 채우는 방식
-
-
-
-
-
-## UE4의 콜리전
-
-- 블록
-  - 물리적인 현상이 일어나는 충돌
-- 오버랩
-  - 물리적인 현상이 일어나지 않는 충돌
-  - 단순히 겹치는 것만 검출
-  - 트리거
-    - 오버랩 활용을 주 목적으로 하는 콜리전
-    - 이벤트 박스라고도 한다.
-
-
-
-
-
 ## 컴포넌트
 
 - 루트 컴포넌트
@@ -612,13 +581,32 @@ share: true
 - 게임
   - 클래스에서 액터 스폰(SpawnActor from Class)
     - 지정한 클래스(블루프린트)의 액터를 생성하여 레벨에 배치한다.
+- Physics
+  - Set Simulate Physics
+    - 피직스 시뮬레이션을 시작 또는 정지 시킨다
+  - Add Impulse
+    - 강체에 힘을 가한다.
+    - Vel Change
+      - 주어진 힘을 그대로 가속도로 사용할지 결정
 - Utilities
   - Transformation
     - GetActorTransformation
       - 타겟 액터의 Transform을 제공한다.
+    - Get Socket Transform
+      - 메쉬 안에 있는 소켓을 반환한다.
+      - Transform Space
+        - RTS World
+          - 월드 위치
+        - RTS Actor
+          - 액터 상태 위치
+        - RTS Component
+          - 컴포넌트 상태 위치
   - Time
     - Set Timer by Function Name
       - 지정한 시간 뒤에 지정한 이름의 함수를 실행
+  - Flow Control
+    - Delay
+      - 지정한 시간 후 실행 출력
 - 유틸리티
   - 플로우 콘트롤
     - 시퀀스
@@ -630,6 +618,9 @@ share: true
       - 한 번만 신호를 출력한다.
       - Reset 된 이 후 한 번만 신호를 출력한다.
       - 매크로 노드이므로 더블 클릭으로 구성을 확인해 볼 수 있다.
+    - WhileLoop
+      - while 문
+      - condition이 true이면 Loop Body가 실행, false이면 Completed 실행
 - 입력
   - 키보드 이벤트
     - 키보드의 키 입력에 대응하는 이벤트 생성
@@ -694,6 +685,109 @@ share: true
     - 특정한 게임에 특화된 물리 엔진은 직접 만드는 것이 낫다.
 
 
+
+
+
+## 피직스 애셋(Physics Asset)
+
+- 스켈레톤의 관절과 관절 사이에 콜리전을 추가해 애니메이션과 함께 움직이게 하는 애니메이션 대응 콜리전.
+- 캐릭터 콜리전이 부분적으로 작동해야하는 경우 사용.
+- 지형 콜리전과 캐릭터 콜리전을 따로 만든다.
+- 컨스트레인트 모드
+  - Angular Limits
+    - Angular Swing 1Motion
+      - 빨간색 원주의 스윙(롤 회전)
+    - Angular YMotion
+      - 초록색 원주의 스윙(요 회전)
+    - Angular Swing 2Motion
+      - 파란색 원주의 스윙(피치 회전)
+
+
+
+## zero extend
+
+- 작은 크기의 데이터를 큰 크기의 데이터로 변경할 때 데이터가 모자라는 부분을 0으로 채우는 방식
+
+
+
+
+
+## Physics
+
+#### UE4의 콜리전
+
+- 블록
+  - 물리적인 현상이 일어나는 충돌
+- 오버랩
+  - 물리적인 현상이 일어나지 않는 충돌
+  - 단순히 겹치는 것만 검출
+  - 트리거
+    - 오버랩 활용을 주 목적으로 하는 콜리전
+    - 이벤트 박스라고도 한다.
+
+
+
+#### 피지컬 머티리얼
+
+- 마찰 등 물리과 관련된 입력값을 갖는 재질(머티리얼)
+- 하나의 피지컬 머티리얼은 여러 메시에 적용할 수 있다.
+- 피지컬 머티리얼 블루프린트 설정 항목
+  - Physical Material
+    - Friction
+      - 마찰 계수
+      - 0에 가까울 수록 마찰이 약해진다.
+      - 마찰력
+        - 마찰계수 * 질량
+    - Friction Combine Mode
+      - 두 강체가 접촉했을 때 마찰을 계산하는 방법
+      - 방법
+        - Average
+          - 두 마찰의 평균값. 디폴트
+        - Multiply
+          - 두 마찰을 곱한다.
+          - 마찰은 0~1의 범위로 설정하기 때문에 곱하면 더 작아진다.
+            - Physics Material에서 Friction은 0~1 이외의 값도 입력이 가능한데... 
+        - Max
+          - 두 마찰 중 큰 값 사용
+          - 최대한 물리를 멈추고 싶을 때  사용
+        - Min
+          - 두 마찰 중 작은 값 사용
+          - 최대한 물체를 움직이고 싶을 때 사용
+      - 여러 머티리얼의 마찰을 어떻게 계산할지 설정
+    - Override Friction Combine Mode
+      - Friction Combine Mode의 프로젝트 설정을 덮어씀
+    - Restitution
+      - 회복, 반발계수
+      - 0에 가까울 수록 반발력이 약해진다.
+      - 1로 설정하면 받은 힘을 그대로 돌려준다는 의미, 1이상은 받은 힘 이상을 돌려준다.
+    - Density
+      - 밀도
+      - 메시 부피와 밀도로 질량을 계산한다.
+
+
+
+#### 액터의 피직스 프로퍼티
+
+- Start Awake
+  - 체크 시 액터의 스폰(생성)과 동시에 피직스 시뮬레이션이 시작
+  - 체크 안하면 해당 액터에 물리적 힘이 가해지기 전까지 피직스 시뮬레이션이 작동하지 않음
+- Mass in Kg
+  - 액터의 질량
+  - 피직컬 머티리얼의 Density와 메시의 부피를 기반으로 자동 계산
+  - 체크 시 수동으로 입력 가능
+- Enable Gravity
+  - 중력 적용 여부
+- Center Of Mass Offset
+  - 액터의 무게 중심을 수동으로 설정
+  - 밀도가 균일하지 않은 메시의 움직임을 만들 수 있음
+  - 
+
+
+
+#### 소켓
+
+- 스켈레탈 메시의 특정 위치에 별도의 뼈를 추가하여 그 위치에 무언가를 얻거나 방출하기 위한 로케이터
+- 스켈레톤의 본에서 우클릭하여 소켓 추가 가능
 
 
 
@@ -768,7 +862,11 @@ share: true
   - 보유하다, 가지다, 소유하다, 소지하다, 홀리다
 - carton *[kάːrtn]*
   - 카턴, 판지 상자, 판지, 종이 용기, 한 상자분의 용량
-- 
+- impulse
+  - 충동, 충격, 추진력, 자극
+- momentary
+  - 순간의
+  - 끊임없이 되풀이되는, 쉴틈이 없는
 
 
 
@@ -776,7 +874,7 @@ share: true
 
 ## 읽어 볼 것
 
-- [FBX 스켈레탈 메시 파이프라인 | Unreal Engine](https://docs.unrealengine.com/latest/KOR/Engine/Content/FBX/SkeletalMeshes/)
+- [FBX 스켈레탈 메시 파이프라인 - Unreal Engine](https://docs.unrealengine.com/latest/KOR/Engine/Content/FBX/SkeletalMeshes/)
 
 
 

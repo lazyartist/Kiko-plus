@@ -10,6 +10,8 @@ share: true
 
 [TOC]
 
+
+
 ## 등가속도
 
 
@@ -445,7 +447,7 @@ public class ParabolaAlgorithm
 
 
 
-참고
+## 참고
 
 <http://blog.naver.com/PostView.nhn?blogId=whwodud98&logNo=50103673919>
 
