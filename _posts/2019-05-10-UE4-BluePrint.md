@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "UE4 - BluePrint"
-description: ""
+description: "hihihi"
 date: 2019-05-10 19:00:00+09:00
 tags: [UE4, BluePrint]
 comments: true
@@ -1067,6 +1067,45 @@ share: true
 
 
 
+## 애니메이션 블루프린트
+
+- 신규 추가 > 애니메이션 > 블렌드 스페이스 1D
+  - 범위를 분할하고 분할 위치에 애니메이션 시퀸스를 배치
+  - 주어진 파라미터에 가장 가까운 시퀸스 2개를 기반으로 블렌드를 수행
+  - 이러한 것을 일반적으로 파라메트릭 블렌드(parametic blend)라 부른다.
+
+
+
+## 애니메이션 블루프린트 에디터
+
+- 이벤트 그래프
+  - 액션
+    - Blueprint Update Animation 이벤트
+      - 애니메이션이 변경되는 시점에 호출
+- 애님 그래프
+  - 액션
+    - State Machines
+      - State Machine을 추가
+- State Machine 노드
+  - Conduit
+    - 애니메이션을 갖지 않는 노드
+    - 조건을 판별하여 트랜지션하고싶을 때 Conduit 노드로 이동하여 판별하고 트랜지션할 수 있다.
+- 트랜지션 규칙 그래프
+  - 결과 노드의 입력 핀에 True가 입력되면 트랜지션이 수행된다.
+  - 액션
+    - Asset Player
+      - Time Remaining (ratio)(Rabbit_Surprise)
+        - 애니메시션의 남은 시간
+        - 남은 시간을 1.0~0.0 비율로 나타낸다.
+      - Time Remaining
+        - 애니메이션의 남은 시간
+        - 남은 시간을 초로 나타낸다.
+    - 
+
+
+
+
+
 ## 무료 에셋
 
 - Infinity Blade
@@ -1125,11 +1164,11 @@ share: true
   - 발가락
 - emitter
   -  방사체, 발포자, 발행인
-- crouch *[krauʧ]*
+- crouch [krauʧ]
   - 숙이다. 구부리다.
-- possess [*pəzés*]
+- possess [pəzés]
   - 보유하다, 가지다, 소유하다, 소지하다, 홀리다
-- carton *[kάːrtn]*
+- carton [kάːrtn]
   - 카턴, 판지 상자, 판지, 종이 용기, 한 상자분의 용량
 - impulse
   - 충동, 충격, 추진력, 자극
@@ -1138,16 +1177,21 @@ share: true
   - 끊임없이 되풀이되는, 쉴틈이 없는
 - spectator
   - 관중, 관객
-- visibility *[vìzəbíləti]*
+- visibility [vìzəbíləti]
   - 눈에 보임, 가시성, 시야
 - encounter
   - ~과 만나다, 부닥치다
 - property
   - 재산, <u>특성</u>, <u>속성</u>, 부동산, 소유, 토지
-- deviation *[dìːviéiʃən]*
+- deviation [dìːviéiʃən]
   - 탈선, 일탈, 편차, 이탈
 - underlying *[Λndərlàiiŋ]*
   - 기초를 이루는, 근원적인, 기저의
+- conduit [kάndwit, -djuːit]
+  - (물, 가스 등의)도관, (정보, 물자를 전하는)루트, 파이프.
+- locomotion
+  - 이동, 운동, 이동력, 보행력
+- 
 
 
 
@@ -1156,6 +1200,8 @@ share: true
 ## 읽어 볼 것
 
 - [FBX 스켈레탈 메시 파이프라인 - Unreal Engine](https://docs.unrealengine.com/latest/KOR/Engine/Content/FBX/SkeletalMeshes/)
+- [애니메이션 리타기팅](<http://api.unrealengine.com/KOR/Engine/Animation/AnimationRetargeting/>)
+- [애니메이션 리타기팅 (다른 스켈레톤)](<http://api.unrealengine.com/KOR/Engine/Animation/RetargetingDifferentSkeletons/>)
 
 
 
