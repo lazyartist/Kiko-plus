@@ -689,6 +689,15 @@ share: true
   - Get Controlled Pawn
     - 컨트롤러가 조작하는 폰을 추출
     - 추출한다.
+- Rendering
+  - Material
+    - Create Dynamic Material Instance
+      - Material Instance를 동적으로 생성한다.
+      - 생성된 머티리얼을 Mesh의 Materials에 적용한다.
+    - Set Vector Parmeter Value
+      - 머티리얼의 벡터 파라미터 이름을 지정해서 파라미터 값을 변경한다.
+    - Set Scalar Parameter Value
+      - 머티리얼의 스칼라 파라미터 이름을 지정해서 파라미터 값을 변경한다.
 
 
 
@@ -1111,9 +1120,13 @@ share: true
 #### 머티리얼 에디터
 
 - 노드 기반의 셰이더 에디터
-- Texture Sample 노드 생성
-  - 팔레트에서 Texture Sample 검색
-  - 그래프 영역에서 T + 클릭 으로 생성1
+- 노드
+  - Texture Sample 노드 생성
+    - 팔레트에서 Texture Sample 검색
+    - 그래프 영역에서 T + 클릭 으로 생성1
+  - Append
+    - 두 개의 스칼라 값을 사용하여 Vector2(Float2)를 출력
+    - 
 
 
 
@@ -1199,6 +1212,15 @@ share: true
 - 스페큘러
   - 광원을 반사하는 정도
   - 기본적으로 메탈릭과 러프니스로 질감을 설정하고 미세 조정 시 보조적으로 스페큘러 사용을 추천
+
+
+
+#### 머티리얼 인스턴스
+
+- 미리 만든 머티리얼을 템플릿을 기반으로 가져와 새로운 머티리얼을 만들 수 있는 기능
+- 단점
+  - 파라미터가 많아지면 어떻게 변경되는지 파악하기 힘들어진다.
+  - 파라미터를 조금만 사용해도 많이 사용하는 것과 차이가 없을 정도로 GPU를 많이 사용한다.
 
 
 
@@ -1303,7 +1325,14 @@ share: true
   - (물, 가스 등의)도관, (정보, 물자를 전하는)루트, 파이프.
 - locomotion
   - 이동, 운동, 이동력, 보행력
-- 
+- tint
+  - 색조, 엷은 빛깔, 빛깔
+- intensity
+  - 강도, 강렬함, 집중, 중요성
+- lit
+  - 불을 밝혔다, 켜졌다, 빛났다, 문학
+- unlit
+  - 켜져 있지 않은
 
 
 
