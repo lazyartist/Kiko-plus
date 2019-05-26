@@ -698,6 +698,13 @@ share: true
       - 머티리얼의 벡터 파라미터 이름을 지정해서 파라미터 값을 변경한다.
     - Set Scalar Parameter Value
       - 머티리얼의 스칼라 파라미터 이름을 지정해서 파라미터 값을 변경한다.
+- Effects
+  - Components
+    - Particle System
+      - Spawn Emitter at Location
+        - 지정한 파티클 시스템을 지정한 위치에 지정한 방향으로 이미터를 스폰시킨다.
+        - Auto Destroy 핀이 활성화되어 있다면 원샷 파티클 시스템은 자동으로 파괴된다.
+- 
 
 
 
@@ -1120,13 +1127,18 @@ share: true
 #### 머티리얼 에디터
 
 - 노드 기반의 셰이더 에디터
-- 노드
-  - Texture Sample 노드 생성
-    - 팔레트에서 Texture Sample 검색
-    - 그래프 영역에서 T + 클릭 으로 생성1
-  - Append
-    - 두 개의 스칼라 값을 사용하여 Vector2(Float2)를 출력
-    - 
+- 팔레트 노드
+  - 텍스처
+    - Texture Sample
+      - 텍스처에서 색 값을 추출
+      - 그래프 영역에서 T + 클릭 으로 생성1
+  - 수학
+    - Append
+      - 두 개의 스칼라 값을 사용하여 Vector2(Float2)를 출력
+  - 팔레트
+    - ParticleColor
+      - 파티클 시스템 에디터(캐스케이드 파티클 에디터)에서 설정한 색상이 출력으로 아옴
+      - 머티리얼에 사용하면 색을 변화시킴
 
 
 
@@ -1240,6 +1252,59 @@ share: true
 
 
 
+## 파티클
+
+#### 파티클 에디터
+
+- 캐스케이드 파티클 에디터
+- 스프라이트를 방출하는 이미터의 크기는 X축만 의미를 갖는다.
+- 파티클은 썸네일을 수동으로 찍어줘야 콘텐츠 브라우저에서 썸네일을 볼 수 있다.
+
+
+
+#### 파티클 모듈
+
+- Required
+  - 형태, 정렬
+- Spawn
+  - 생성 양과 빈도
+- Location
+  - 생성하는 위치
+- Lifetime
+  - 소멸 시간
+- Velocity
+  - 방출하는 방향과 속도
+- Acceration
+  - 방출 후 가속(중력 등)
+- Size
+  - 초기 크기와 크기 변화
+- Color
+  - 색 변화
+
+
+
+#### 파티클 값을 지정하는 방법을 결정 - Distribution
+
+- Float Constant / Vector Constant
+  - 고정값 지정
+- Float Uniform / Vector Uniform
+  - 최소, 최대 범위 값 지정
+- Float Curve / Vector Curve
+  - 시간에 따라 변화하는 값 지정
+
+
+
+#### 파티클 디테일 패널
+
+- Spawn
+  - Rate
+    - 1초에 방출할 파티클 양
+  - Burst
+    - 이미터가 실행되고 특정 시간이 지난 후 원하는 만큼의 파티클을 방출하는 설정
+  - 
+
+
+
 ## 무료 에셋
 
 - Infinity Blade
@@ -1333,6 +1398,17 @@ share: true
   - 불을 밝혔다, 켜졌다, 빛났다, 문학
 - unlit
   - 켜져 있지 않은
+- translucent
+  - 반투명의, 반투명인, 투명한
+- emitter
+  -  방사체, 발포자, 발행인
+- distribution
+  - 분배, 배급, 배포, 살포
+- burst
+  - 터지다, 터뜨리다, 폭발하다, 무너지다,  분출하다.
+- look up
+  - 올려다보다, 쳐다보다, 검색, 고개를 들다.
+- 
 
 
 
