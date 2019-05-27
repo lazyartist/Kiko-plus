@@ -578,6 +578,8 @@ share: true
   - Damage
     - Apply Damage
       - Damaged Actor에 할당한 액터에 AnyDamage 이벤트를 호출한다.
+  - Get Game Mode
+    - GameMode를 가져온다.
 - 게임
   - 클래스에서 액터 스폰(SpawnActor from Class)
     - 지정한 클래스(블루프린트)의 액터를 생성하여 레벨에 배치한다.
@@ -704,7 +706,12 @@ share: true
       - Spawn Emitter at Location
         - 지정한 파티클 시스템을 지정한 위치에 지정한 방향으로 이미터를 스폰시킨다.
         - Auto Destroy 핀이 활성화되어 있다면 원샷 파티클 시스템은 자동으로 파괴된다.
-- 
+- Audio
+  - Components
+    - Audio
+      - Set Integer Parameter
+        - In Name으로 지정한 파라미터 값을 설정
+        - Audio Switch 노드에 입력값을 전달
 
 
 
@@ -1403,6 +1410,47 @@ share: true
 
 
 
+## 사운드
+
+- 패닝
+  - 리스너를 기준으로 왼쪽에서 발생한 소리는 왼쪽에서 오른쪽에서 발생한 소리는 오른쪽에서 들리는 것
+- 감쇠(Attenuation)
+  - 가까이에서 발생한 소리는 크게, 멀리서 발생한 소리는 작게 들리는 것
+- Spatialize
+  - 음원을 3D 공간 좌표에 놓는 것
+
+
+
+#### 사운드 큐
+
+- Attenuation
+  - 감쇠 
+- Spatialize
+  - 3D 사운드
+- 반경
+  - 사운드가 100% 들리는 거리
+- Falloff Distance
+  - 사운드가 감쇠해서 완전히 안들리는 거리
+- Non-Spatialized Radius
+  - 이 값보다 가까우는 패닝이 없어진다.
+- Attenuate with LPF
+  - 감쇠 연산에 로우 패스 필터(고주파수 영역을 자르고, 저주파수 영역만 통과시키는 필터)가 함께 적용
+  - 대기 흡수에 의한 감쇠를 모방
+- LPFRadius Min
+  - LPF 적용이 시작되는 거리
+- LPFRadius Max
+  - LPF 적용이 끝나는 거리
+
+
+
+#### 사운드 노드
+
+- Wave Player
+  - 사운드 소스 노드
+- Switch
+  - 외부에서 입력된 파라미터 값에 따라 여러 개의 입력 사운드 중 하나를 출력
+  - 파라미터 언셋은 어떠한 파라미터도 설정하지 않았을 때 출력할 값을 지정
+
 
 
 ## 무료 에셋
@@ -1508,6 +1556,12 @@ share: true
   - 터지다, 터뜨리다, 폭발하다, 무너지다,  분출하다.
 - look up
   - 올려다보다, 쳐다보다, 검색, 고개를 들다.
+- jingle
+  - (음악이나 시의) 같은 음의 반복
+- spatial
+  - 공간의, 공간적인, 장소의
+- spatialize
+  - 공간 좌표 지정
 - 
 
 
