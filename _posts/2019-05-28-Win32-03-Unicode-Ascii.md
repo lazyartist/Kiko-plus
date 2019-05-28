@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Windows - UNICODE vs ASCII"
+title: "Win32 - UNICODE vs ASCII"
 description: ""
 date: 2019-05-28 00:00:03
 tags: [win32]
