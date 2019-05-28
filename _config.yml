@@ -55,14 +55,14 @@ kramdown:
 
 # Navigation
 nav:
-  - name:           "About"
-    url:            "/about"
+#  - name:           "About"
+#    url:            "/about"
   - name:           "Archive"
     url:            "/archive"
   - name:           "Tags"
     url:            "/tags"
-  - name:           "Github"
-    url:            "https://lazyartist.github.io/blog"
+#  - name:           "Github"
+#    url:            "https://lazyartist.github.io/blog"
 
 # Sass
 sass:
