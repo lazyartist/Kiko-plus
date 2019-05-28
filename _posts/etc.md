@@ -1,3 +1,13 @@
+---
+layout: post
+title: "Etc"
+description: ""
+date: 3000-01-01 19:00:00+09:00
+tags: [unity]
+comments: true
+share: true
+---
+
 #defined로 싱글턴 만들기
 템플릿 함수 만들기
 
