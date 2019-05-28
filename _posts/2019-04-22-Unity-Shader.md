@@ -3,7 +3,7 @@ layout: post
 title: "Unity - Shader"
 description: ""
 date: 2019-04-22 19:00:00+09:00
-tags: [Shader]
+tags: [unity, Shader]
 comments: true
 share: true
 ---

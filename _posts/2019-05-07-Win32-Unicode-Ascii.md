@@ -3,7 +3,7 @@ layout: post
 title: "Windows - UNICODE vs ASCII"
 description: ""
 date: 2019-05-07 19:00:00+09:00
-tags: [Win32, unicode, ascii, c++]
+tags: [Win32]
 comments: true
 share: true
 ---

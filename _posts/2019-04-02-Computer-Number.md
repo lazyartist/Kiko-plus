@@ -3,7 +3,7 @@ layout: post
 title: "Computer - Number"
 description: ""
 date: 2019-04-02 19:00:00+09:00
-tags: [computer, random, program]
+tags: [computer]
 comments: true
 share: true
 ---

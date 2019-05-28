@@ -3,7 +3,7 @@ layout: post
 title: "Math - Vector(Dot Product)"
 description: ""
 date: 2019-03-20 19:00:00+09:00
-tags: [game, math, math]
+tags: [math]
 comments: true
 share: true
 ---

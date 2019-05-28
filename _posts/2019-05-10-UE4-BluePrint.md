@@ -3,7 +3,7 @@ layout: post
 title: "UE4 - BluePrint"
 description: ""
 date: 2019-05-10 19:00:00+09:00
-tags: [UE4, BluePrint]
+tags: [UE4]
 comments: true
 share: true
 ---
