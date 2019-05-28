@@ -3,7 +3,7 @@ layout: post
 title: "Physics - Projectile"
 description: ""
 date: 2019-04-28 19:00:00+09:00
-tags: [Physics, Projectile]
+tags: [physics]
 comments: true
 share: true
 ---
