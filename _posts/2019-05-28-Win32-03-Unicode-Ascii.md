@@ -76,7 +76,7 @@ share: true
 
 ## WBCS
 
-WBCS 방식은 모든 문자를 2바이트로 처리하기 때문에 MBCS 방식의 문제점이 나타나지 않는다.
+WBCS 방식은 모든 문자를 2바이트로 처리하기 때문에 MBCS 방식의 문제점이 나타나지 않고 MBCS 보다 빠르다.
 
 - char -> wchar_t
   - char
