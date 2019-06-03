@@ -43,7 +43,8 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   padding-top: 1em;
-  //padding-bottom: 0.3em;
+  padding-bottom: 0.5em;
+  
   font-size: 1.75em;
   //line-height: 1.2em;
   border-bottom: 1px solid #eee;
@@ -53,7 +54,8 @@ h1 {
 
 h2 {
   padding-top: 1em;
-  //padding-bottom: 0.3em;
+  padding-bottom: 0.5em;
+  
   font-size: 1.75em;
   //line-height: 1.2em;
   border-bottom: 1px solid #eee;
@@ -62,26 +64,37 @@ h2 {
 }
 
 h3 { 
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  
   font-size: 1.5em; 
   //line-height: 1.43em;
   
   counter-reset: h4;
 }
 
-h4 { 
-font-size: 1.25em;
-  font-size: 1em;
+h4 {
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  
+  font-size: 1.25em;
   
   counter-reset: h5;
 }
 
 h5 { 
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  
   font-size: 1.125em; 
   
   counter-reset: h6;
 }
 
 h6 { 
+  padding-top: 1em;
+  padding-bottom: 0.5em;
+  
   font-size: 1em;
   //color: $oc-gray-6; 
 }
