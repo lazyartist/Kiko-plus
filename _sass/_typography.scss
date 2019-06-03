@@ -42,41 +42,41 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 h1 {
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
-  font-size: 2em;
-  line-height: 1.2em;
+  padding-top: 1em;
+  //padding-bottom: 0.3em;
+  font-size: 1.75em;
+  //line-height: 1.2em;
   border-bottom: 1px solid #eee;
 
   counter-reset: h3;
 }
 
 h2 {
-  padding-top: 0.3em;
-  padding-bottom: 0.3em;
-  font-size: 2em;
-  line-height: 1.2em;
+  padding-top: 1em;
+  //padding-bottom: 0.3em;
+  font-size: 1.75em;
+  //line-height: 1.2em;
   border-bottom: 1px solid #eee;
   
   counter-reset: h3;
 }
 
 h3 { 
-  font-size: 1.75em; 
-  line-height: 1.43em;
+  font-size: 1.5em; 
+  //line-height: 1.43em;
   
   counter-reset: h4;
 }
 
 h4 { 
-font-size: 1.5em;
+font-size: 1.25em;
   font-size: 1em;
   
   counter-reset: h5;
 }
 
 h5 { 
-  font-size: 1.25em; 
+  font-size: 1.125em; 
   
   counter-reset: h6;
 }
