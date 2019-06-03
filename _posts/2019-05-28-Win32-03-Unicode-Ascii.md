@@ -12,19 +12,19 @@ share: true
 
 
 
-# ASCII
+ASCII
 
 - 1Byte로 문자 표현
 
 
 
-# Unicode
+## Unicode
 
 - 2Byte로 문자 표현
 
 
 
-# 인코딩 종류
+## 인코딩 종류
 
 - 인코딩 종류
   - UTF-8
@@ -41,7 +41,7 @@ share: true
     - 인코딩 방법뿐만 아니라 문자코딩 자체임
     - 유니코드의 모든 문자열을 표현할 수 있음
 
-## octet
+### octet
 
 - 옥텟은 컴퓨팅에서 8개의 비트가 한데 모인것을 의미
 - 초기 컴퓨터는 1바이트가 꼭 8비트를 의미하지 않았으므로 8비트를 명확하게 정의하기 위해 옥텟이라는 용어가 필요
@@ -49,7 +49,7 @@ share: true
 
 
 
-# 문자셋
+## 문자셋
 
 약속된 문자의 표현방법
 
@@ -66,7 +66,7 @@ share: true
 
 
 
-# MBCS 문제
+## MBCS 문제
 
 - 문자열 길이를 일정하게 계산하기 힘들다
   - ascii 코드는 1
@@ -94,13 +94,13 @@ WBCS 방식은 모든 문자를 2바이트로 처리하기 때문에 MBCS 방식
 
 
 
-# sizeof
+## sizeof
 
 sizeof는 함수가 아니라 연산자인다.
 
 
 
-# Windows 자료형 조합원리
+## Windows 자료형 조합원리
 
 - LP = Long Pointer
 - W = Wide
@@ -113,7 +113,7 @@ sizeof는 함수가 아니라 연산자인다.
 
 
 
-# Windows 자료형 예
+## Windows 자료형 예
 
 - char = 1byte
 - wchar_t = 2byte
@@ -124,7 +124,7 @@ sizeof는 함수가 아니라 연산자인다.
 
 
 
-# 문자열 관련 함수
+## 문자열 관련 함수
 
 | SBCS   | WBCS                                                  |                                |
 | ------ | ----------------------------------------------------- | ------------------------------ |
@@ -135,7 +135,7 @@ sizeof는 함수가 아니라 연산자인다.
 
 
 
-## 문자열 관련 함수에서 한글사용 시
+### 문자열 관련 함수에서 한글사용 시
 
 ```cpp
 #include "locale.h"
@@ -149,7 +149,7 @@ Windows2000 이상에서는 내부적으로 모든 문자열을 유니코드 기
 
 
 
-# main 함수를 유니코드 기반으로 작성하기
+## main 함수를 유니코드 기반으로 작성하기
 
 - main이라는 이름의 함수는 전달되는 문자열을 MBCS 기반으로 구성한다.
 - wmain이라는 이름의 함수를 사용하면 전달되는 문자열이 유니코드 기반으로 구성된다. MS 확장.
@@ -163,7 +163,7 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 
 
-# MBCS와 WBCS를 동시에 지원하는 매크로 T~
+## MBCS와 WBCS를 동시에 지원하는 매크로 T~
 
 - UNICODE 매크로 정의 여부에 따라 MBCS와 WBCS를 결정해준다.
   - T(Template) 문자가 들어간 매크로는 전처리 시 MBCS와 WBCS를 결정한다.
@@ -200,7 +200,7 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 
 
-# UNICODE 매크로와 관련된 함수
+## UNICODE 매크로와 관련된 함수
 
 | T(template) | WBCS    | MBCS    |
 | ----------- | ------- | ------- |
@@ -218,7 +218,7 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 
 
-# Pre-compiled 헤더
+## Pre-compiled 헤더
 
 - Pre-compiled 헤더를 사용하도록 프로젝트 설정을 했다면 stdafx.h와 stdafx.cpp 파일이 만들어진다.
 - stdafx.h 파일은 stdio.h와 tchar.h를 포함하기 때문에 직접 포함시키지 않아도 된다.
@@ -227,13 +227,15 @@ int _tmain(int argc, _TCHAR* argv[]);
 
 
 
-# TCHAR 조작 함수 찾는 방법
+## TCHAR 조작 함수 찾는 방법
 
 - 먼저 MBCS, WBCS의 함수를 찾는다.
 - MSDN의 [CRT alphabetical function reference](https://docs.microsoft.com/en-us/cpp/c-runtime-library/reference/crt-alphabetical-function-reference?view=vs-2019)에 가서 찾아본다.
 - Generic-Text Routine Mappings 항목에 TCHAR용 함수가 나와있다.
 
-# TCHAR에서 int를 string으로 변경하기
+
+
+## TCHAR에서 int를 string으로 변경하기
 
 ```cpp
 const UINT strLength = 10;

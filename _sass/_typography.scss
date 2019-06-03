@@ -47,43 +47,43 @@ h1 {
   font-size: 2em;
   line-height: 1.2em;
   border-bottom: 1px solid #eee;
-  list-style-type : lower-roman;
+
+  counter-reset: h3;
 }
 
 h2 {
   padding-top: 0.3em;
   padding-bottom: 0.3em;
-  font-size: 1.75em;
-  line-height: 1.225em;
+  font-size: 2em;
+  line-height: 1.2em;
   //border-bottom: 1px solid #eee;
-  list-style-type : lower-roman;
   
   counter-reset: h3;
 }
 
 h3 { 
-  font-size: 1.5em; 
+  font-size: 1.75em; 
   line-height: 1.43em;
   
   counter-reset: h4;
 }
 
 h4 { 
-font-size: 1.25em;
+font-size: 1.5em;
   font-size: 1em;
   
   counter-reset: h5;
 }
 
 h5 { 
-  font-size: 1.1em; 
+  font-size: 1.25em; 
   
   counter-reset: h6;
 }
 
 h6 { 
-  font-size: 1.1em;
-  color: $oc-gray-6; 
+  font-size: 1em;
+  //color: $oc-gray-6; 
 }
 
 
