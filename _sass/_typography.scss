@@ -17,7 +17,7 @@ body {
     font-weight: 300;
   }
   
-  counter-reset: h1;
+  counter-reset: h2
 }
 
 /*--------------
@@ -48,8 +48,6 @@ h1 {
   line-height: 1.2em;
   border-bottom: 1px solid #eee;
   list-style-type : lower-roman;
-  
-  counter-reset: h2;
 }
 
 h2 {
@@ -97,7 +95,6 @@ h4 {counter-reset: h5}
 h5 {counter-reset: h6}
 */
 
-h1:before {counter-increment: h1; content: counter(h1) ". "}
 h2:before {counter-increment: h2; content: counter(h2) ". "}
 h3:before {counter-increment: h3; content: counter(h2) "." counter(h3) ". "}
 h4:before {counter-increment: h4; content: counter(h2) "." counter(h3) "." counter(h4) ". "}
