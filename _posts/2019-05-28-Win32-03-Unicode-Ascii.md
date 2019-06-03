@@ -12,7 +12,7 @@ share: true
 
 
 
-ASCII
+## ASCII
 
 - 1Byte로 문자 표현
 
