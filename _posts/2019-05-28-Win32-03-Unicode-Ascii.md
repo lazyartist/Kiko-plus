@@ -253,5 +253,5 @@ _stprintf_s(strBuffer, strLength, "%d", 99); // 뒤에 _s가 붙은 함수가 �
 - <https://s2junn.tistory.com/80>
 - <http://dev.epiloum.net/487>
 - <http://soen.kr/lecture/ccpp/cpp2/18-2-4.htm>
-- 
+- <http://gema-textcube.blogspot.com/2010/03/double-int-to-tchar.html>
 
