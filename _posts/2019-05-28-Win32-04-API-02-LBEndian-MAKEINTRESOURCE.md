@@ -1,8 +1,8 @@
 ---
 layout: post
-title: "Win32 - Little/Big Endian과 MAKEINTRESOURCE 매크로"
+title: "Win32 - API - Little/Big Endian과 MAKEINTRESOURCE 매크로"
 description: ""
-date: 2019-05-28 00:00:05
+date: 2019-05-28 00:04:02
 tags: [win32]
 comments: true
 share: true
