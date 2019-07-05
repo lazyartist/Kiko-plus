@@ -53,4 +53,10 @@ share: true
 
 
 
+## 디버깅 팁
+
+
+
+https://kindtis.tistory.com/518
+
 
