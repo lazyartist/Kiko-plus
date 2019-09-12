@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Physics - Basic"
+title: "Physics - Velocity, Accelation"
 description: ""
 date: 2019-09-13 19:00:00+09:00
 tags: [physics]
@@ -70,10 +70,43 @@ $$
 - 물체가 실제로 움직인 거리
 - 이리저리 움직인것 모두 포함
 
-#### 변위
+#### 변위(위치, 거리)
 
 - 위치 변화량, 항상 직선상의 최소 거리
 - 이리저리 이동한것은 취급하지 않고 처음과 끝의 직선상의 변화량만 따진다.
+- 속도, 시간 그래프에서 그려지는 면적이 이동 거리이다.
+
+#### 평균속도를 알경우 변위 구하기
+
+$$
+v=평균속도\\
+s=vt
+$$
+
+#### 등속도 운동일 경우 변위 구하기
+
+- 등속도 운동은 속도가 변하지 않으므로 현재속도와 평균속도가 같다.
+- 따라서 평균속도로 변위 구하기와 같다.
+- 속도, 시간 그래프에서 사각면적이 변위이다.
+
+
+
+### 등가속도 운동일 경우 변위 구하기
+
+- 속도, 시간 그래프에서 만들어지는 삼각형이 변위이다.
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="662" height="182.47222900390625" style="
+        width:662px;
+        height:182.47222900390625px;
+        background: #FFF;
+        fill: none;
+">
+        <svg xmlns="http://www.w3.org/2000/svg"><g><defs><pattern id=".5033028152059664" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="lightgray" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#.5033028152059664)" stroke="lightgray" stroke-width="0.5"/></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="role-diagram-draw-area"><g class="shapes-region" style="stroke: black; fill: none;"><g class="composite-shape axis2d" style="stroke-width: 1; stroke: rgb(0, 0, 0);"><path class="real" d=" M413.26,152.35 L566,152.35 M428.54,35.04 L428.54,165.39"/><path d=" M559,147.35 L566,152.35 L559,157.35"/><path d=" M423.54,42.04 L428.54,35.04 L433.54,42.04"/></g><g class="composite-shape"><path class="real" d=" M530.18,58.47 L428.54,152.35 L530.18,152.35 Z" style="stroke-width: 1; stroke: rgb(0, 0, 0); fill: rgba(74, 144, 226, 0.42);"/></g><g class="composite-shape axis2d" style="stroke-width: 1; stroke: rgb(0, 0, 0);"><path class="real" d=" M95.26,154.35 L248,154.35 M110.54,37.04 L110.54,167.39"/><path d=" M241,149.35 L248,154.35 L241,159.35"/><path d=" M105.54,44.04 L110.54,37.04 L115.54,44.04"/></g><g class="composite-shape"><path class="real" d=" M110.54,96.88 L227.54,96.88 L227.54,154.35 L110.54,154.35 Z" style="stroke-width: 1; stroke: rgb(0, 0, 0); fill: rgb(189, 218, 254);"/></g><g/></g><g/><g/><!-- react-empty: 101541 --></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="660" height="180.47222900390625" style="width:660px;height:180.47222900390625px;font-family:Asana-Math, Asana;background:#FFF;"><g><g><g style="transform:matrix(1,0,0,1,405.41668701171875,41.8125);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,545.9583129882812,170.4305419921875);"><path d="M125 390L69 107C68 99 56 61 56 31C56 6 67 -9 86 -9C121 -9 156 11 234 74L265 99L255 117L210 86C181 66 161 56 150 56C141 56 136 64 136 76C136 102 150 183 179 328L192 390L299 390L310 440C272 436 238 434 200 434C216 528 227 577 245 631L234 646C214 634 187 622 156 610L131 440C87 419 61 408 43 403L41 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,467.35418701171875,136.59722900390625);"><path d="M31 148C26 97 20 62 9 16C47 -2 81 -11 116 -11C165 -11 211 7 262 47C313 87 334 124 334 174C334 228 302 257 228 271L185 279C125 290 106 307 106 348C106 401 151 442 208 442C249 442 287 424 303 397L303 342L326 342C330 377 334 404 345 455C306 474 278 482 245 482C193 482 132 452 84 404C58 377 47 352 47 316C47 260 78 228 144 215L207 203C251 195 267 177 267 138C267 73 221 29 150 29C115 29 84 40 56 64L56 148Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g style="transform:matrix(1,0,0,1,479.04864501953125,136.59722900390625);"><path d="M604 347L604 406L65 406L65 347ZM604 134L604 193L65 193L65 134Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g><g><g><g style="transform:matrix(1,0,0,1,496.77777099609375,126.04168701171875);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420ZM624 390L568 107C567 99 555 61 555 31C555 6 566 -9 585 -9C620 -9 655 11 733 74L764 99L754 117L709 86C680 66 660 56 649 56C640 56 635 64 635 76C635 102 649 183 678 328L691 390L798 390L809 440C771 436 737 434 699 434C715 528 726 577 744 631L733 646C713 634 686 622 655 610L630 440C586 419 560 408 542 403L540 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.01275,0,0,-0.01275,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,498.89581298828125,144.40277099609375);"><path d="M16 23L16 -3C203 -3 203 0 239 0C275 0 275 -3 468 -3L468 82C353 77 307 81 122 77L304 270C401 373 431 428 431 503C431 618 353 689 226 689C154 689 105 669 56 619L39 483L68 483L81 529C97 587 133 612 200 612C286 612 341 558 341 473C341 398 299 324 186 204Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.01275,0,0,-0.01275,0,0);"></path></g></g></g><line style="fill:none;stroke-width:1px;stroke:rgb(0, 0, 0);" x1="496.77777099609375" y1="132.02777099609375" x2="507.3749933242798" y2="132.02777099609375"></line></g></g></g><g><g><g style="transform:matrix(1,0,0,1,87.41665649414062,43.8125);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,227.95831298828125,172.4305419921875);"><path d="M125 390L69 107C68 99 56 61 56 31C56 6 67 -9 86 -9C121 -9 156 11 234 74L265 99L255 117L210 86C181 66 161 56 150 56C141 56 136 64 136 76C136 102 150 183 179 328L192 390L299 390L310 440C272 436 238 434 200 434C216 528 227 577 245 631L234 646C214 634 187 622 156 610L131 440C87 419 61 408 43 403L41 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,147.89236450195312,132.388916015625);"><path d="M31 148C26 97 20 62 9 16C47 -2 81 -11 116 -11C165 -11 211 7 262 47C313 87 334 124 334 174C334 228 302 257 228 271L185 279C125 290 106 307 106 348C106 401 151 442 208 442C249 442 287 424 303 397L303 342L326 342C330 377 334 404 345 455C306 474 278 482 245 482C193 482 132 452 84 404C58 377 47 352 47 316C47 260 78 228 144 215L207 203C251 195 267 177 267 138C267 73 221 29 150 29C115 29 84 40 56 64L56 148Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g style="transform:matrix(1,0,0,1,159.58682250976562,132.388916015625);"><path d="M604 347L604 406L65 406L65 347ZM604 134L604 193L65 193L65 134Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g style="transform:matrix(1,0,0,1,176.045166015625,132.388916015625);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420ZM624 390L568 107C567 99 555 61 555 31C555 6 566 -9 585 -9C620 -9 655 11 733 74L764 99L754 117L709 86C680 66 660 56 649 56C640 56 635 64 635 76C635 102 649 183 678 328L691 390L798 390L809 440C771 436 737 434 699 434C715 528 726 577 744 631L733 646C713 634 686 622 655 610L630 440C586 419 560 408 542 403L540 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><text x="131.4132080078125" y="9.5555419921875" style="white-space:pre;stroke:none;fill:rgb(0, 0, 0);font-size:15px;font-family:Arial, Helvetica, sans-serif;font-weight:400;font-style:normal;dominant-baseline:text-before-edge;text-decoration:none solid rgb(0, 0, 0);">등속도 운동</text></g></g><g><g><text x="437.9132080078125" y="9.5555419921875" style="white-space:pre;stroke:none;fill:rgb(0, 0, 0);font-size:15px;font-family:Arial, Helvetica, sans-serif;font-weight:400;font-style:normal;dominant-baseline:text-before-edge;text-decoration:none solid rgb(0, 0, 0);">등가속도 운동</text></g></g></svg>
+</svg>
+
 
 
 
@@ -115,7 +148,7 @@ $$
 $$
 
 
-- 속도 변화에 <u>규칙성</u>이 있다면(가속도가 일정하다면) 다음과 같이 평균 속도를 쉽게 구할 수 있다
+- 속도 변화에 <u>규칙성</u>이 있다면(등가속도) 다음과 같이 평균 속도를 쉽게 구할 수 있다
 
 $$
 평균속도=\frac{처음속도+나중속도}{2}\\
@@ -150,15 +183,32 @@ $$
 
 ## 가속도
 
+- 시간에 따른 속도 변화량
 - 물체의 속력 또는 속도가 변화된 강도
 - 단위 시간단 변경된 속력 또는 속도
 - 방향이 없으면 스칼라, 방향이 있으면 벡터
+- 속도, 시간 그래프에서 기울기에 해당한다.
 
 $$
 가속도=\frac{변경된속력(속도)}{변경에걸린시간}\\
 a=\frac{\Delta v}{\Delta t}\\
 \vec{a}=\frac{\Delta \vec{v}}{\Delta t}
 $$
+
+
+<svg xmlns="http://www.w3.org/2000/svg" width="662" height="163.6666717529297" style="
+        width:662px;
+        height:163.6666717529297px;
+        background: #FFF;
+        fill: none;
+">
+        <svg xmlns="http://www.w3.org/2000/svg"><g><defs><pattern id=".0680633689479333" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="lightgray" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#.0680633689479333)" stroke="lightgray" stroke-width="0.5"/></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="role-diagram-draw-area"><g class="shapes-region" style="stroke: black; fill: none;"><g class="composite-shape axis2d" style="stroke-width: 1; stroke: rgb(0, 0, 0);"><path class="real" d=" M189.26,135.35 L342,135.35 M204.54,18.04 L204.54,148.39"/><path d=" M335,130.35 L342,135.35 L335,140.35"/><path d=" M199.54,25.04 L204.54,18.04 L209.54,25.04"/></g><g class="arrow-line"><path class="connection real" stroke-dasharray="" d="  M302.51,47.01 L204.54,135.35" style="stroke: rgb(126, 211, 33); stroke-width: 1; fill: none;"/><g stroke="none" fill="rgba(126,211,33,1)" transform="matrix(-0.7426775031271874,0.6696492562145997,-0.6696492562145997,-0.7426775031271874,304.00000000000006,45.66668701171875)" style="stroke: none; fill: rgb(126, 211, 33); stroke-width: 1;"><path d=" M8.93,-4.29 L0,0 L8.93,4.29 Z"/></g></g><g/></g><g/><g/><!-- react-empty: 107061 --></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="660" height="161.6666717529297" style="width:660px;height:161.6666717529297px;font-family:Asana-Math, Asana;background:#FFF;"><g><g><g style="transform:matrix(1,0,0,1,181.41668701171875,24.8125);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,321.95831298828125,153.43060302734375);"><path d="M125 390L69 107C68 99 56 61 56 31C56 6 67 -9 86 -9C121 -9 156 11 234 74L265 99L255 117L210 86C181 66 161 56 150 56C141 56 136 64 136 76C136 102 150 183 179 328L192 390L299 390L310 440C272 436 238 434 200 434C216 528 227 577 245 631L234 646C214 634 187 622 156 610L131 440C87 419 61 408 43 403L41 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,311.57989501953125,47.59722900390625);"><path d="M271 204L242 77C238 60 236 42 236 26C236 4 245 -9 260 -9C283 -9 324 17 406 85L399 106C375 86 346 59 324 59C315 59 309 68 309 82C309 87 309 90 310 93L402 472L392 481L359 463C318 478 301 482 274 482C246 482 226 477 199 464C137 433 104 403 79 354C35 265 4 145 4 67C4 23 19 -11 38 -11C75 -11 155 41 271 204ZM319 414C297 305 278 253 244 201C187 117 126 59 94 59C82 59 76 72 76 99C76 163 104 280 139 360C163 415 186 433 234 433C257 433 275 429 319 414Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g style="transform:matrix(1,0,0,1,319.11456298828125,47.59722900390625);"><path d="M146 266C146 526 243 632 301 700L282 726C225 675 60 542 60 266C60 159 85 58 133 -32C168 -99 200 -138 282 -215L301 -194C255 -137 146 -15 146 266Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><text x="324.76043701171875" y="48.14537733395895" style="white-space:pre;stroke:none;fill:rgb(0, 0, 0);font-size:17px;font-family:Asana-Math, Asana;font-weight:400;font-style:normal;dominant-baseline:auto;text-decoration:none solid rgb(0, 0, 0);">가속도</text><g style="transform:matrix(1,0,0,1,375.76043701171875,47.59722900390625);"><path d="M51 726L32 700C87 636 187 526 187 266C187 -10 83 -131 32 -194L51 -215C104 -165 273 -23 273 265C273 542 108 675 51 726Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g style="transform:matrix(1,0,0,1,386.50347900390625,47.59722900390625);"><path d="M604 347L604 406L65 406L65 347ZM604 134L604 193L65 193L65 134Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><g><g><g><g style="transform:matrix(1,0,0,1,404.232666015625,37.04168701171875);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.01275,0,0,-0.01275,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,405.295166015625,55.40283203125);"><path d="M125 390L69 107C68 99 56 61 56 31C56 6 67 -9 86 -9C121 -9 156 11 234 74L265 99L255 117L210 86C181 66 161 56 150 56C141 56 136 64 136 76C136 102 150 183 179 328L192 390L299 390L310 440C272 436 238 434 200 434C216 528 227 577 245 631L234 646C214 634 187 622 156 610L131 440C87 419 61 408 43 403L41 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.01275,0,0,-0.01275,0,0);"></path></g></g></g><line style="fill:none;stroke-width:1px;stroke:rgb(0, 0, 0);" x1="404.232666015625" y1="43.02783203125" x2="410.593777179718" y2="43.02783203125"></line></g><g style="transform:matrix(1,0,0,1,416.9617919921875,47.59722900390625);"><path d="M604 347L604 406L65 406L65 347ZM604 134L604 193L65 193L65 134Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g><text x="433.420166015625" y="48.14537733395895" style="white-space:pre;stroke:none;fill:rgb(0, 0, 0);font-size:17px;font-family:Asana-Math, Asana;font-weight:400;font-style:normal;dominant-baseline:auto;text-decoration:none solid rgb(0, 0, 0);">기울기</text></g></g></svg>
+</svg>
+
+
+
 
 
 
@@ -327,6 +377,8 @@ $$
 
 #### 등가속도 문제
 
+##### 문제1
+
 - 정지해 있던 물체가 등가속도 운동을 하여 5초 동안에 50m 이동하였다. 이 물체의 가속도와 50m위치에서의 속도의 크기는 몇 m/s인가?
 
 ##### 풀이1. 공식 이용
@@ -369,15 +421,98 @@ $$
 
 ##### 풀이3. 평균속도 이용
 
+- 등가속도 운동에서는 처음과 끝 속도를 알면 평균속도를 구할 수 있다.
+
+$$
+\begin{array}{l}
+등가속도\ 운동에서\ 평균속도\ 구하기\\
+\begin{array}{ c c c }
+v( 평균속도) & = & \frac{v_{1} -v_{0}}{2}
+\end{array}\\
+\\
+평균속도\ 구하기\\
+\begin{array}{ c c c }
+s & = & v( 평균속도) t\\
+ & = & \left(\frac{v_{1} -v_{0}}{2}\right) t\\
+50 & = & \left(\frac{v_{1} -0}{2}\right) 5\\
+100 & = & 5v\\
+\therefore v & = & 20m/s
+\end{array}\\
+\\
+가속도\ 구하기\\
+\begin{array}{ c c c }
+a & = & \frac{\Delta v}{t}\\
+ & = & \frac{v_{1} -v_{0}}{t}\\
+ & = & \frac{20-0}{5}\\
+ & = & 4m/s^{2}
+\end{array}
+\end{array}
+$$
 
 
 
+##### 문제2.
+
+- 다음과 같은 등가속도 운동에서 이동 거리, 평균 속도를 구하시오.
 
 
+<svg xmlns="http://www.w3.org/2000/svg" width="662" height="163.6666717529297" style="
+        width:662px;
+        height:163.6666717529297px;
+        background: #FFF;
+        fill: none;
+">
+        <svg xmlns="http://www.w3.org/2000/svg"><g><defs><pattern id=".29840259201269115" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="lightgray" stroke-width="0.5"/></pattern></defs><rect width="100%" height="100%" fill="url(#.29840259201269115)" stroke="lightgray" stroke-width="0.5"/></g></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" class="role-diagram-draw-area"><g class="shapes-region" style="stroke: black; fill: none;"><g class="composite-shape axis2d" style="stroke-width: 1; stroke: rgb(0, 0, 0);"><path class="real" d=" M250.12,127.32 L402.86,127.32 M265.39,10 L265.39,140.35"/><path d=" M395.86,122.32 L402.86,127.32 L395.86,132.32"/><path d=" M260.39,17 L265.39,10 L270.39,17"/></g><g class="arrow-line"><path class="connection real" stroke-dasharray="" d="  M329.44,63.38 L265.39,127.32" style="stroke: rgb(126, 211, 33); stroke-width: 1; fill: none;"/><g stroke="none" fill="rgba(126,211,33,1)" transform="matrix(-0.7077235789366845,0.7064894449438368,-0.7064894449438368,-0.7077235789366845,330.8559027777777,61.964936803598874)" style="stroke: none; fill: rgb(126, 211, 33); stroke-width: 1;"><path d=" M8.93,-4.29 L0,0 L8.93,4.29 Z"/></g></g><g class="arrow-line"><path class="connection real" stroke-dasharray="" d="  M360.07,130.13 L330.86,61.96" style="stroke: rgb(126, 211, 33); stroke-width: 1; fill: none;"/><g stroke="none" fill="rgba(126,211,33,1)" transform="matrix(-0.393941909590951,-0.9191353392552345,0.9191353392552345,-0.393941909590951,360.8559027777777,131.96493680359885)" style="stroke: none; fill: rgb(126, 211, 33); stroke-width: 1;"><path d=" M8.93,-4.29 L0,0 L8.93,4.29 Z"/></g></g><g class="composite-shape"><path class="real" d=" M265.39,61.96 L330.86,61.96 L330.86,127.32 L265.39,127.32 Z" style="stroke-width: 1; stroke: rgb(0, 0, 0); fill: none; stroke-dasharray: 1.125, 3.35;"/></g><g/></g><g/><g/><!-- react-empty: 109828 --></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" width="660" height="161.6666717529297" style="width:660px;height:161.6666717529297px;font-family:Asana-Math, Asana;background:#FFF;"><g><g><g style="transform:matrix(1,0,0,1,242.27777099609375,16.77777099609375);"><path d="M166 420C187 420 203 421 229 424C118 304 76 221 76 121C76 44 122 -11 186 -11C324 -11 477 236 477 384C477 441 451 482 415 482C402 482 390 478 382 470L332 423L343 404C352 410 361 413 370 413C397 413 413 390 413 350C413 202 316 39 228 39C179 39 148 81 148 146C148 251 187 342 285 464L275 482C255 473 242 470 214 470C186 470 144 472 115 475L103 476C97 477 92 477 91 477C79 477 70 475 59 470C45 443 34 407 21 352L43 352L60 394C67 411 87 422 111 422C144 422 128 420 166 420Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,382.8125,145.3958740234375);"><path d="M125 390L69 107C68 99 56 61 56 31C56 6 67 -9 86 -9C121 -9 156 11 234 74L265 99L255 117L210 86C181 66 161 56 150 56C141 56 136 64 136 76C136 102 150 183 179 328L192 390L299 390L310 440C272 436 238 434 200 434C216 528 227 577 245 631L234 646C214 634 187 622 156 610L131 440C87 419 61 408 43 403L41 390Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,248.1319580078125,68.73614501953125);"><path d="M16 23L16 -3C203 -3 203 0 239 0C275 0 275 -3 468 -3L468 82C353 77 307 81 122 77L304 270C401 373 431 428 431 503C431 618 353 689 226 689C154 689 105 669 56 619L39 483L68 483L81 529C97 587 133 612 200 612C286 612 341 558 341 473C341 398 299 324 186 204Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,328.1319580078125,148.73614501953125);"><path d="M16 23L16 -3C203 -3 203 0 239 0C275 0 275 -3 468 -3L468 82C353 77 307 81 122 77L304 270C401 373 431 428 431 503C431 618 353 689 226 689C154 689 105 669 56 619L39 483L68 483L81 529C97 587 133 612 200 612C286 612 341 558 341 473C341 398 299 324 186 204Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g><g><g><g style="transform:matrix(1,0,0,1,353.1319580078125,148.73614501953125);"><path d="M462 224C462 345 355 366 308 374C388 436 418 482 418 541C418 630 344 689 233 689C165 689 120 670 72 622L43 498L74 498L92 554C103 588 166 622 218 622C283 622 336 569 336 506C336 431 277 368 206 368C198 368 187 369 174 370L159 371L147 318L154 312C192 329 211 334 238 334C321 334 369 281 369 190C369 88 308 21 215 21C169 21 128 36 98 64C74 86 61 109 42 163L15 153C36 92 44 56 50 6C103 -12 147 -20 184 -20C307 -20 462 87 462 224Z" stroke="rgb(0, 0, 0)" stroke-width="8" fill="rgb(0, 0, 0)" style="transform:matrix(0.017,0,0,-0.017,0,0);"></path></g></g></g></svg>
+</svg>
 
+$$
+ \begin{array}{l}
+이동거리\ 구하기\\
+\begin{array}{ c c c }
+s & = & \frac{2\times 2}{2} +\frac{1\times 2}{2}\\
+ & = & 2+1\\
+ & = & 3
+\end{array}\\
+\\
+평균속도\ 구하기\\
+\begin{array}{ c c c }
+s & = & v( 평균속도) t\\
+3 & = & 3v\\
+\therefore v & = & 1m/s
+\end{array}
+\end{array}
+$$
 
+##### 문제3.
 
+- 등속도 10m/s로 움직이는 A자동차가 기준선 P를 통과하는 순간에 속도가 0m/s인 B 자동차가 출발하여 기준선 Q를 A와 함께 통과하였다. 
+  - B의 Q에서의 속도와 가속도를 구하여라
 
+$$
+\begin{gather*}
+A와\ B는\ 같은\ 거리를\ 같은\ 시간에\ 통과했으므로\ 평균속도가\ 같다.\\
+A는\ 등속도로\ 움직이므로\ 평균속도는\ 등속도와\ 같다.\ \\
+\therefore B의\ 평균속도=10m/s\\
+\\
+B의\ 기준선\ Q에서의\ 속도\ v_{1} \ 구하기\\
+등가속도일\ 때\ 평균속도를\ 구하는\ 공식을\ 이용한다.\\
+\begin{array}{ c c c }
+v( 평균속도) & = & \frac{v_{0} +v_{1}}{2}\\
+10 & = & \frac{0+v_{1}}{2}\\
+\therefore v_{1}(Q에서의 속도) & = & 20m/s
+\end{array}\\
+\\
+B의\ 가속도\ 구하기\\
+\begin{array}{ c c c }
+a & = & \frac{\Delta v}{\Delta t}\\
+ & = & \frac{v_{1} -v_{0}}{8}\\
+ & = & \frac{20}{8}\\
+\therefore a(가속도) & = & 2.5m/s^{2}
+\end{array}
+\end{gather*}
+$$
 
 
 
