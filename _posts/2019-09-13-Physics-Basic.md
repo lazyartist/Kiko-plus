@@ -2,7 +2,7 @@
 layout: post
 title: "Physics - Basic"
 description: ""
-date: 2019-09-12 19:00:00+09:00
+date: 2019-09-13 19:00:00+09:00
 tags: [physics]
 comments: true
 share: true
