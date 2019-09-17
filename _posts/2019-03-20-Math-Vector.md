@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Math - Vector(Dot Product)"
+title: "Math - Vector"
 description: ""
 date: 2019-03-20 19:00:00+09:00
 tags: [math]
