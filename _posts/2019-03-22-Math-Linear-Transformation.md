@@ -12,7 +12,7 @@ share: true
 
 
 
-#### 선형 변환의 벡터
+## 선형 변환의 벡터
 
 선형 변환에 쓰이는 벡터는 x, y, z에 w가 추가된 4개의 성분은 갖는 벡터를 사용한다.
 
@@ -22,8 +22,7 @@ x \\ y \\ z \\ w
 \end{pmatrix}
 $$
 
-
-좌표로 쓰이는 벡터
+### 좌표로 쓰이는 벡터
 
 평행이동을 위해 w성분이 1이다.
 
@@ -33,8 +32,7 @@ x \\ y \\ z \\ 1
 \end{pmatrix}
 $$
 
-
-벡터로 쓰이는 벡터
+### 벡터로 쓰이는 벡터
 
 평행이동을 하지 않기(무의미 하기) 때문에 w성분이 0이다.
 
@@ -44,7 +42,7 @@ x \\ y \\ z \\ 0
 \end{pmatrix}
 $$
 
-#### 좌표와 벡터
+## 좌표와 벡터
 
 |      | 크기 변환 | 회전 변환 | 평행 이동 |
 | :--: | :-------: | :-------: | :-------: |
@@ -55,7 +53,33 @@ $$
 
 
 
-#### 크기변환(Scaling) 행렬
+## 평행 이동(Translation)
+
+$$
+\begin{pmatrix}
+1 & 0 & 0 & T_x \\ 
+0 & 1 & 0 & T_y \\ 
+0 & 0 & 1 & T_z \\ 
+0 & 0 & 0 & 1 
+\end{pmatrix}
+\times
+\begin
+{pmatrix} 
+x \\ y \\ z \\ w 
+\end{pmatrix}
+=
+\begin{pmatrix} 
+x+T_x \\ y+T_y \\ z+T_z \\ w 
+\end{pmatrix}
+$$
+
+
+
+#### 
+
+
+
+## 크기변환(Scaling) 행렬
 
 $$
 \begin{pmatrix}
@@ -77,7 +101,7 @@ $$
 
 
 
-#### 회전 변환(Rotation)
+## 회전 변환(Rotation)
 
 $$
 x축 회전 변환 \\
@@ -135,29 +159,7 @@ $$
 
 
 
-#### 평행 이동
-
-$$
-\begin{pmatrix}
-1 & 0 & 0 & T_x \\ 
-0 & 1 & 0 & T_y \\ 
-0 & 0 & 1 & T_z \\ 
-0 & 0 & 0 & 1 
-\end{pmatrix}
-\times
-\begin
-{pmatrix} 
-x \\ y \\ z \\ w 
-\end{pmatrix}
-=
-\begin{pmatrix} 
-x+T_x \\ y+T_y \\ z+T_z \\ w 
-\end{pmatrix}
-$$
-
-
-
-#### 행렬의 합성
+## 행렬의 합성
 
 여러 행렬을 한번에 곱해서 결과를 내야하는 경우 값이 고정된 행렬들을 미리 계산하여 하나의 행렬로 만들어 계산 횟수를 줄일 수 있다.
 
@@ -173,7 +175,7 @@ $$
 
 
 
-#### 크기, 회전, 이동 행렬 구현
+## 크기, 회전, 이동 행렬 구현
 
 참고 : <https://www.euclideanspace.com/maths/algebra/matrix/functions/inverse/fourD/index.htm>
 
@@ -454,21 +456,21 @@ public class MatrixTest : MonoBehaviour
 
 
 
-#### 좌표계 변환
+## 좌표계 변환
 
-###### 로컬 좌표계
+### 로컬 좌표계
 
 오브젝트에 붙어 있는 좌표계.
 
 
 
-###### 월드 좌표계
+### 월드 좌표계
 
 오브젝트가 놓여질 공간의 좌표계
 
 
 
-###### 뷰 좌표계
+### 뷰 좌표계
 
 카메라가 원점인 좌표계
 
@@ -478,7 +480,7 @@ public class MatrixTest : MonoBehaviour
 
 
 
-###### 투영 좌표계
+### 투영 좌표계
 
 카메라에서 바라본 3D 오브젝트를 투영행렬을 이용하여 2D 스크린에 투영한 좌표계
 
@@ -491,7 +493,7 @@ public class MatrixTest : MonoBehaviour
 
 
 
-###### 좌표계 변환 행렬 처리
+### 좌표계 변환 행렬 처리
 
 로컬 -> 월드 -> 뷰 -> 투영 행렬을 하나로 합쳐서 처리한다.
 
@@ -506,7 +508,7 @@ $$
 
 
 
-#### 쿼터니온(사원수 - Quaternion)
+## 쿼터니온(사원수 - Quaternion)
 
 회전만 필요한 곳의 정보는 쿼터니언으로 표시한다.
 
