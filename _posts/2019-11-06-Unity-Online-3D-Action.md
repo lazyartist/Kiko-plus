@@ -19,7 +19,29 @@ share: true
 
 
 
+## SkyBox 설정
 
+- Window > Rendering > Lighting Setting > Lighting(window) > Skybox Material 항목에 머티리얼을 설정
+  - 머티리얼은 Shader가 Skybox/6 Sided 등의 스카이박스 머티리얼이어야 한다.
+
+
+
+## 안개 설정
+
+- Lighting(window) > Other Setting > Fog
+  - Color
+    - 안개의 색
+  - Density
+    - 안개의 농도
+
+
+
+## 지형에 레이어 설정
+
+- Terrain 오브젝트 선택하여 Inspector 표시
+- Layer 클릭 > Add Layer 선택
+- Tags & Layers에서 User Layer 8에 Ground 텍스트 입력
+- Terrain 오브젝트를 다시 선택하여 Layer를 Ground로 변경
 
 
 
