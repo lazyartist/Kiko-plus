@@ -190,6 +190,7 @@ public static Quaternion RotateTowards(Quaternion from, Quaternion to, float max
 
 #### 목표방향으로 회전을 마쳤는지 확인
 
+- Vector3.Dot()을 이용
 - 목표방향 벡터와 캐릭터 오브젝트의 정면 벡터의 내적으로 알 수 있다.
 - 내적결과 1이면 같은 방향, 0이면 수직(직교), -1이면 반대이다.
 
@@ -331,6 +332,255 @@ public class CharacterMove : MonoBehaviour
 
 
 
+## 입력
+
+### Input 클래스
+
+- Edit > Project Settings > Input에서 미리 지정한 이름으로 키, 마우스, 조이스틱의 값을 가져올 수 있다.
+- Horizontal, Vertical, Fire1, Fire2, Jump, ... 
+
+#### GetButtonDown
+
+- 미리 지정한 버튼 이름으로 버튼이 눌렸는지 확인
+- 눌린 프레임만 true
+
+#### GetButtonUp
+
+- 버튼이 올라온 프레임만 true
+
+#### GetButton
+
+- 버튼이 눌려있는 동안 true
+
+#### GetAxis
+
+- 스틱의 기울기를 -1~1 사이의 값으로 가져온다.
+- Horizontal, Vertical
+
+#### GetKeyDown
+
+- 가상 매핑한 키이름이 아니라 키보드의 키 입력을 직접가져온다.
+- Input.GetKeyDown(keyCode.Escape)
+
+#### mousePosition
+
+- 마우스 커서의 위치를 가지고 있다
+- 좌표가 좌하단 부터 시작하며 (0, 0)이 시작좌표이기 때문에 전체 크기에서 -1해준 값이 끝 픽셀좌표이다.
+  - 100x100 스크린이라면 좌하단(0,0), 우상단(99, 99)
+
+
+
+### 슬라이드 조작
+
+- 마우스 버튼을 누른 채 일정값 이상으로 이동하면 슬라이드로 간주
+- 커서가 이동한 값을 deltaPosition으로 저장
+- 마우스 버튼을 떼면 슬라이드 종료
+
+```c#
+//슬라이드 시작
+if (Input.GetButtonDown("Fire1"))
+{
+	slideStartPosition = GetCursorPosition();
+}
+//슬라이드인지 아닌지 판단
+if(Input.GetButton("Fire1"))
+{
+    if(Vector2.Distance(slideStartPosition, GetCursorPosition()) >= Screen.width * 0.1f)
+    {
+    	moved = true;
+    }
+}
+//슬라이드 종료
+if(!Input.GetButtonUp("Fire1") && !Input.GetButton("Fire1"))//버튼을 뗀 프레임까지 슬라이드로 간주
+{
+	moved = false;
+}
+```
+
+
+
+### 슬라이드 시 마우스 이동량 구하기
+
+- 매 프레임마다 마우스 위치를 기억
+- 이전 프레임 마우스 위치와 현재 프레임 마우스 위치의 차
+
+
+
+## 다른 게임 오브젝트에 있는 컴포넌트 가져오기
+
+### public 변수에 Inspector에서 지정
+
+- Inspector에서 public 변수에 게임 오브젝트를 드래그 드랍하면 해당 변수의 타입과 맞는 컴포넌트 또는 게임 오브젝트가 할당된다.
+
+
+
+### FindObjectOfType(), FindObjectsOfTypes()로 찾는다
+
+- 현재 인스턴스화된 컴포넌트에서 타입이 맞는 컴포넌트를 찾아준다.
+- 느리다.
+
+```c#
+//하나의 객체만 찾는다
+PlayerCtrl playerCtrl = FindObjectOfType<PlayerCtrl>();
+PlayerCtrl playerCtrl = FindObjectOfType(typeof(PlayerCtrl)) as PlayerCtrl;
+//모든 객체를 찾는다
+PlayerCtrl[] plyaerCtrls = FindObjectsOfTypes<PlayerCtrl>();
+PlayerCtrl[] plyaerCtrls = FindObjectsOfTypes(typeof(PlayerCtrl)) as PlayerCtrl;
+```
+
+
+
+### 게임 오브젝트에 태그를 설정하고 FindGameObjectWithTag()로 찾는다.
+
+- 게임 오브젝트를 선택하고 Inspector에서 tag를 설정한다.
+- 느리다.
+
+```c#
+GameObject go = GameObject.FindGameObjectWithTag("Player");
+PlayerCtrl playerCtrl = go.GetComponent<PlayerCtrl>();
+```
+
+
+
+## Ray
+
+- 게임 세계에서 보이지 않는 광선을 날려 광선이 닿는 물체와 위치를 조사하기 위한 방법
+- 광선에 해당하는 Ray와 Ray와 닿는 물체를 조사하는 Physics.RayCast() 함수를 이용
+
+
+
+### Ray 만들기
+
+- Ray의 시작위치와 방향으로 만들 수 있다.
+
+```c#
+Ray ray = new Ray(startVector, directionVector);
+```
+
+
+
+### 카메라에서 화면 안쪽을 향하는 Ray 만들기
+
+```c#
+Ray ray = Camera.main.ScreenPointToRay();
+```
+
+
+
+### Ray 광선이 지면과 충돌한 위치 구하기
+
+- Ray와 모델의 메쉬의 충돌을 검사하는게 아니라 Collider 컴포넌트의 형상과 충돌했는지 검사한다.
+- 지면에는 Terrain Collider 컴포넌트가 있으므로 지면과 Ray이 충돌을 검사할 수 있다.
+
+```c#
+public static bool Raycast(Ray ray, out RaycastHit hitInfo, float maxDistance, int layerMask);
+```
+
+#### RaycastHit
+
+- 충돌한 물체의 정보와 위치를 저장
+
+```c#
+    //
+    // 요약:
+    //     Structure used to get information back from a raycast.
+    [NativeHeader("Runtime/Interfaces/IRaycast.h")]
+    [NativeHeader("PhysicsScriptingClasses.h")]
+    [NativeHeader("Runtime/Dynamics/RaycastHit.h")]
+    [UsedByNativeCode]
+    public struct RaycastHit
+    {
+        //
+        // 요약:
+        //     The Collider that was hit.
+        public Collider collider { get; }
+        //
+        // 요약:
+        //     The impact point in world space where the ray hit the collider.
+        public Vector3 point { get; set; }
+        //
+        // 요약:
+        //     The normal of the surface the ray hit.
+        public Vector3 normal { get; set; }
+        //
+        // 요약:
+        //     The barycentric coordinate of the triangle we hit.
+        public Vector3 barycentricCoordinate { get; set; }
+        //
+        // 요약:
+        //     The distance from the ray's origin to the impact point.
+        public float distance { get; set; }
+        //
+        // 요약:
+        //     The index of the triangle that was hit.
+        public int triangleIndex { get; }
+        //
+        // 요약:
+        //     The uv texture coordinate at the collision location.
+        public Vector2 textureCoord { get; }
+        //
+        // 요약:
+        //     The secondary uv texture coordinate at the impact point.
+        public Vector2 textureCoord2 { get; }
+        [Obsolete("Use textureCoord2 instead. (UnityUpgradable) -> textureCoord2")]
+        public Vector2 textureCoord1 { get; }
+        //
+        // 요약:
+        //     The Transform of the rigidbody or collider that was hit.
+        public Transform transform { get; }
+        //
+        // 요약:
+        //     The Rigidbody of the collider that was hit. If the collider is not attached to
+        //     a rigidbody then it is null.
+        public Rigidbody rigidbody { get; }
+        //
+        // 요약:
+        //     The uv lightmap coordinate at the impact point.
+        public Vector2 lightmapCoord { get; }
+    }
+```
+
+
+
+#### layerMask
+
+- 충돌 검사할 오브젝트의 layer번호를 비트 마스크로 지정한다.
+- 이름으로 레이어 번호를 찾기 위해서 LayerMask.NameToLayer() 함수를 이용한다.
+
+```c#
+1 << 8;
+1 << LayerMask.NameToLayer("Ground");
+1 << LayerMask.NameToLayer("Ground") | 1 << LayerMask.NameToLayer("Player");
+```
+
+
+
+SendMessage
+
+- 같은 게임 오브젝트의 다른 컴포넌트의 함수를 호출하는 함수
+- 호출할 함수 이름과 인수를 받는다.
+- 지정한 해당 함수가 다른 컴포넌트에 있으면 호출하고 없으면 무시한다.
+
+```c#
+SendMessage("FuncName", arg);//FuncName 함수를 호출한다.
+```
+
+
+
+
+
+
+
+## 에러
+
+### Camera.main이 null인 경우
+
+- Camera 게임 오브젝트의 tag가 MainCamera로 지정한다
+
+### 
+
+
+
 ## 영어
 
 - shininess
@@ -340,3 +590,10 @@ public class CharacterMove : MonoBehaviour
   - 와르그
   - 톨킨의 작품 세계관에서 바르그에서 따온 와르그라는 존재가 등장
   - 늑대처럼 생긴 사악한 생명체
+
+
+
+# 참고
+
+- 반다이 남코 현역 개발팀이 알려주는 유니티 3D 온라인 액션 게임 공작소
+- 
