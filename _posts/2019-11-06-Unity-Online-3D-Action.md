@@ -567,7 +567,109 @@ SendMessage("FuncName", arg);//FuncName 함수를 호출한다.
 
 
 
+## 카메라
 
+### 대상 추적 카메라
+
+#### 추적 대상의 위치
+
+- 추적 대상의 위치(position)
+- 추적 대상의 위치에서 카메라의 주시점까지의 보정값(offset)
+- 이 두 값을 더한 위치값이 카메라가 실제 바라보는 위치(lookPosition=position+offset)
+
+```c#
+Vector3 lookPosition = lookTarget.position + offset;
+```
+
+#### 대상 추적 카메라 위치  및 회전
+
+- 추적 대상의 주시점에서 바라본 카메라의 위치를 구한다(relativePos)
+- 카메라의 위치는 기준이 되는 방향 벡터에 회전값을 적용하여 구한다.
+- verticalAngle, horizontalAngle 값에 따라 카메라의 위치가 결정되고 이 값을 변경하면 대상을 중심으로 카메라가 원 궤적에서 이동한다.
+- distance는 대상과 카메라의 거리에 해당한다.
+
+```c#
+//플레이어 위치를 기준으로하는 카메라 위치 구하기
+Vector3 relativePos = Quaternion.Euler(verticalAngle, horizontalAngle, 0) * new Vector3(0, 0, -distance);
+//카메라의 실제 위치
+Vector3 cameraPos = lookPosition + relativePos;
+```
+
+#### 카메라를 타깃으로 향하기
+
+- transform 클래스의 LookAt 함수를 이용
+
+```
+transform.LookAt(lookPosition);
+```
+
+#### 화면 슬라이드로 카메라 회전 갱신
+
+- 화면을 슬라이드한 값과 1필셀당 회전할 각도를 곱해서 현재 카메라의 각도에 적용한다.
+
+```c#
+//화면 전체를 슬라이드 했을 때 회전할 양, 회전 최댓값
+float rotAngle = 180.0f;
+//픽셀당 회전할 각도
+float anglePerPixel = rotAngle / Screen.width;
+//이번 프레임에 슬라이드된 거리(픽셀)
+Vector2 slideDelta;
+
+//좌우 회전값
+horizontalAngle += slideDelta.x * anglePerPixel;
+//Repeat 함수로 회전값을 0~360도 사이에서 순환되도록 한다.
+horizontalAngle = Mathf.Repeat(horizontalAngle, 360.0f);
+//상하 회전값
+verticalAngle -= slideDelta.y * anglePerPixel;
+//Clamp 함수로 회전값을 -60~60도를 벗어나지 않게 한다.
+verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
+```
+
+
+
+## 스크립트 처리 순서 바꾸기
+
+- 다른 스크립트의 갱신값을 사용하는 스크립트의 종속관계가 있을 때 종속된 스크립트가 먼저 실행된다면 값의 갱신이 1프레임씩 느려지므로 순서를 정해줘야한다.
+- Edit > Project Setting > Script Execution Order
+  - 순서를 정할 스크립트를 Inspector에 드래그 드랍
+  - 가장 먼저 실행되어야할 스크립트를 Default Time 영역 위로 이동
+    - Default Time은 순서를 지정하지 않은 스크립트가 실행되는 타이밍
+  - 갱신된 값을 기준으로 갱신하는 스크립트는 Default Time 아래로 이동
+
+
+
+## Mathf
+
+### Repeat
+
+```c#
+//
+        // 요약:
+        //     Loops the value t, so that it is never larger than length and never smaller than
+        //     0.
+        //     t의 값이 length를 넘어서면 0으로 돌아간 값을 반환한다.
+        // 매개 변수:
+        //   t:
+        //
+        //   length:
+        public static float Repeat(float t, float length);
+```
+
+### Clamp
+
+```c#
+        //
+        // 요약:
+        //     Clamps value between min and max and returns value.
+        //     value가 min, max를 넘지 않은 값을 반환한다.
+        // 매개 변수:
+        //   value:
+        //
+        //   min:
+        //
+        //   max:
+        public static int Clamp(int value, int min, int max);
+```
 
 
 
@@ -590,6 +692,12 @@ SendMessage("FuncName", arg);//FuncName 함수를 호출한다.
   - 와르그
   - 톨킨의 작품 세계관에서 바르그에서 따온 와르그라는 존재가 등장
   - 늑대처럼 생긴 사악한 생명체
+- Clamp *[klæmp]*
+  - 쇠집게, 고정시키다, 단속하다, 진압, 물리다
+- angle
+  - 각도, 관점, 모서리
+- rotation
+  - 회전, 교대, 순환, 로테이션
 
 
 
