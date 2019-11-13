@@ -629,7 +629,7 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 ## 스크립트 처리 순서 바꾸기
 
-- 다른 스크립트의 갱신값을 사용하는 스크립트의 종속관계가 있을 때 종속된 스크립트가 먼저 실행된다면 값의 갱신이 1프레임씩 느려지므로 순서를 정해줘야한다.
+- 같은 프레임에서 다른 스크립트의 갱신값을 입력값으로 사용할 경우 스크립트 사이에의 종속관계가 생기고 이 때 스크립트 실행 순서를 지정해줘야 일정한 결과 값을 기대할 수 있다.
 - Edit > Project Setting > Script Execution Order
   - 순서를 정할 스크립트를 Inspector에 드래그 드랍
   - 가장 먼저 실행되어야할 스크립트를 Default Time 영역 위로 이동
@@ -638,37 +638,138 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
+## 애니메이션
+
+### 매카님(Mecanim)
+
+#### 애니메이션 대상 변경(Retargeting)
+
+- 다양한 3D 모델에서 같은 애니메이션 데이터를 사용할 수 있는 기능
+- 유니티에서는 인간형 모델(휴머노이드-Humanoid)에 사용
+
+#### 상태 머신(State Machines)
+
+- 애니메이션의 상태 전환을 유니티에서 편집할 수 있는 기능
+- 애니메이션 간 전환 조건, 블랜딩 설정 등을 시각적으로 확인
+
+
+
+### 애니메이션 대상 변경(Retargeting) 설정
+
+- 모델 데이터 선택 > Inspector > [Player] Import Settings
+  - Rig 탭 선택 > Animation Type > Humanoid 설정 > Apply
+    - Animation Type
+      - None: 애니메이션을 사용하지 않는 모델
+      - Genenic: 휴머노이드가 맞지 않는 모델 데이터, 애니메이션 대상 변경 기능을 사용할 수 없음
+      - Legacy: 유니티 3.x 버전과 호환을 위한 모드, 사용하지 않는다.
+      - Humanoid: 애니메이션 대상 변경을 사용하기 위한 타입
+- 애니메이션 데이터도 모델 데이터와 마찮가지로 Animation Type을 Humanoid로 설정
+
+
+
+### 애니메이션 클립(Animation Clip)
+
+- 유니티로 임포트한 애니메이션 데이터에서 실제로 이용할 데이터만 뽑아내 유니티에서 사용하기 쉽게 조정한 데이터
+- 애니메이션 데이터 선택 > Inspector > [Player@Stay] Import Settings > Animation 탭 선택
+- 클립에서는 애니메이션 데이터를 추출하는 시간을 조절할 수 있고 여러 애니메이션을 FBX 파일에 저장했다가 유니티에서 나누어 사용하는 것도 가능하다.
+- 재생 설정
+  - Loop Time
+    - 애니메이션이 반복 재생됨
+    - Loop Pose : 체크하면 애니메이션의 시작과 끝이 매끄럽다.
+  - Root Transform Rotation
+    - Bake Into Pose
+      - 체크하면 루트 오브젝트의 Transform > Rotation에 애니메이션 값을 대입하지 않는다.
+      - 스크립트 쪽에서 오브젝트의 회전을 제어할 때 사용
+      - Body Transform의 Orientation을 따름
+      - Root Orientation은 상수값
+      - AnimationClip에 의해 게임 오브젝트는 일절 회전되지 않음
+      - 비슷한 시작과 끝의 루트 방향을 가진 애니메이션 클립에만 옵션을 사용해야함
+      - loop match가 녹색이면 사용하기 좋은 클립
+        - 적합한 후보는 똑바로 걷거나 달리는 것
+    - Based Upon
+      - 회전의 루트 위치를 설정
+      - Original : 애니메이션 데이터를 따름
+      - Body Orientation : 상반신 전방을 루트의 Transform>Rotation에 맞춤
+    - Offset
+      - 회전의 보정값 설정
+  - Root Transform Position(Y)
+    - Bake Into Pose
+      - 체크하면 루트 오브젝트의 Transform > Position > Y에 애니메이션 값을 대입하지 않는다.
+      - 스크립트 족에서 캐릭터의 점프 등을 제어할 때 이용
+      - 애니메이션의 루트 기준점의 Y값의 변화는 모두 무시됨
+    - Based Upon(at Start)
+      - 수직 방향의 기준이 되는 것을 설정
+      - Original : 애니메이션 데이터를 따름
+      - Center of Mass : 오브젝트의 중심을 루트의 Position > Y에 맞춤, 몸 기준점으로 일치
+      - Feet : 발 위치에 맞춤
+    - Offset
+      - Position > Y의 보정값을 설정
+  - Root Transform Position(XZ)
+    - Bake Into Pose
+      - 체크하면 루트 오브젝트의 Transform > Position > XZ에 애니메이션 값을 대입하지 않음
+      - 스크립트 쪽에서 오브젝트의 수평 위치를 제어할 때 이용
+      - 숨쉬기와 같이 캐릭터 위치를 변화시키지 않는 애니메이션을 사용하는 경우 이 옵션을 켜면 불필요한 계산을 방지할 수 있음.
+  - loop match 아이콘
+    - 애니메이션의 시작과 끝을 연결했을 때 깔끔하게 재생되는지 나타냄
+  - Mirror
+    - 애니메이션의 좌우 반전
+
+
+
+### 애니메이션 이벤트
+
+- 애니메이션 클립을 재생할 때 특정 타이밍에 게임 오브젝트에 설치한 스크립트의 이벤트 함수를 호출할 수 있다.
+- Import Settings > Animation > Events
+- 인수에는 0이나 1만 설정 가능
+- 인수가 두 개 이상인 함수 호출 시 오류
+- 오버로딩된 함수를 호출 시 먼저 만든 함수를 호출
+
+
+
+### 애니메이션 전환
+
+- 모델의 실제 애니메이션 처리는 Animator 컴포넌트가 담당
+- 이 Animator 컴포넌트가 애니메이션을 제어하는데 필요한 데이터를 Animator Controller라 함
+- Animator Controller 데이터에는 재생할 애니메이션, 애니메이션까리 전환 관계, 애니메이션 전환 조건이 저장됨
+
+
+
+## 스켈레탈 애니메이션(Skeletal animation)
+
+- 컴퓨터 애니메이션에서 캐릭터가 두 부분으로 표현되는 기술
+  1. Skin or Mesh
+     - 캐릭터를 그리는데 사용되는 표면
+  2. Skeleton or Rig
+     - 메시에 애니메이션을 적용하는데 사용되는 상호 연결된 본(bone)
+- 리깅(Rigging)
+  - 조인트 계층 구조를 만드는 과정
+- 스키닝(Skinnig)
+  - 스켈레톤을 메시에 연결하는 과정
+
+
+
+
+
+
+
 ## Mathf
 
 ### Repeat
 
 ```c#
-//
-        // 요약:
-        //     Loops the value t, so that it is never larger than length and never smaller than
-        //     0.
-        //     t의 값이 length를 넘어서면 0으로 돌아간 값을 반환한다.
-        // 매개 변수:
-        //   t:
-        //
-        //   length:
-        public static float Repeat(float t, float length);
+// 요약:
+//     Loops the value t, so that it is never larger than length and never smaller than 0.
+//     t의 값이 length를 넘어서면 0으로 돌아간 값을 반환한다.
+public static float Repeat(float t, float length);
 ```
 
 ### Clamp
 
 ```c#
-        //
-        // 요약:
-        //     Clamps value between min and max and returns value.
-        //     value가 min, max를 넘지 않은 값을 반환한다.
-        // 매개 변수:
-        //   value:
-        //
-        //   min:
-        //
-        //   max:
-        public static int Clamp(int value, int min, int max);
+// 요약:
+//     Clamps value between min and max and returns value.
+//     value가 min, max를 넘지 않은 값을 반환한다.
+public static int Clamp(int value, int min, int max);
 ```
 
 
@@ -698,10 +799,16 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
   - 각도, 관점, 모서리
 - rotation
   - 회전, 교대, 순환, 로테이션
+- skeletal
+  - 해골의, 골격의, 해골 같은
+- based upon ~
+  - ~을 기반으로
 
 
 
 # 참고
 
 - 반다이 남코 현역 개발팀이 알려주는 유니티 3D 온라인 액션 게임 공작소
-- 
+- [루트 모션 - 작업 방법](https://docs.unity3d.com/kr/530/Manual/RootMotion.html)
+- [Mecanim Animation](https://m.blog.naver.com/PostView.nhn?blogId=aeroviper&logNo=70169024232&proxyReferer=https%3A%2F%2Fwww.google.com%2F)
+- [Preparing Humanoid Assets for export](https://docs.unity3d.com/kr/2019.3/Manual/UsingHumanoidChars.html)

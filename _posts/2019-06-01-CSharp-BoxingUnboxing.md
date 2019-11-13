@@ -29,12 +29,14 @@ share: true
 
 
 ## 참고
-- NDC 2019 발표 : [이놈의 enum의 박싱을 어찌할꼬]
+- [NDC 2019 발표 : [이놈의 enum의 박싱을 어찌할꼬]](http://ndcreplay.nexon.com/NDC2019/sessions/NDC2019_0040.html#c=NDC2019&t%5B%5D=%ED%94%84%EB%A1%9C%EA%B7%B8%EB%9E%98%EB%B0%8D&k%5B%5D=%EC%9D%B4%EB%86%88)
 - <https://hwan-shell.tistory.com/76>
 - <http://www.inven.co.kr/webzine/news/?news=198239&game=7545>
 - 유니티 최적화 책...
 
-aaaa
+
+
+
 
 
 
