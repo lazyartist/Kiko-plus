@@ -734,6 +734,46 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
+#### 애니메니션 컨트롤러(Animation Controller)
+
+- 애니메이션 스테이트(Animation State)
+  - 애니메이션의 재생 상태를 나타내는 요소
+- Project 브라우저에서 애니메이션을 Animator 윈도우로 드래그 드랍하면 애니메이션 스테이트가 만들어진다.
+- Ani State
+  - 모든 스테이트에 같은 전환 설정을 하는 특수한 스테이트
+- 디폴트 스테이트
+  - 가장 먼저 선택되는 스테이트
+  - 주황색 스테이트
+
+
+
+#### 애니메이션 스테이트 전환 파라미터
+
+- Animator Controller에 설정한다.
+- Animator 윈도우 > Parameters
+- Float, Int, Bool, Trigger
+  - Trigger는 true/false 값을 갖지만 Bool 형과 달리 애니메이션이 전환되는 순간 자동으로 false가 됨
+
+#### 애니메이션 스테이트 전환
+
+##### 트랜지션(Transition)
+
+- 어느 스테이트에서 어느 스테이트로 향하는지 나타내는 정보
+- 화살표로 표시됨
+- Inspector에 표시된 트렌지션의 파라미터 내에있는 Conditions에서 전환 조건을 지정
+
+
+
+#### Animator에 Animator Controller 적용
+
+- Animator 컨포넌트의 Controller에 Animator Controller 지정
+- Apply Root Motion
+  - 루트 오브젝트의 Transform에 애니메이션의 파라미터가 반영될지 여부
+
+
+
+
+
 ## 스켈레탈 애니메이션(Skeletal animation)
 
 - 컴퓨터 애니메이션에서 캐릭터가 두 부분으로 표현되는 기술
@@ -747,6 +787,12 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
   - 스켈레톤을 메시에 연결하는 과정
 
 
+
+## 단축키
+
+### Animator Window 바닥 움직이기
+
+- Alt + 왼클릭
 
 
 
