@@ -723,6 +723,8 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 - 인수에는 0이나 1만 설정 가능
 - 인수가 두 개 이상인 함수 호출 시 오류
 - 오버로딩된 함수를 호출 시 먼저 만든 함수를 호출
+- SendMessage 함수와 비슷하게 스크립트의 함수를 호출한다
+  - Unity가 애니메이터 컨트롤러가 있는 오브젝트의 하위 오브젝트의 스크립트에 있는 함수까지 호출해주는듯..
 
 
 
@@ -788,6 +790,105 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
+## 충돌
+
+### 컬라이더(Collider) 컴포넌트
+
+- 오브젝트 간의 충돌을 판정하는 컴포넌트
+- 리지드바디 컴포넌트와 함께 물리 시뮬레이션에서 사용
+- 형태
+  - 상자, 구, 캡슐, 메시(처리가 무겁다)
+
+#### 컬라이더 속성
+
+- Is Trigger
+  - 컬라이더의 충돌 검출에만 이용
+  - 물리적 작용을 하지 않음
+
+#### 컬라이더 충돌 이벤트
+
+- Is Trigger 설정된 경우
+  - OnTriggerEnter
+    - 다른 컬라이더가 이 Trigger에 접촉한 때
+  - OnTriggerStay
+    - 다른 컬라이더가 이 Trigger에 계속 닿아 있을 때
+  - OnTriggerExit
+    - 다른 컬라이더가 이 Trigger에서 떨어졌을 때
+- Is Trigger 설정되지 않음 경우
+  - OnCollisionEnter
+    - 다른 컬라이더가 이 컬라이더에 접촉한 때
+  - OnCollisionStay
+    - 다른 컬라이더가 이 컬라이더에 계속 닿아 있을 때
+  - OnCollisionExit
+    -  다른 컬라이더가 이 컬라이더에서 떨어졌을 때
+- OnCollision 함수가 호출되려면 적어도 충돌한 오브젝트 중 어느 한쪽에는 리지드바디 컴포넌트가 설치되어 있어야 한다.
+
+### 리지드바디(Rigidbody) 컴포넌트와 충돌 판정
+
+- 리지드바디 컴포넌트는 물리 시뮬레이션을 하는 컴포넌트
+- 리지드바디 컴포넌트는 처리가 무거운 컴포넌트이므로 필요한 곳에만 설치
+- 게임 내에서 물리적으로 이동시키고 싶은 오브젝트에 설치
+- 리지드바디 컴포넌트는 물리 엔진에 이 오브젝트가 이동할 가능성이 있다고 알려줌
+
+#### 리지드바디 속성
+
+- Is Kinematic
+  - 물리 시뮬레이션에 따라 이동할 필요가 없을 때 체크
+  - 다른 오브젝트가 가하는 힘과 충돌에 영향을 받지 않음
+
+
+
+### 충돌 관련 레이어 설정
+
+- 물체끼리 작용과 충돌 검출 여부를 레이어에서 설정 가능
+- 컬라이더가 있는 게임 오브젝트의 레이어를 설정할 때 자식 오브젝트의 레이어는 변경하지 않아도 된다.
+
+
+
+#### 레이어 설정
+
+- Edit > Project Settings > Tags and Layers
+  - Ground : 지면
+  - EnemyHit : 적의 대미지를 받는 부분
+  - PlayerHit : 플레이어의 대미지를 받는 부분
+  - EnemyAttack : 적의 공격 부분
+  - PlayerAttack : 플레이어의 공격 부분
+
+
+
+#### 레이어의 접촉 검출(Layer Collision Matrix) 설정
+
+-  Edit > Project Settings > Physics > PhysicsManager
+  - Layer Collision Matrix에서 체크된 레이어끼리 충돌 판정을 함
+
+
+
+### 충돌 스크립트
+
+- AttackArea
+  - 공격 판정 컬라이더와 같은 게임 오브젝트에 추가
+  - 공격이 적중하면 OnTriggerEnter 이벤트를 받아서 대미지를 계산한 후 공격받은 HitArea에 대미지값을 전달
+- HitArea
+  - 공격을 받는 컬라이더와 같은 게임 오브젝트에 추가
+  - AttackArea 스크립트에서 대미지값이 넘어오면 그 값을 루트인 부모 오브젝트에 전파(SendMessage)해서 그곳에 설치된 PlayerCtrl과 EnemyCtrl 컴포넌트에 대미지 값을 전달
+- PlayerCtrl, EnemyCtrl
+  - 대미지 처리를 구현
+  - 체력에 대미지값을 적용
+
+
+
+## 스테이트 구현
+
+- 플레이어는 한번에 한가지 상태만 가질 수 있다.
+- Update 함수
+  - 현재 상태 갱신 함수를 호출한다.
+  - 상태가 갱신됐는지 확인한다.
+- 상태가 갱신될 때 상태초기화 함수를 호출한다.
+
+
+
+
+
 ## 단축키
 
 ### Animator Window 바닥 움직이기
@@ -824,9 +925,9 @@ public static int Clamp(int value, int min, int max);
 
 ### Camera.main이 null인 경우
 
-- Camera 게임 오브젝트의 tag가 MainCamera로 지정한다
+- Camera 게임 오브젝트의 tag를 MainCamera로 지정한다
 
-### 
+
 
 
 
@@ -849,6 +950,9 @@ public static int Clamp(int value, int min, int max);
   - 해골의, 골격의, 해골 같은
 - based upon ~
   - ~을 기반으로
+- kinematic [*kìnəmǽtik*]
+  - 운동학적인, 운동상의
+- 
 
 
 
