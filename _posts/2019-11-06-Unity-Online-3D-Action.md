@@ -877,13 +877,30 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
-## 스테이트 구현
+
+
+
+
+## 캐릭터 스테이트 구현 
 
 - 플레이어는 한번에 한가지 상태만 가질 수 있다.
 - Update 함수
   - 현재 상태 갱신 함수를 호출한다.
   - 상태가 갱신됐는지 확인한다.
 - 상태가 갱신될 때 상태초기화 함수를 호출한다.
+
+
+
+## AI
+- 이ㅓㄹ널
+- 이ㅓㄹㄴㅇㄹ
+- ㄴ이ㅓㄹㄴㄹ
+1. 이ㅓㄹㄴㅇㄹ
+2. ㅣㄴ얼ㄴㄹ
+3. 
+니얼ㄴㄹ
+
+
 
 
 
@@ -919,6 +936,18 @@ public static float Repeat(float t, float length);
 public static int Clamp(int value, int min, int max);
 ```
 
+
+
+## Random
+
+```c#
+/// <summary>
+///   <para>Returns a random point inside a circle with radius 1 (Read Only).</para>
+/// </summary>
+public static Vector2 insideUnitCircle {
+	get;
+}
+```
 
 
 ## 에러
