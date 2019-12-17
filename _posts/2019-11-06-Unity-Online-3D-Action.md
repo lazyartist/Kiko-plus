@@ -805,6 +805,8 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
   - 컬라이더의 충돌 검출에만 이용
   - 물리적 작용을 하지 않음
 
+
+
 #### 컬라이더 충돌 이벤트
 
 - Is Trigger 설정된 경우
@@ -821,11 +823,27 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
     - 다른 컬라이더가 이 컬라이더에 계속 닿아 있을 때
   - OnCollisionExit
     -  다른 컬라이더가 이 컬라이더에서 떨어졌을 때
+
+
+
+#### 컬라이더 충돌 이벤트 조건
+
 - OnCollision 함수가 호출되려면 적어도 충돌한 오브젝트 중 어느 한쪽에는 리지드바디 컴포넌트가 설치되어 있어야 한다.
+- OnTriggerEnter, OnTriggerStay, OnTriggerExit 함수가 정의된 컴포넌트가 disable 상태라도 함수는 호출된다.
+- Collider 컴포넌트와 OnTriggerEnter, .. 등이 정의된 컴포넌트는 같은 게임오브젝트에 있어야한다.
+  - 부모, 자식 관계에서는 호출되지 않는다.
 
 
 
-### 리지드바디(Rigidbody) 컴포넌트와 충돌 판정
+### 리지드바디 컴포넌트(Rigidbody)
+
+#### 리지드바디 속성
+
+- Is Kinematic
+  - 물리 시뮬레이션에 따라 이동할 필요가 없을 때 체크
+  - 다른 오브젝트가 가하는 힘과 충돌에 영향을 받지 않음
+
+#### 리지드바디(Rigidbody) 컴포넌트와 충돌 판정
 
 - 리지드바디 컴포넌트는 물리 시뮬레이션을 하는 컴포넌트
 - 리지드바디 컴포넌트는 처리가 무거운 컴포넌트이므로 필요한 곳에만 설치
@@ -834,17 +852,26 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
-#### 리지드바디 속성
-
-- Is Kinematic
-  - 물리 시뮬레이션에 따라 이동할 필요가 없을 때 체크
-  - 다른 오브젝트가 가하는 힘과 충돌에 영향을 받지 않음
-
-
-
 #### 캐릭터 컨트롤러(Character Controller) 컴포넌트와 충돌 판정
 
 - 리지드바디가 없어도 캐릭터 컨트롤러 컴포넌트가 있으면 다른 컬라이더와 충돌할 수 있다.
+- 단, 캐릭터 컨트롤러끼리는 충돌 시 OnTriggerEnter... 등의 함수가 호출되지 않는다.
+
+
+
+### Character Controller, Rigidbody, Collider의 충돌 연관성
+
+|                      | Collider | Collider(Rigidbody) | Character Controller |
+| :------------------: | :------: | :-----------------: | :------------------: |
+|       Collider       |    X     |          O          |          O           |
+| Collider(Rigidbody)  |    O     |          O          |          O           |
+| Character Controller |    O     |          O          |          X           |
+
+- Collider 끼리는 최소한 한 쪽에 Rigidbody가 있어야 충돌한다.
+- Character Controller 끼리는 충돌하지 않는다.
+- Collider와 Character Controller 컴포넌트는 같은 게임 오브젝트에 있을 시 충돌 이벤트가 발생한다.
+  - 이 때 Collider에 대해 한 번, Character Controller에 대해 한 번 충돌 이벤트가 발생 하므로 최종적으로 충돌 이벤트가 두 번 발생하게 된다. 의도하지 않았을 경우 낭비가된다.
+  - 부모 자식 관계도 상관없이 Collider와 Character Controller가 충돌하면 이벤트가 발생한다.
 
 
 
@@ -887,10 +914,6 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
-
-
-
-
 ## 캐릭터 스테이트 구현 
 
 - 플레이어는 한번에 한가지 상태만 가질 수 있다.
@@ -902,13 +925,13 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 ## AI
-- 이ㅓㄹ널
-- 이ㅓㄹㄴㅇㄹ
-- ㄴ이ㅓㄹㄴㄹ
-1. 이ㅓㄹㄴㅇㄹ
-2. ㅣㄴ얼ㄴㄹ
-3. 
-니얼ㄴㄹ
+- 공격 대상을 검출할 컬라이더에 대상이 들어오면 공격 대상으로 지정하고 따라다님
+
+- 공격 대상과 일정 거리 이상이면 공격대상까지 이동
+
+- 공격 대상과 일정 거리 이하이면 공격
+
+  
 
 
 
@@ -1000,4 +1023,4 @@ public static Vector2 insideUnitCircle {
 - 반다이 남코 현역 개발팀이 알려주는 유니티 3D 온라인 액션 게임 공작소
 - [루트 모션 - 작업 방법](https://docs.unity3d.com/kr/530/Manual/RootMotion.html)
 - [Mecanim Animation](https://m.blog.naver.com/PostView.nhn?blogId=aeroviper&logNo=70169024232&proxyReferer=https%3A%2F%2Fwww.google.com%2F)
-- [Preparing Humanoid Assets for export](https://docs.unity3d.com/kr/2019.3/Manual/UsingHumanoidChars.html)
+- [Preparing Humanoid Assets for export](https://docs.unity3d.com/kr/2019.3/Manual/UsingHumanoidChars.html
