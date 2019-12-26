@@ -933,6 +933,19 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
   
 
+## 코루틴
+
+- 함수 처리를 도중에 중단, 재개할 수 있는 구조
+- yield 키워드로 중단시킬 수 있고 재개할 때는 yield  뒤부터 실행
+- StartCoroutine으로 등록한 함수를 매 프레임마다 Update 뒤에 호출
+- 반환값은 IEnumerator
+  - yield return new WaitForSeconds(Time)
+    - 처리를 지정한 초만큼 멈춘다. 일정한 간격으로 처리하고 싶을 때 간단히 구현할 수 있다.
+  - yield return null
+    - 다음 프레임까지 중단
+  - yield break
+    - 코루틴을 종료한다.
+
 
 
 
