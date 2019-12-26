@@ -114,7 +114,6 @@ share: true
 
 
 
-
 ## 용어
 
 - 쓰로틀링(throttling)

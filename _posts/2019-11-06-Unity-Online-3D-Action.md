@@ -950,6 +950,18 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 
 
+## Unity Doc
+
+### Time.deltaTime
+
+- 이전 프레임이 완성되는데 걸린 시간
+- 단순히 이전 프레임과 지금 프레임의 시간 간격이 아니다.
+  - 따라서 브레이크 포인트를 걸어도 이 시간은 같다.
+
+
+
+
+
 
 
 ## 단축키
@@ -1027,7 +1039,8 @@ public static Vector2 insideUnitCircle {
   - ~을 기반으로
 - kinematic [*kìnəmǽtik*]
   - 운동학적인, 운동상의
-- 
+- Misc
+  - Miscellaneous, 기타
 
 
 
