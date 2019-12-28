@@ -931,7 +931,129 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 
 - 공격 대상과 일정 거리 이하이면 공격
 
+
+
+## 파티클
+
+- 파티클은 파티클 시스템에 있는 모듈들을 설정하여 발생시킨다.
+
+[파티클 시스템 레퍼런스](https://docs.unity3d.com/kr/2017.4/Manual/PartSysReference.html)
+
+### 메인 모듈
+
+| 속성               | 설명                                                         |
+| ------------------ | ------------------------------------------------------------ |
+| Duration           | 에미터(emitter(방사체), 파티클의 발생원)에서 파티클이 계속 발생하는 시간. 파티클의 수명이 아니다. |
+| Looping            | 설정한 Duration 시간이 되었을 때 파티클 발생을 반복하는 설정 |
+| Prewarm            | 미리 파티클을 발생시킨다. 파티클은 씬에 만들어지는 곧바로 발생하므로, 시작 부분을 감춰 자연스럽게 만들 때 이 속성을 사용한다. Looping이 On일 때만 효과가 있다. |
+| Start Delay        | 에미터가 씬에 만들어지고 파티클을 발생시킬 때까지 시간을 지연시킬 수 있다. Prewarm이 Off일 때만 효과가 있다. |
+| Start Lifetime     | 파티클의 수명. 발생하고 사라지기까지의 시간을 설정한다.      |
+| Start Speed        | 파티클 발생 속도를 설정한다(단위:m/s)                        |
+| Start Size         | 파티클이 발생할 때 크기를 설정한다.                          |
+| Start Rotation     | 파티클이 발생할 때 회전 각도를 설정한다. 기본 파티클로는 알 수 없다. |
+| Start Color        | 파티클이 발생할 때 색을 설정한다.                            |
+| Gravity Multiplier | 중력 설정. 플러스 값은 아래쪽 방향, 마이너스 값은 위쪽 방향으로 가속한다. |
+| Inherit Velocity   | 에미터가 움직일 때 움직인 방향과 속도에 따라 파티클의 초기 속도에 더한다. Simulation Space 항목이 World일 때만 유효하다. |
+| Simulation Space   | 파티클이 항상 에미터 위치에서 상대적인 위치가 되는지(=local), 발생 후에는 에미터의 위치를 고려하지 않는지(=world) 설정할 수 있다. |
+| Play On Awake      | 에미터가 만들어질 때부터 자동으로 파티클을 발생시킬지 설정할 수 있다. |
+| Max Particles      | Duration으로 지정한 시간 내에 발생할 파티클의 최대 수를 지정할 수 있다. |
+
+
+
+### 속성값의 타입
+
+- Constant
+  - 고정된 값
+- Curve
+  - 시간이 지남에 따라 값을 부드럽게 변화시킨다
+- Random Between Two Constants
+  - 두 값 사이의 랜덤값을 적용한다.
+- Random Between Two Curves
+  - 두 커브값 사이의 랜덤값을 적용한다.
+
+
+
+### Emission 모듈
+
+- 파티클 발생 타이밍과 발생량을 제어하는 모듈
+
+| 속성                              | 기능                                                         |
+| --------------------------------- | ------------------------------------------------------------ |
+| Rate over Time(시간당 방출량)     | 시간 단위당 방출되는 파티클의 수                             |
+| Rate over Distance(거리당 방출량) | 이동한 거리 단위당 방출되는 파티클의 수                      |
+| Bursts                            | 버스트는 파티클을 생성하는 이벤트. 이 설정을 통해 지정된 시점에 파티클을 방출할 수 있다. |
+| *Time*                            | 파트클 시스템이 시작된 이후로 버스트를 방출할 시점을 초 단위로 설정 |
+| *Count*                           | 방출되는 파티클 수를 설정                                    |
+| *Cycles*                          | 버스트를 반복할 횟수를 설정                                  |
+| *Interval*                        | 버스트가 반복되는 시간 사이의 간격(초)을 설정                |
+
+
+
+### Velocity over Lifetime 모듈
+
+- 파티클의 속도를 제어하는 모듈
+- x, y, z 축으로 중력을 제어할 수 있다
+
+
+
+### Color over Lifetime 모듈
+
+- 시간 경과에 따라 색이 변하도록 설정
+
+
+
+### Size over Lifetime 모듈
+
+- 시간 경과에 따른 크기 변화를 제어
+
+
+
+### Renderer 모듈
+
+- [렌더러 모듈](https://docs.unity3d.com/kr/2018.1/Manual/PartSysRendererModule.html)
+- 파티클 그리기와 관련된 설정
+- Render Mode
+  - Billboard
+    - 파티클은 항상 카메라를 향합니다.
+  - Stretched Billboard
+    - 파티클을 항상 카메라를 향하지만, 다양한 스케일이 적용됩니다.
+      - Camera Scale
+        - 카메라 움직임에 따라 파티클을 스트레치합니다. 이 값을 0으로 설정하면 카메라 움직임 스트레치가 비활성화됩니다.
+      - Velocity Scale
+        - 속도에 비례하여 파티클을 스트레치합니다. 이 값을 0으로 설정하면 속도 기준의 스트레치가 비활성화됩니다.
+      - Length Scale
+        - 파티클의 속도 방향에 따라 크기에 비례하여 파티클을 스트레치 합니다. 이 값을 0으로 설정하면 파티클이 사라지고 길이가 0이 됩니다.
+
+
+
+### Shape 모듈
+
+- 파티클 발생월의 형태를 설정
+- 가운데서 발생시키려면 설정하지 않는다.
+
+
+
+### 파티클에 텍스쳐 적용
+
+- 텍스쳐를 파티클 게임 오브젝트에 드래그 드랍하면 적용된다.
+
+- 파티클 셰이더를 Particles/Alpha Blended로 설정하면 알파값에 따라 외곽이 깔끔해진다.
+
+- 파티클 텍스쳐는 단색으로 강도만 정해준다.
+
   
+
+
+
+## 쿼터니언으로 벡터 회전 시키기
+
+- Quaternion의 * 연산자를 사용한다.
+
+```c#
+Vector3 offset = Quaternion.Euler(0.0f, angle, 0.0f) * Vector3.forward;
+```
+
+
 
 ## 코루틴
 
@@ -957,6 +1079,13 @@ verticalAngle = Mathf.Clamp(verticalAngle, -60.0f, 60.0f);
 - 이전 프레임이 완성되는데 걸린 시간
 - 단순히 이전 프레임과 지금 프레임의 시간 간격이 아니다.
   - 따라서 브레이크 포인트를 걸어도 이 시간은 같다.
+
+### RectTransform
+
+- UI를 그리는 Canvas에서의 위치 및 크기를 설정
+- 크기는 sizeDelta, 위치는 anchoredPosition으로 설정
+
+
 
 
 
@@ -1041,6 +1170,23 @@ public static Vector2 insideUnitCircle {
   - 운동학적인, 운동상의
 - Misc
   - Miscellaneous, 기타
+- shuriken
+  - [しゅりけん](https://alldic.daum.net/word/view.do?wordid=jkw000037402&supid=jku005009516) 손 안에 쥐고 던지는 작은 칼
+- inherit
+  - 물려받다, 유전되다, 이어받다, 상속하다
+- emission [imíʃən]
+  - 배출, 방출, 배기, 발생, 발열
+- as well as ~
+  - ~뿐만 아니라.
+- burst
+  - 터지다, 터뜨리다, 폭팔하다, 무너지다, 분출하다
+- stretch
+  - 스트레칭, 늘리다, 뻗다, 기지개를 켜다, 이어지다
+- billboard
+  - 게시판, 광고판
+- angular
+  - 모난, 딱딱한, 각의
+- 
 
 
 
