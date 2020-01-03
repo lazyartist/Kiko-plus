@@ -785,12 +785,12 @@ public:
         }
         pending_[tail_] = soundData;//요청을 tail_위치에 추가
         tail_ = (tail_+1) % MAX_PENDING;//끝이면 처음으로 보낸다
-	}
-	void update(){
+    }
+    void update(){
         if(head_ == tail_) return;
         startSound(pending_[head_]);//head_ 위치의 요청 처리
         head_ = (head_+1) % MAX_PENDING;//끝이면 처음으로 보낸다
-	}
+    }
 	static const int MAX_PENDING = 16;
 	static SoundData pending_[MAX_PENDING];//큐, 보류된 요청
 	static int head_;
