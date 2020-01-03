@@ -2,7 +2,7 @@
 layout: post
 title: "Algoritm Analysis"
 description: ""
-date: 2019-12-29 19:00:00+09:00
+date: 2020-01-03 19:00:00+09:00
 tags: [Algoritm Analysis]
 comments: true
 share: true
