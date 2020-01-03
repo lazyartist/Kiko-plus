@@ -1,9 +1,9 @@
 ---
 layout: post
-title: "Design Pattern"
+title: "Game Design Pattern"
 description: ""
 date: 2019-12-29 19:00:00+09:00
-tags: [Design Pattern]
+tags: [Game Design Pattern]
 comments: true
 share: true
 ---
