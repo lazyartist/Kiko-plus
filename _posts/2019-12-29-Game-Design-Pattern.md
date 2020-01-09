@@ -1261,37 +1261,76 @@ Locator::provide(service);//로그 서비스로 바꿔치기 한다.
 
 
 
-When to Use It
+#### When to Use It
 
-Keep in Mind
+- 성능 문제가 캐시 미스인 경우 사용해야한다.
+- 캐시 분석 도구를 사용하자
+  - 무료 툴 Cachegrind
+- 미리 캐시 최적화를 할 필요는 없지만 자료구조를 캐시하기 좋게 만들 필요는 있다.
 
-Sample Code
 
-Contiguous arrays
 
-Packed data
+#### Keep in Mind
 
-Hot/cold splitting
+- 데이터 지역성 패턴을 위해서는 추상화를 일부 희생해야 한다.
+  - 추상화를 위해 인터페이스를 사용하면 객체 접근에 포인터, 레퍼런스를 사용하는데 이 과정에서 메모리를 랜덤 액세스하게 된다. 또한 가상 메서드 호출도 객체의 vtable에서 호출 함수의 포인터를 찾아야 하므로 캐시 미스가 일어날 수 있다.
 
-Design Decisions
 
-How do you handle polymorphism?
 
-Don`t
+#### Sample Code
 
-Use separate arrays for each type
+##### Contiguous arrays 연속 배열
 
-Use a collection of pointers
+- 포인터 대신 실제 객체가 있는 배열을 이용해 객체를 메모리 상 연속된 공간에 배치한다.
 
-How are game entities defined?
+```cpp
+// 개선 전 - 객체를 포인터로 관리
+class GameEntity{
+    AIComponent *ai;
+}
+GameEntity* gameEntities;
+for ... {
+    //gameEntities에 객체의 포인터가 들어있어 있어 접근하며 캐시 미스
+    gameEntities[i]->ai->update();
+}
 
-If game entities are classes with pointers to their components
+// 개선 후 - 포인터가 아닌 객체 배열로 데이터 지역성을 높임
+AIComponent* aiComponents = new AIComponent[MAX_ENTITIES];
+for ... {
+    //간접참조(->)를 안하기 때문에 캐시 히트
+    aiComponents[i].update();
+}
+```
 
-If game entities are classes with IDs for their components
 
-If the game entity is itself just an ID
 
-See Also
+##### Packed data 정렬된 데이터
+
+- 
+
+
+
+##### Hot/cold splitting
+
+#### Design Decisions
+
+##### How do you handle polymorphism?
+
+##### Don`t
+
+##### Use separate arrays for each type
+
+##### Use a collection of pointers
+
+##### How are game entities defined?
+
+##### If game entities are classes with pointers to their components
+
+##### If game entities are classes with IDs for their components
+
+##### If the game entity is itself just an ID
+
+#### See Also
 
 
 
