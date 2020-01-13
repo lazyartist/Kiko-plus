@@ -1325,27 +1325,103 @@ for ... {
 
 #### Design Decisions  디자인 결정
 
+##### How do you handle polymorphism? 다형성은 어떻게 할 것인가?
+
+###### Don`t (상속을) 사용하지 않는다.
+
+- 장점
+  - 안전하고 쉽다.
+  - 더 빠르다.
+    - vtable에서 메서드를 찾지 않기 때문에 더 빠르다.
+      - Devirtualization이 지원된다면 '더' 빠르진 않다.
+- 단점
+  - 유연하지 않다.
+    - 동적 디스패치(vtable)를 사용하지 않으면 개체별로 다른 동작을 하기 위해 선택문이 들어가야 하므로 코드가 지저분해진다.
 
 
-##### How do you handle polymorphism?
 
-##### Don`t
+###### Use separate arrays for each type 종류별로 다른 배열에 넣는다.
 
-##### Use separate arrays for each type
+- 장점
+  - 객체를 빈틈없이 담을 수 있다.
+  - 정적 디스패치를 할 수 있다.
+- 단점
+  - 여러 컬렉션을 관리해야 한다.
+    - 종류가 많아지면 관리가 부담된다.
+  - 모든 자료형을 알고 있어야 한다.
+    - 다형성을 제공하지 않으니 다른 코드와 커플링된다.
 
-##### Use a collection of pointers
 
-##### How are game entities defined?
 
-##### If game entities are classes with pointers to their components
+###### Use a collection of pointers 하나의 컬렉션에 포인터를 모아놓는다.
 
-##### If game entities are classes with IDs for their components
+- 장점
+  - 유연하다.
+    - 인터페이스를 통해 객체를 관리하기 때문에 인터페이스를 상속한 어떤 객체라도 컬렉션에 들어갈 수 있다.
+- 단점
+  - 캐시 친화적이지 않다.
+    - 포인터 접근은 캐시 친화적이지 않다.
+    - 성능에 문제가 없다면 이렇게 해도 된다.
 
-##### If the game entity is itself just an ID
+
+
+##### How are game entities defined? 게임 개체(GameEntity)는 어떻게 정의할 것인가?
+
+- 여기서 말하는 게임 개체는 여러 컴포넌트를 묶어 게임에서 작동하는 하나의 단위를 말한다.
+
+###### If game entities are classes with pointers to their components 게임 개체 클래스가 자기 컴포넌트들을 포인터로 들고 있을 때
+
+- 장점
+  - 컴포넌트들을 연속된 배열에 저장할 수 있다.
+    - 게임 개체와 상관없는 곳에 저장되므로
+  - 개체로부터 개체 컴포넌트를 쉽게 얻을 수 있다.
+    - 포인터로 관리하므로
+- 단점
+  - 컴포넌트를 메모리에 옮기기가 어렵다.
+    - 컴포넌트의 메모리 위치가 변경될 경우 게임 개체의 컴포넌트 포인터도 같이 업데이트 해야한다.
+
+
+
+###### If game entities are classes with IDs for their components 게임 개체 클래스가 컴포넌트를 ID로 들고 있을 때
+
+- 설명
+  - 컴포넌트의 ID로 실제 컴포넌트를 찾는다.
+    - 배열의 인덱스 또는 ID를 갖고 배열이나 해시 테이블에서 컴포넌트를 찾을 수 있다.
+- 단점
+  - 더 복잡하다
+    - 포인트를 쓰는 것보다 구현할게 많다.
+  - 더 느리다.
+    - 검색이나 해싱 작업이 필요하므로 포인터 보다 느리다.
+  - 컴포넌트 '관리자' 같은 것에 접근해야 한다.
+    - 인덱스나 ID를 받아 컴포넌트를 찾아주는 관리자 클래스가 필요하다.
+    - 컴포넌트 등록소도 있어야 한다.
+
+
+
+###### If the game entity is itself just an ID 게임 개체가 단순히 ID일 때
+
+- 설명
+  - 게임 개체에서 컴포넌트를 찾는 대신 컴포넌트가 게임 개체의 ID나 인덱스를 가지고 형재 컴포넌트를 찾을 수 있다.
+  - 게임 개체는 실제하지 않고 개념적으로 존재하며 컴포넌트를 그룹화하는 역할을 한다.
+- 장점
+  - 개체가 단순해진다.
+    - 숫자 하나로 게임 개체의 레퍼런스를 주고 받는다.
+  - 개체가 비어 있다.
+    - 개체가 실존하지 않는다.
+  - 개체 생명주기를 관리하지 않아도 된다.
+    - 단순한 값이기 때문에 메모리에 할당/해제하지 않아도 된다.
+- 단점
+  - 개체가 ID로 관리될 경우 특정 개체의 컴포넌트를 찾는게 느릴 수 있다.
+    - ID로 개체를 찾기위해 해싱등을 할 경우 느려진다.
+    - 배열의 인덱스를 ID로 삼는 경우 해결 가능하지만 이럴 경우 모든 컴포넌트들이 같은 배열 위치를 가져야하므로 부분적으로 컴포넌트를 활성/비활성 할 경우 정렬이 불가능해진다.
+
+
 
 #### See Also
 
-
+- Data Locality 패턴은 컴포넌트 패턴과 관련이 많다.
+- Data Locality 패턴에서는 거의 언제나 단일 자료형을 하나의 연속된 배열에 나열하는 방식을 활용한다.
+  - 객체 풀 패턴이라고 볼 수도 있다.
 
 
 
@@ -1439,7 +1515,7 @@ for ... {
 
 - 캐시 무효화가 계속 반복되는 현상
 - 캐시 히트와 캐시 미스의 퍼포먼스 비교 코드
-  - https://git.io/vwkE4
+  - [https://git.io/vwkE4](https://git.io/vwkE4)
 
 
 
@@ -1453,9 +1529,36 @@ for ... {
 ### Data-oriented Design 데이터 중심 디자인
 
 - 데이터를 연속된 공간에 모아두어 캐시 미스를 최소화하는 방법
-- http://parkpd.egloos.com/4092250
-  - 원문 : http://gamesfromwithin.com/data-oriented-design
-  - 
+- Data driven Design(데이터 주도형 디자인)과는 다르다.
+- [http://parkpd.egloos.com/4092250](http://parkpd.egloos.com/4092250)
+  - 원문 : [http://gamesfromwithin.com/data-oriented-design](http://gamesfromwithin.com/data-oriented-design)
+
+
+
+### Data driven Design 데이터 주도형 디자인
+
+- 프로그램의 기능을 최대한 밖으로 꺼내어 데이터쪽으로 옮기는 것.
+
+
+
+### Dynamic Dispatch 동적 디스패치
+
+- 런타임 시에 호출 객체를 확인해 해당 객체의 메서드를 호출한다.
+
+
+
+### Static Dispatch 정적 디스패치
+
+- 컴파일 타임에 어떤 메서드가 호출될지 정해진다.
+
+
+
+### Method Signature 메서드 시그니처
+
+- 메서드를 구분할 수 있는 정의
+- 반환형, 이름, 인자
+  - 자바에서는 반환형은 시그니처에 포함되지 않는다.
+    - 따라서 반환형만 다른 메서드는 오버로딩되지 않는다.
 
 
 
