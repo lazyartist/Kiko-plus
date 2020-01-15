@@ -2209,8 +2209,8 @@ Overhead
 # 참고
 
 - [서적] 게임 프로그래밍 패턴 / 로버트 나이트롬, 박일
-  - http://gameprogrammingpatterns.com/contents.html
-  - https://github.com/munificent/game-programming-patterns
+  - [http://gameprogrammingpatterns.com/contents.html](http://gameprogrammingpatterns.com/contents.html)
+  - [https://github.com/munificent/game-programming-patterns](https://github.com/munificent/game-programming-patterns)
 - [오토마타에 대해 알아봅시다.](https://m.blog.naver.com/PostView.nhn?blogId=staryoorang&logNo=80211270197&proxyReferer=https%3A%2F%2Fwww.google.com%2F)
 - [오토마타](https://namu.wiki/w/%EC%98%A4%ED%86%A0%EB%A7%88%ED%83%80)
 - 
