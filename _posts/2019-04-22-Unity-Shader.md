@@ -74,7 +74,7 @@ share: true
 ## 유니티에 내장된 시간 변수
 
 - _Time
-  - float4
+  - 자료형 : float4
   - t : 원래 시간
   - (x, y, z, w) == (t/20, t, t×2, t×3)
 - _SinTime
